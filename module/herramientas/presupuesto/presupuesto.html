@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Archivos - Modular-App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark-mode">
+    <button class="toggle-mode" id="toggle-mode" title="Cambiar modo">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cloud-upload-alt"></i> Subir Archivos</h1>
+            <p>Sube archivos PDF, imágenes y fotos a Firebase Storage</p>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div class="upload-card">
+            <div class="upload-zone" id="upload-zone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Arrastra archivos aquí</h3>
+                <p>O haz clic para seleccionar archivos</p>
+                <p style="font-size: 0.875rem; opacity: 0.6;">Formatos soportados: PDF, JPG, PNG, GIF (máx. 10MB)</p>
+                <button type="button" class="upload-btn" id="select-files">
+                    <i class="fas fa-folder-open"></i> Seleccionar Archivos
+                </button>
+            </div>
+            <input type="file" id="file-input" class="file-input" multiple 
+                   accept=".pdf,.jpg,.jpeg,.png,.gif" />
+        </div>
+
+        <div id="file-list" class="file-list"></div>
+    </div>
+</body>
+</html>
