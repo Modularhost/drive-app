@@ -76,15 +76,15 @@ function showMessage(text, type = 'success') {
 function validateFile(file) {
     const maxSize = 10 * 1024 * 1024; // 10MB
     const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-    
+
     if (file.size > maxSize) {
         return `El archivo ${file.name} es demasiado grande. Máximo 10MB permitido.`;
     }
-    
+
     if (!allowedTypes.includes(file.type.toLowerCase())) {
         return `El tipo de archivo ${file.name} no está permitido.`;
     }
-    
+
     return null;
 }
 
@@ -109,7 +109,7 @@ function addFilesToList(files) {
             console.log('Archivo añadido a la lista:', file.name);
         }
     });
-    
+
     renderFileList();
 }
 
@@ -135,12 +135,12 @@ function renderFileList() {
             </div>
             <div class="file-actions-presupuesto">
                 ${!fileObj.uploaded && !fileObj.uploading ? `
-                    <button class="btn-small-presupuesto btn-upload-presupuesto">
+                    <button class="btn-small-presupuesto btn-upload-presupuesto" onclick="uploadFilePresupuesto('${fileObj.id}')">
                         <i class="fas fa-cloud-upload-alt"></i> Subir
                     </button>
                 ` : ''}
                 ${fileObj.uploaded && fileObj.url ? `
-                    <button class="btn-small-presupuesto btn-upload-presupuesto">
+                    <button class="btn-small-presupuesto btn-upload-presupuesto" data-action="copy">
                         <i class="fas fa-copy"></i> Copiar URL
                     </button>
                 ` : ''}
@@ -155,9 +155,13 @@ function renderFileList() {
 }
 
 // Funciones globales
-window.uploadFilePresupuesto = async function(fileId) {
+window.uploadFilePresupuesto = async function (fileId) {
+    console.log('Intentando subir archivo con ID:', fileId); // Nuevo log
     const fileObj = selectedFiles.find(f => f.id === fileId);
-    if (!fileObj || fileObj.uploading || fileObj.uploaded) return;
+    if (!fileObj || fileObj.uploading || fileObj.uploaded) {
+        console.log('No se puede subir: archivo no encontrado, ya subiendo o ya subido', fileObj);
+        return;
+    }
 
     fileObj.uploading = true;
     renderFileList();
@@ -192,7 +196,7 @@ window.uploadFilePresupuesto = async function(fileId) {
                     showMessage(`Presupuesto ${fileObj.file.name} subido exitosamente!`);
                     console.log('URL de descarga:', downloadURL);
                     renderFileList();
-                    
+
                     const presupuestos = JSON.parse(localStorage.getItem('presupuestos-subidos') || '[]');
                     presupuestos.push({
                         id: fileObj.id,
@@ -219,13 +223,13 @@ window.uploadFilePresupuesto = async function(fileId) {
     }
 };
 
-window.removeFilePresupuesto = function(fileId) {
+window.removeFilePresupuesto = function (fileId) {
     selectedFiles = selectedFiles.filter(f => f.id !== fileId);
     renderFileList();
     showMessage('Archivo de presupuesto eliminado de la lista');
 };
 
-window.copyUrlPresupuesto = async function(url) {
+window.copyUrlPresupuesto = async function (url) {
     try {
         await navigator.clipboard.writeText(url);
         showMessage('URL del presupuesto copiada al portapapeles!');
@@ -271,22 +275,22 @@ uploadZone.addEventListener('click', (e) => {
 });
 
 fileList.addEventListener('click', (e) => {
-    const uploadBtn = e.target.closest('.btn-upload-presupuesto');
+    const uploadBtn = e.target.closest('.btn-upload-presupuesto:not([data-action="copy"])');
     const removeBtn = e.target.closest('.btn-remove-presupuesto');
+    const copyBtn = e.target.closest('.btn-upload-presupuesto[data-action="copy"]');
 
     if (uploadBtn) {
         const fileId = uploadBtn.closest('.file-item-presupuesto').dataset.id;
-        if (uploadBtn.querySelector('.fa-copy')) {
-            const fileObj = selectedFiles.find(f => f.id === fileId);
-            if (fileObj && fileObj.url) {
-                copyUrlPresupuesto(fileObj.url);
-            }
-        } else {
-            uploadFilePresupuesto(fileId);
-        }
+        uploadFilePresupuesto(fileId);
     } else if (removeBtn) {
         const fileId = removeBtn.closest('.file-item-presupuesto').dataset.id;
         removeFilePresupuesto(fileId);
+    } else if (copyBtn) {
+        const fileId = copyBtn.closest('.file-item-presupuesto').dataset.id;
+        const fileObj = selectedFiles.find(f => f.id === fileId);
+        if (fileObj && fileObj.url) {
+            copyUrlPresupuesto(fileObj.url);
+        }
     }
 });
 
