@@ -1,0 +1,33 @@
+<div class="detalles-container">
+    <div class="year-filter-container">
+        <label for="year-filter">Filtrar por Año:</label>
+        <select id="year-filter"></select>
+    </div>
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p>Cargando <span id="loading-progress">0%</span></p>
+        </div>
+    </div>
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <i id="success-icon" class="fas"></i>
+            <p id="success-message"></p>
+        </div>
+    </div>
+    <div id="table-container" style="display: none;">
+        <p>Total de registros: <span id="total-records"></span></p>
+        <table id="detalles-table">
+            <thead>
+                <tr>
+                    <th>Mes</th>
+                    <th>Año</th>
+                    <th>Total Facturas Ingresadas</th>
+                    <th>Total Salidas</th>
+                    <th>Total Facturas</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Empresas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="empresas-container">
+  <h2>Gestión de Empresas</h2>
+  <hr class="divider">
+
+  <div class="form-container">
+    <div class="form-group">
+      <label for="nombre-empresa">Nombre de la Empresa:</label>
+      <input type="text" id="nombre-empresa" placeholder="Ingrese el nombre de la empresa" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="rut-empresa">RUT de la Empresa:</label>
+      <input type="text" id="rut-empresa" placeholder="Ingrese el RUT de la empresa" autocomplete="off">
+    </div>
+    <div class="form-group form-group-button">
+      <button id="registrar-btn">Registrar</button>
+    </div>
+    <div class="form-group form-group-empty"></div>
+  </div>
+
+  <div id="register-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal">×</button>
+      <div class="spinner-container">
+        <span class="loader"></span>
+        <span class="spinner-text">Registrando... <span id="register-progress">0%</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="success-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal">×</button>
+      <div class="success-message-container">
+        <i id="success-icon" class="fas"></i>
+        <div id="success-message" class="success-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="edit-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal">×</button>
+      <h2>Editar Empresa</h2>
+      <div class="form-container edit-form-container">
+        <div class="form-group">
+          <label for="edit-nombre-empresa">Nombre de la Empresa:</label>
+          <input type="text" id="edit-nombre-empresa" placeholder="Ingrese el nombre de la empresa" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="edit-rut-empresa">RUT de la Empresa:</label>
+          <input type="text" id="edit-rut-empresa" placeholder="Ingrese el RUT de la empresa" autocomplete="off">
+        </div>
+        <div class="form-group estado-container">
+          <label><input type="radio" name="estado" id="edit-estado-activo" value="Activo"> Activo</label>
+          <label><input type="radio" name="estado" id="edit-estado-inactivo" value="Inactivo"> Inactivo</label>
+        </div>
+        <div class="form-group form-group-button">
+          <button id="save-edit-btn">Guardar</button>
+          <button id="cancel-edit-btn">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="loading-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal">×</button>
+      <div class="spinner-container">
+        <span class="loader"></span>
+        <span class="spinner-text">Cargando empresas... <span id="loading-progress">0%</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal">×</button>
+      <p id="delete-message"></p>
+      <div class="modal-buttons">
+        <button id="confirm-delete-btn">Sí</button>
+        <button id="cancel-delete-btn">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="log-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal">×</button>
+      <h2>Historial</h2>
+      <div class="log-content" id="log-content"></div>
+      <div class="modal-buttons">
+        <button id="close-log-btn">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container" id="table-container" style="display: none;">
+    <table id="empresas-table">
+      <thead>
+        <tr>
+          <th>ID <svg class="filter-icon" data-column-index="0" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path></svg></th>
+          <th>Acciones <svg class="filter-icon" data-column-index="1" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path></svg></th>
+          <th>Nombre de la Empresa <svg class="filter-icon" data-column-index="2" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path></svg></th>
+          <th>RUT de la Empresa <svg class="filter-icon" data-column-index="3" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path></svg></th>
+          <th>Estado <svg class="filter-icon" data-column-index="4" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path></svg></th>
+          <th>Fecha de Creación <svg class="filter-icon" data-column-index="5" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path></svg></th>
+          <th>Usuario <svg class="filter-icon" data-column-index="6" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path></svg></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="pagination-container">
+    <button id="prev-btn" disabled>Anterior</button>
+    <button id="next-btn">Siguiente</button>
+    <button id="export-excel-btn">Descargar Excel</button>
+    <span id="page-info">Página 1 de 1</span>
+    <span id="total-records">Total de registros: 0</span>
+  </div>
+</div>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.min.js"></script>
+<script type="module" src="empresas.js"></script>
+</body>
+</html>

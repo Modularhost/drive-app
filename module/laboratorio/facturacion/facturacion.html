@@ -1,0 +1,217 @@
+<div class="facturas-container">
+    <h2>Facturación</h2>
+    <hr class="divider">
+    <form class="form-container">
+        <div class="form-group">
+            <label for="fecha-ingreso">Fecha de Ingreso</label>
+            <input type="date" id="fecha-ingreso" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="numero-factura">Número de Factura</label>
+            <input type="text" id="numero-factura" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="fecha-factura">Fecha de Factura</label>
+            <input type="date" id="fecha-factura" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="monto-factura">Monto</label>
+            <input type="text" id="monto-factura" required autocomplete="off" placeholder="Ej: 1.232.132">
+        </div>
+        <div class="form-group">
+            <label for="oc">OC</label>
+            <input type="text" id="oc" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="acta">Acta</label>
+            <input type="text" id="acta" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="salida">Salida</label>
+            <input type="number" id="salida" min="0" step="1" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="fecha-oc">Fecha de OC</label>
+            <input type="date" id="fecha-oc" readonly autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="proveedor">Proveedor</label>
+            <input type="text" id="proveedor" readonly autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="fecha-salida">Fecha de Salida</label>
+            <input type="date" id="fecha-salida" autocomplete="off">
+        </div>
+        <div class="form-group-button">
+            <button id="ingresar-btn">Ingresar</button>
+        </div>
+    </form>
+
+    <div id="register-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Registrando... <span id="register-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="success-message-container">
+                <i id="success-icon" class="fas"></i>
+                <div id="success-message" class="success-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Editar Factura</h2>
+            <form class="edit-form-container">
+                <div class="form-group">
+                    <label for="edit-numero-factura">Número de Factura</label>
+                    <input type="text" id="edit-numero-factura" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-fecha-factura">Fecha de Factura</label>
+                    <input type="date" id="edit-fecha-factura" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-monto-factura">Monto</label>
+                    <input type="text" id="edit-monto-factura" required autocomplete="off" placeholder="Ej: 1.232.132">
+                </div>
+                <div class="form-group">
+                    <label for="edit-oc">OC</label>
+                    <input type="text" id="edit-oc" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-fecha-oc">Fecha de OC</label>
+                    <input type="date" id="edit-fecha-oc" readonly autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-proveedor">Proveedor</label>
+                    <input type="text" id="edit-proveedor" readonly autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-acta">Acta</label>
+                    <input type="text" id="edit-acta" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-fecha-salida">Fecha de Salida</label>
+                    <input type="date" id="edit-fecha-salida" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-salida">Salida</label>
+                    <input type="number" id="edit-salida" min="0" step="1" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="edit-fecha-ingreso">Fecha de Ingreso</label>
+                    <input type="date" id="edit-fecha-ingreso" required autocomplete="off">
+                </div>
+                <div class="form-group-button">
+                    <button id="save-edit-btn">Guardar</button>
+                    <button id="cancel-edit-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Cargando facturas... <span id="loading-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn">Sí</button>
+                <button id="cancel-delete-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="log-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Historial</h2>
+            <div class="log-content" id="log-content"></div>
+            <div class="modal-buttons">
+                <button id="close-log-btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="duplicate-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <p id="duplicate-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-duplicate-btn">Sí</button>
+                <button id="cancel-duplicate-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container" id="table-container">
+        <table id="facturas-table">
+            <thead>
+                <tr>
+                    <th class="resizeable">ID <i class="fas fa-filter filter-icon" data-column="facturaId"></i></th>
+                    <th class="resizeable">Acciones <i class="fas fa-filter filter-icon" data-column="acciones"></i>
+                    </th>
+                    <th class="resizeable">Fecha de Ingreso <i class="fas fa-filter filter-icon"
+                            data-column="fechaIngreso"></i></th>
+                    <th class="resizeable">Número de Factura <i class="fas fa-filter filter-icon"
+                            data-column="numeroFactura"></i></th>
+                    <th class="resizeable">Fecha de Factura <i class="fas fa-filter filter-icon"
+                            data-column="fechaFactura"></i></th>
+                    <th class="resizeable">Monto <i class="fas fa-filter filter-icon" data-column="montoFactura"></i>
+                    </th>
+                    <th class="resizeable">OC <i class="fas fa-filter filter-icon" data-column="oc"></i></th>
+                    <th class="resizeable">Fecha de OC <i class="fas fa-filter filter-icon" data-column="fechaOC"></i>
+                    </th>
+                    <th class="resizeable">Proveedor <i class="fas fa-filter filter-icon" data-column="proveedor"></i>
+                    </th>
+                    <th class="resizeable">Acta <i class="fas fa-filter filter-icon" data-column="acta"></i></th>
+                    <th class="resizeable">Fecha de Salida <i class="fas fa-filter filter-icon"
+                            data-column="fechaSalida"></i></th>
+                    <th class="resizeable">Salida <i class="fas fa-filter filter-icon" data-column="salida"></i></th>
+                    <th class="resizeable">Mes de Ingreso <i class="fas fa-filter filter-icon"
+                            data-column="mesIngreso"></i></th>
+                    <th class="resizeable">Año de Ingreso <i class="fas fa-filter filter-icon"
+                            data-column="anioIngreso"></i></th>
+                    <th class="resizeable">Mes de Salida <i class="fas fa-filter filter-icon"
+                            data-column="mesSalida"></i></th>
+                    <th class="resizeable">Año de Salida <i class="fas fa-filter filter-icon"
+                            data-column="anioSalida"></i></th>
+                    <th class="resizeable">Usuario <i class="fas fa-filter filter-icon" data-column="usuario"></i></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <button id="export-excel-btn">Descargar Excel</button>
+        <div class="import-export-container">
+            <button id="download-format-btn">Descargar Formato</button>
+            <label for="import-file" class="import-btn">Importar
+                <input type="file" id="import-file" accept=".xlsx, .xls" style="display: none;">
+            </label>
+        </div>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+</div>

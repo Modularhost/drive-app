@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pacientes Combinados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+</head>
+<body>
+    <div class="referencias-container">
+        <h2>Gestión de Pacientes Combinados</h2>
+        <hr class="divider">
+        <div class="form-container">
+            <div class="filter-container-main">
+                <div class="form-group">
+                    <label for="filter-year">Año</label>
+                    <select id="filter-year" autocomplete="off">
+                        <option value="all">Todos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="filter-month">Mes</label>
+                    <select id="filter-month" autocomplete="off">
+                        <option value="" disabled selected>Seleccione un mes</option>
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                </div>
+                <div class="estado-buttons" id="estado-buttons"></div>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="combinados-table">
+                <thead>
+                    <tr>
+                        <th>Modalidad<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="1"></i></th>
+                        <th>Previsión<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="2"></i></th>
+                        <th>Admisión<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="3"></i></th>
+                        <th>Nombre Paciente<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="4"></i></th>
+                        <th>Médico<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="5"></i></th>
+                        <th>Fecha CX<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="6"></i></th>
+                        <th>Proveedor<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="7"></i></th>
+                        <th>Estado<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="8"></i></th>
+                        <th>Total Paciente<div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="9"></i></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <button id="prev-page-btn" disabled>Anterior</button>
+            <span id="page-info">Página 1 de 1</span>
+            <button id="next-page-btn" disabled>Siguiente</button>
+        </div>
+        <div id="message-container"></div>
+        <div id="loading-modal" class="modal">
+            <div class="modal-content">
+                <div class="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        </div>
+        <script type="module" src="pacientes.js"></script>
+    </body>
+</html>

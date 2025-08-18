@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Personales - Modular-App</title>
+</head>
+<body>
+    <div class="personal-data-container">
+        <h2>Datos Personales</h2>
+        <div class="divider"></div>
+        <div class="card">
+            <div class="card-header">
+                <img id="user-icon" src="img/icono-otro.png" alt="User Icon" class="user-icon">
+                <h3 id="user-fullName">Nombre del Usuario</h3>
+                <span id="user-role" class="role-badge"></span>
+            </div>
+            <div class="card-body">
+                <div class="data-group">
+                    <i class="fas fa-id-card"></i>
+                    <label>RUT:</label>
+                    <span id="user-rut">Sin RUT</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-envelope"></i>
+                    <label>Correo Electrónico:</label>
+                    <span id="user-email">Sin correo</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-user"></i>
+                    <label>Nombre de Usuario:</label>
+                    <span id="user-username">Sin usuario</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-venus-mars"></i>
+                    <label>Género:</label>
+                    <span id="user-gender">Sin género</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-birthday-cake"></i>
+                    <label>Fecha de Nacimiento:</label>
+                    <span id="user-birthDate">Sin fecha</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-clock"></i>
+                    <label>Edad:</label>
+                    <span id="user-age">Sin edad</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <label>Días para el próximo cumpleaños:</label>
+                    <span id="user-daysToBirthday">Sin datos</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-star"></i>
+                    <label>Signo Zodiacal:</label>
+                    <span id="user-zodiac">Sin signo</span>
+                </div>
+                <div class="data-group">
+                    <i class="fas fa-dragon"></i>
+                    <label>Animal del Zodiaco Chino:</label>
+                    <span id="user-chineseZodiac">Sin animal</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content success-message-container">
+            <button class="close-modal">×</button>
+            <i id="success-icon" class="fas"></i>
+            <span class="success-message"></span>
+        </div>
+    </div>
+
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content spinner-container">
+            <span class="loader"></span>
+            <span class="spinner-text">Cargando...</span>
+        </div>
+    </div>
+</body>
+</html>

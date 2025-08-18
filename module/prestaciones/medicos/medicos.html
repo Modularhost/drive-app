@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Médicos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="medicos-container">
+    <h2>Registro de Médicos</h2>
+    <hr class="divider">
+    <div class="form-container">
+        <div class="form-group">
+            <label for="nombre-medico">Nombre del Médico:</label>
+            <input type="text" id="nombre-medico" placeholder="Ingrese el nombre del médico" required autocomplete="off">
+        </div>
+        <div class="form-group estado-container">
+            <label><input type="radio" name="estado" value="activo" checked> Activo</label>
+            <label><input type="radio" name="estado" value="inactivo"> Inactivo</label>
+        </div>
+        <div class="form-group form-group-empty"></div>
+        <div class="form-group form-group-button">
+            <button id="registrar-btn">Registrar</button>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Registrando... <span id="register-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <div class="success-message-container">
+                <i id="success-icon" class="fas"></i>
+                <div id="success-message" class="success-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <h2>Editar Médico</h2>
+            <div class="form-container edit-form-container">
+                <div class="form-group">
+                    <label for="edit-nombre-medico">Nombre del Médico:</label>
+                    <input type="text" id="edit-nombre-medico" required autocomplete="off">
+                </div>
+                <div class="form-group estado-container">
+                    <label><input type="radio" name="edit-estado" value="activo"> Activo</label>
+                    <label><input type="radio" name="edit-estado" value="inactivo"> Inactivo</label>
+                </div>
+                <div class="form-group form-group-button">
+                    <button id="save-edit-btn">Guardar</button>
+                    <button id="cancel-edit-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Cargando médicos... <span id="loading-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn">Sí</button>
+                <button id="cancel-delete-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="log-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <h2>Historial</h2>
+            <div class="log-content" id="log-content"></div>
+            <div class="modal-buttons">
+                <button id="close-log-btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container" id="table-container" style="display: none;">
+        <table id="medicos-table">
+            <thead>
+                <tr>
+                    <th>ID <svg class="filter-icon" data-column-index="0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6H19V8H5V6ZM7 10H17V12H7V10ZM9 14H15V16H9V14ZM11 18H13V20H11V18Z" fill="currentColor"/></svg></th>
+                    <th>Acciones <svg class="filter-icon" data-column-index="1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6H19V8H5V6ZM7 10H17V12H7V10ZM9 14H15V16H9V14ZM11 18H13V20H11V18Z" fill="currentColor"/></svg></th>
+                    <th>Nombre del Médico <svg class="filter-icon" data-column-index="2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6H19V8H5V6ZM7 10H17V12H7V10ZM9 14H15V16H9V14ZM11 18H13V20H11V18Z" fill="currentColor"/></svg></th>
+                    <th>Estado <svg class="filter-icon" data-column-index="3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6H19V8H5V6ZM7 10H17V12H7V10ZM9 14H15V16H9V14ZM11 18H13V20H11V18Z" fill="currentColor"/></svg></th>
+                    <th>Fecha de Creación <svg class="filter-icon" data-column-index="4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6H19V8H5V6ZM7 10H17V12H7V10ZM9 14H15V16H9V14ZM11 18H13V20H11V18Z" fill="currentColor"/></svg></th>
+                    <th>Usuario <svg class="filter-icon" data-column-index="5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6H19V8H5V6ZM7 10H17V12H7V10ZM9 14H15V16H9V14ZM11 18H13V20H11V18Z" fill="currentColor"/></svg></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <button id="export-excel-btn">Descargar Excel</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+</div>
+<script src="medicos.js" type="module"></script>
+</body>
+</html>

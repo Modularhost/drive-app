@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guías de Despacho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="content-container">
+        <div class="module-header">
+            <h2>Guías de Despacho</h2>
+            <div class="header-actions">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input id="search-guia-input" type="text" placeholder="Buscar por folio...">
+                </div>
+                <button id="crear-guia-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Nueva Guía</button>
+            </div>
+        </div>
+        <div class="module-content">
+            <ul id="guias-list" class="list-group"></ul>
+        </div>
+        <div id="guia-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <button id="close-guia-btn" class="close-modal-btn"><i class="fas fa-times"></i></button>
+                <h3 id="guia-modal-title">Nueva Guía</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Folio:</label>
+                        <span id="guia-folio-display">-</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Emisión:</label>
+                        <span id="guia-fecha-emision-display">-</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Razón Social Emisor:</label>
+                        <span id="guia-razon-social-display">-</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="xml-file-input">Archivos XML:</label>
+                        <input type="file" id="xml-file-input" accept=".xml" multiple>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <h4>Detalles</h4>
+                    <table id="detalles-list" class="table">
+                        <thead>
+                            <tr>
+                                <th>Items</th>
+                                <th>Nombre</th>
+                                <th>Código</th>
+                                <th>Cantidad</th>
+                                <th>Lote</th>
+                                <th>Vencimiento</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="modal-actions">
+                    <button id="save-guia-btn" class="btn btn-primary" disabled>Guardar</button>
+                    <button id="download-pdf-btn" class="btn btn-secondary" disabled>Visualizar PDF</button>
+                    <button id="cancel-guia-btn" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="delete-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Confirmar Eliminación</h3>
+                <p>¿Estás seguro de que deseas eliminar esta guía?</p>
+                <div class="modal-actions">
+                    <button id="confirm-delete-btn" class="btn btn-danger">Eliminar</button>
+                    <button id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="notification-toast" class="notification-toast" style="display: none;">
+            <div class="notification-content success">
+                <i id="success-icon" class="fas fa-check-circle"></i>
+                <p class="success-message"></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

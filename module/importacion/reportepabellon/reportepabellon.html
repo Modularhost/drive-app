@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Pabellón</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="reporte-container">
+    <h2>Reporte Pabellón</h2>
+    <hr class="divider">
+
+    <div class="form-container">
+        <div class="form-group">
+            <label for="filter-year">Año:</label>
+            <select id="filter-year"></select>
+        </div>
+        <div class="form-group">
+            <label for="filter-month">Mes:</label>
+            <select id="filter-month"></select>
+        </div>
+        <div class="form-group form-group-button">
+            <button id="import-btn">Importar</button>
+            <input type="file" id="import-file" accept=".xlsx, .xls" style="display: none;">
+        </div>
+        <div class="form-group form-group-button">
+            <button id="download-format-btn">Formato</button>
+        </div>
+        <div class="form-group form-group-button">
+            <button id="export-btn">Exportar</button>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-message-container">
+                <i id="success-icon" class="fas"></i>
+                <div id="success-message" class="success-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-import-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Importando... <span id="import-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="reporte-pabellon-table">
+            <thead>
+                <tr>
+                    <th><span class="column-title">Fecha</span> <i class="fas fa-bars filter-icon" data-column-index="0"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Día</span> <i class="fas fa-bars filter-icon" data-column-index="1"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Mes</span> <i class="fas fa-bars filter-icon" data-column-index="2"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Cod.Artículo</span> <i class="fas fa-bars filter-icon" data-column-index="3"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Descripción</span> <i class="fas fa-bars filter-icon" data-column-index="4"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Admisión</span> <i class="fas fa-bars filter-icon" data-column-index="5"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Rut</span> <i class="fas fa-bars filter-icon" data-column-index="6"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Paciente</span> <i class="fas fa-bars filter-icon" data-column-index="7"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Edad</span> <i class="fas fa-bars filter-icon" data-column-index="8"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Previsión</span> <i class="fas fa-bars filter-icon" data-column-index="9"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Isapre</span> <i class="fas fa-bars filter-icon" data-column-index="10"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Convenio</span> <i class="fas fa-bars filter-icon" data-column-index="11"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Cód.Arancel</span> <i class="fas fa-bars filter-icon" data-column-index="12"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Arancel</span> <i class="fas fa-bars filter-icon" data-column-index="13"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">Cant.Art.</span> <i class="fas fa-bars filter-icon" data-column-index="14"></i><span class="resize-handle"></span></th>
+                    <th><span class="column-title">1° Cirujano</span> <i class="fas fa-bars filter-icon" data-column-index="15"></i><span class="resize-handle"></span></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="table-footer">
+        <span id="total-records">0 registros</span>
+    </div>
+</div>
+<script type="module" src="reportepabellon.js"></script>
+</body>
+</html>

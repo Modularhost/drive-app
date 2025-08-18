@@ -1,0 +1,102 @@
+<div class="previsiones-container">
+  <h2>Registro de Previsiones</h2>
+  <hr class="divider">
+
+  <div class="form-container">
+    <div class="form-group">
+      <label for="nombre-prevision">Previsión:</label>
+      <input type="text" id="nombre-prevision" placeholder="Ingrese el nombre de la previsión" required
+        autocomplete="off">
+    </div>
+    <div class="form-group form-group-button">
+      <button id="registrar-btn">Registrar</button>
+    </div>
+    <div class="form-group form-group-empty"></div>
+  </div>
+
+  <div id="register-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="spinner-container">
+        <span class="loader"></span>
+        <span class="spinner-text">Registrando... <span id="register-progress">0%</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="success-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="success-message-container">
+        <i id="success-icon" class="fas"></i>
+        <div id="success-message" class="success-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="edit-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Editar Previsión</h2>
+      <div class="form-container edit-form-container">
+        <div class="form-group">
+          <label for="edit-nombre-prevision">Previsión:</label>
+          <input type="text" id="edit-nombre-prevision" required autocomplete="off">
+        </div>
+        <div class="form-group form-group-button">
+          <button id="save-edit-btn">Guardar</button>
+          <button id="cancel-edit-btn">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="loading-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="spinner-container">
+        <span class="loader"></span>
+        <span class="spinner-text">Cargando previsiones... <span id="loading-progress">0%</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <p id="delete-message"></p>
+      <div class="modal-buttons">
+        <button id="confirm-delete-btn">Sí</button>
+        <button id="cancel-delete-btn">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="log-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Historial</h2>
+      <div class="log-content" id="log-content"></div>
+      <div class="modal-buttons">
+        <button id="close-log-btn">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container" id="table-container" style="display: none;">
+    <table id="previsiones-table">
+      <thead>
+        <tr>
+          <th>ID <i class="fas fa-filter filter-icon" data-column="id"></i></th>
+          <th>Acciones <i class="fas fa-filter filter-icon" data-column="acciones"></i></th>
+          <th>Previsión <i class="fas fa-filter filter-icon" data-column="nombrePrevision"></i></th>
+          <th>Fecha de Creación <i class="fas fa-filter filter-icon" data-column="fechaCreacion"></i></th>
+          <th>Usuario <i class="fas fa-filter filter-icon" data-column="usuario"></i></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="pagination-container">
+    <button id="prev-btn" disabled>Anterior</button>
+    <button id="next-btn">Siguiente</button>
+    <button id="export-excel-btn">Descargar Excel</button>
+    <span id="page-info">Página 1 de 1</span>
+    <span id="total-records">Total de registros: 0</span>
+  </div>
+</div>
+<script type="module" src="previsiones.js"></script>
