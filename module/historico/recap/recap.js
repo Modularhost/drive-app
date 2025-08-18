@@ -3,13 +3,13 @@ import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } 
 import { getFirestore, collection, getDocs, query, where, getDoc, doc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAdWLsgSF7mtA4moJ4yu9WzrVwfpNqYjXo",
-    authDomain: "respadol-modular.firebaseapp.com",
-    projectId: "respadol-modular",
-    storageBucket: "respadol-modular.firebasestorage.app",
-    messagingSenderId: "458804625858",
-    appId: "1:458804625858:web:5580163bc0736efbf2165b",
-    measurementId: "G-30MEEM4VMZ"
+  apiKey: "AIzaSyDuF7p0X6N8IE19Bqt78LQAp805tMl84Ds",
+  authDomain: "modular-app-16bd6.firebaseapp.com",
+  projectId: "modular-app-16bd6",
+  storageBucket: "modular-app-16bd6.firebasestorage.app",
+  messagingSenderId: "1006327040835",
+  appId: "1:1006327040835:web:b8b4f510da46514a3d3df6",
+  measurementId: "G-GVKBWL9GT9"
 };
 
 try {
@@ -430,4 +430,5 @@ try {
     console.error('Error al inicializar Firebase:', error.message);
     const recapContainer = document.querySelector('.recap-container');
     if (recapContainer) recapContainer.innerHTML = `<p>Error al inicializar: ${error.message}</p>`;
+
 }
