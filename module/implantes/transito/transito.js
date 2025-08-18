@@ -3,13 +3,13 @@ import { getAuth, onAuthStateChanged, setPersistence, browserSessionPersistence 
 import { getFirestore, collection, getDocs, query, where, doc, getDoc, updateDoc, writeBatch, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDmAf-vi7PhzzQkPZh89q9p3Mz4vGGPtd0",
-  authDomain: "modular-app-387da.firebaseapp.com",
-  projectId: "modular-app-387da",
-  storageBucket: "modular-app-387da.firebasestorage.app",
-  messagingSenderId: "271561966774",
-  appId: "1:271561966774:web:e197c00e2abd67b4f0d217",
-  measurementId: "G-7YT6MMR47X"
+  apiKey: "AIzaSyDuF7p0X6N8IE19Bqt78LQAp805tMl84Ds",
+  authDomain: "modular-app-16bd6.firebaseapp.com",
+  projectId: "modular-app-16bd6",
+  storageBucket: "modular-app-16bd6.firebasestorage.app",
+  messagingSenderId: "1006327040835",
+  appId: "1:1006327040835:web:b8b4f510da46514a3d3df6",
+  measurementId: "G-GVKBWL9GT9"
 };
 
 let app;
@@ -1059,4 +1059,5 @@ onAuthStateChanged(auth, async (user) => {
     console.warn('No hay usuario autenticado');
     showSuccessMessage('Por favor, inicia sesión para continuar', false);
   }
+
 });
