@@ -1,12 +1,7 @@
-import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js';
-import { 
-    getStorage, 
-    ref, 
-    uploadBytesResumable, 
-    getDownloadURL 
-} from 'https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js';
+import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js';
 
-// Configuración de Firebase (la misma que en script.js)
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyDuF7p0X6N8IE19Bqt78LQAp805tMl84Ds",
     authDomain: "modular-app-16bd6.firebaseapp.com",
@@ -29,7 +24,7 @@ if (!getApps().length) {
 
 const storage = getStorage(app);
 
-// Elementos del DOM con nombres específicos para presupuesto
+// Elementos del DOM
 const toggleModeBtn = document.getElementById('toggle-mode-presupuesto');
 const body = document.body;
 const uploadZone = document.getElementById('upload-zone-presupuesto');
@@ -40,7 +35,7 @@ const message = document.getElementById('message-presupuesto');
 
 let selectedFiles = [];
 
-// Configuración de modo oscuro/claro para presupuesto
+// Configuración de modo oscuro/claro
 const savedMode = localStorage.getItem('presupuesto-theme') || 'dark';
 if (savedMode === 'light') {
     body.classList.remove('dark-mode');
@@ -54,7 +49,7 @@ toggleModeBtn.addEventListener('click', () => {
     localStorage.setItem('presupuesto-theme', isDark ? 'dark' : 'light');
 });
 
-// Funciones de utilidad para presupuesto
+// Funciones de utilidad
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -94,6 +89,7 @@ function validateFile(file) {
 }
 
 function addFilesToList(files) {
+    console.log('Archivos seleccionados:', files);
     Array.from(files).forEach(file => {
         const error = validateFile(file);
         if (error) {
@@ -110,6 +106,7 @@ function addFilesToList(files) {
                 progress: 0,
                 url: null
             });
+            console.log('Archivo añadido a la lista:', file.name);
         }
     });
     
@@ -138,17 +135,17 @@ function renderFileList() {
             </div>
             <div class="file-actions-presupuesto">
                 ${!fileObj.uploaded && !fileObj.uploading ? `
-                    <button class="btn-small-presupuesto btn-upload-presupuesto" onclick="uploadFilePresupuesto('${fileObj.id}')">
+                    <button class="btn-small-presupuesto btn-upload-presupuesto">
                         <i class="fas fa-cloud-upload-alt"></i> Subir
                     </button>
                 ` : ''}
                 ${fileObj.uploaded && fileObj.url ? `
-                    <button class="btn-small-presupuesto btn-upload-presupuesto" onclick="copyUrlPresupuesto('${fileObj.url}')">
+                    <button class="btn-small-presupuesto btn-upload-presupuesto">
                         <i class="fas fa-copy"></i> Copiar URL
                     </button>
                 ` : ''}
                 ${!fileObj.uploading ? `
-                    <button class="btn-small-presupuesto btn-remove-presupuesto" onclick="removeFilePresupuesto('${fileObj.id}')">
+                    <button class="btn-small-presupuesto btn-remove-presupuesto">
                         <i class="fas fa-trash"></i> Eliminar
                     </button>
                 ` : ''}
@@ -157,7 +154,7 @@ function renderFileList() {
     `).join('');
 }
 
-// Funciones globales para presupuesto
+// Funciones globales
 window.uploadFilePresupuesto = async function(fileId) {
     const fileObj = selectedFiles.find(f => f.id === fileId);
     if (!fileObj || fileObj.uploading || fileObj.uploaded) return;
@@ -166,22 +163,22 @@ window.uploadFilePresupuesto = async function(fileId) {
     renderFileList();
 
     try {
-        // Crear referencia específica para presupuestos
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const fileName = `presupuesto_${timestamp}_${fileObj.file.name}`;
-        const storageRef = ref(storage, `presupuestos/${fileName}`);
+        const timestamp = Date.now();
+        const fileName = `presupuestos/presupuesto_${timestamp}_${fileObj.file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+        const storageRef = ref(storage, fileName);
+        console.log('Iniciando subida del archivo:', fileName);
 
-        // Subir archivo con seguimiento de progreso
         const uploadTask = uploadBytesResumable(storageRef, fileObj.file);
 
         uploadTask.on('state_changed',
             (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 fileObj.progress = Math.round(progress);
+                console.log(`Progreso de subida: ${progress}%`);
                 renderFileList();
             },
             (error) => {
-                console.error('Error al subir presupuesto:', error);
+                console.error('Error al subir presupuesto:', error.code, error.message);
                 showMessage(`Error al subir ${fileObj.file.name}: ${error.message}`, 'error');
                 fileObj.uploading = false;
                 renderFileList();
@@ -193,9 +190,9 @@ window.uploadFilePresupuesto = async function(fileId) {
                     fileObj.uploading = false;
                     fileObj.url = downloadURL;
                     showMessage(`Presupuesto ${fileObj.file.name} subido exitosamente!`);
+                    console.log('URL de descarga:', downloadURL);
                     renderFileList();
                     
-                    // Guardar información del presupuesto en localStorage para referencia
                     const presupuestos = JSON.parse(localStorage.getItem('presupuestos-subidos') || '[]');
                     presupuestos.push({
                         id: fileObj.id,
@@ -207,14 +204,16 @@ window.uploadFilePresupuesto = async function(fileId) {
                     });
                     localStorage.setItem('presupuestos-subidos', JSON.stringify(presupuestos));
                 } catch (error) {
-                    console.error('Error al obtener URL del presupuesto:', error);
+                    console.error('Error al obtener URL:', error);
                     showMessage(`Error al obtener URL de ${fileObj.file.name}`, 'error');
+                    fileObj.uploading = false;
+                    renderFileList();
                 }
             }
         );
     } catch (error) {
-        console.error('Error al iniciar subida del presupuesto:', error);
-        showMessage(`Error al iniciar subida de ${fileObj.file.name}`, 'error');
+        console.error('Error al iniciar subida:', error);
+        showMessage(`Error al iniciar subida de ${fileObj.file.name}: ${error.message}`, 'error');
         fileObj.uploading = false;
         renderFileList();
     }
@@ -232,25 +231,23 @@ window.copyUrlPresupuesto = async function(url) {
         showMessage('URL del presupuesto copiada al portapapeles!');
     } catch (error) {
         showMessage('Error al copiar URL del presupuesto', 'error');
-        // Fallback para navegadores que no soportan clipboard API
         const textArea = document.createElement('textarea');
         textArea.value = url;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        showMessage('URL copiada (fallback method)');
+        showMessage('URL copiada (método alternativo)');
     }
 };
 
-// Event listeners específicos para presupuesto
+// Event listeners
 selectFilesBtn.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', (e) => {
     addFilesToList(e.target.files);
     showMessage(`${e.target.files.length} archivo(s) de presupuesto seleccionado(s)`);
 });
 
-// Drag and drop para presupuestos
 uploadZone.addEventListener('dragover', (e) => {
     e.preventDefault();
     uploadZone.classList.add('dragover');
@@ -273,12 +270,25 @@ uploadZone.addEventListener('click', (e) => {
     }
 });
 
-// Función para limpiar archivos subidos (opcional)
-window.clearUploadedFiles = function() {
-    selectedFiles = selectedFiles.filter(f => !f.uploaded);
-    renderFileList();
-    showMessage('Archivos subidos limpiados de la lista');
-};
+fileList.addEventListener('click', (e) => {
+    const uploadBtn = e.target.closest('.btn-upload-presupuesto');
+    const removeBtn = e.target.closest('.btn-remove-presupuesto');
+
+    if (uploadBtn) {
+        const fileId = uploadBtn.closest('.file-item-presupuesto').dataset.id;
+        if (uploadBtn.querySelector('.fa-copy')) {
+            const fileObj = selectedFiles.find(f => f.id === fileId);
+            if (fileObj && fileObj.url) {
+                copyUrlPresupuesto(fileObj.url);
+            }
+        } else {
+            uploadFilePresupuesto(fileId);
+        }
+    } else if (removeBtn) {
+        const fileId = removeBtn.closest('.file-item-presupuesto').dataset.id;
+        removeFilePresupuesto(fileId);
+    }
+});
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
