@@ -4,13 +4,13 @@ import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, q
 import * as XLSX from "https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.mjs";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDmAf-vi7PhzzQkPZh89q9p3Mz4vGGPtd0",
-  authDomain: "modular-app-387da.firebaseapp.com",
-  projectId: "modular-app-387da",
-  storageBucket: "modular-app-387da.firebasestorage.app",
-  messagingSenderId: "271561966774",
-  appId: "1:271561966774:web:e197c00e2abd67b4f0d217",
-  measurementId: "G-7YT6MMR47X"
+  apiKey: "AIzaSyDuF7p0X6N8IE19Bqt78LQAp805tMl84Ds",
+  authDomain: "modular-app-16bd6.firebaseapp.com",
+  projectId: "modular-app-16bd6",
+  storageBucket: "modular-app-16bd6.firebasestorage.app",
+  messagingSenderId: "1006327040835",
+  appId: "1:1006327040835:web:b8b4f510da46514a3d3df6",
+  measurementId: "G-GVKBWL9GT9"
 };
 
 let app;
@@ -653,4 +653,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
     setTimeout(() => init(), 1);
+
 }
