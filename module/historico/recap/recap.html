@@ -1,0 +1,78 @@
+<div class="recap-container">
+    <h2>Resumen de Proveedores</h2>
+    <div class="divider"></div>
+    <div class="controls-container">
+        <div class="filters">
+            <label for="year-filter">Año:</label>
+            <select id="year-filter"></select>
+        </div>
+    </div>
+    <div class="table-container">
+        <table id="recap-table">
+            <colgroup>
+                <col class="col-proveedor">
+                <col class="col-rut">
+                <col class="col-enero">
+                <col class="col-febrero">
+                <col class="col-marzo">
+                <col class="col-abril">
+                <col class="col-mayo">
+                <col class="col-junio">
+                <col class="col-julio">
+                <col class="col-agosto">
+                <col class="col-septiembre">
+                <col class="col-octubre">
+                <col class="col-noviembre">
+                <col class="col-diciembre">
+                <col class="col-total">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="resizeable">Proveedor</th>
+                    <th class="resizeable">RUT</th>
+                    <th class="resizeable">Enero</th>
+                    <th class="resizeable">Febrero</th>
+                    <th class="resizeable">Marzo</th>
+                    <th class="resizeable">Abril</th>
+                    <th class="resizeable">Mayo</th>
+                    <th class="resizeable">Junio</th>
+                    <th class="resizeable">Julio</th>
+                    <th class="resizeable">Agosto</th>
+                    <th class="resizeable">Septiembre</th>
+                    <th class="resizeable">Octubre</th>
+                    <th class="resizeable">Noviembre</th>
+                    <th class="resizeable">Diciembre</th>
+                    <th class="resizeable">Total</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+</div>
+<div id="loading-modal" class="modal">
+    <div class="modal-content">
+        <div class="spinner-container">
+            <div class="loader"></div>
+            <span id="loading-progress" class="spinner-text">0%</span>
+        </div>
+    </div>
+</div>
+<div id="success-modal" class="modal">
+    <div class="modal-content">
+        <div class="success-message-container">
+            <i id="success-icon" class="fas"></i>
+            <p id="success-message" class="success-message"></p>
+        </div>
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js"></script>
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script> 
+<script src="recap.js"></script>

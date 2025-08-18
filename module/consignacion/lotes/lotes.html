@@ -1,0 +1,82 @@
+<div class="lotes-container">
+    <h2>Lotes</h2>
+    <div class="quick-filters">
+        <select id="filter-year">
+            <option value="">Todos los años</option>
+        </select>
+        <select id="filter-month">
+            <option value="">Todos los meses</option>
+        </select>
+        <button id="show-all-btn">Mostrar Todo</button>
+    </div>
+    <hr class="divider">
+    <div class="table-container">
+        <div id="loading-indicator" class="loading-indicator">
+            <div class="spinner"></div>
+            <span class="loading-text">Cargando datos...</span>
+        </div>
+        <table id="lotes-table">
+            <thead>
+                <tr>
+                    <th>Admisión</th>
+                    <th>Nombre Paciente</th>
+                    <th>Fecha Cx</th>
+                    <th class="editable">Documento Delivery</th>
+                    <th class="editable">Insumo Devuelto</th>
+                    <th class="editable">Cantidad</th>
+                    <th class="editable admin-only">Cargado</th>
+                    <th class="editable admin-only">Estado</th>
+                    <th>Guía</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn">Anterior</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">0</span>
+        <button id="next-btn">Siguiente</button>
+        <button id="export-excel-btn">Exportar a Excel</button>
+    </div>
+</div>
+<div id="success-modal" class="lotes-success-modal" hidden>
+    <div class="modal-content small-modal">
+        <i id="success-icon" class="fas fa-check-circle"></i>
+        <span id="success-message"></span>
+    </div>
+</div>
+<div id="edit-lote-modal" class="lotes-edit-modal" hidden>
+    <div class="modal-content">
+        <h3>Editar Lote</h3>
+        <form id="edit-lote-form">
+            <div class="form-group">
+                <label for="documento-delivery">Documento Delivery</label>
+                <input type="text" id="documento-delivery" name="documentoDelivery" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="insumo-devuelto">Insumo Devuelto</label>
+                <input type="text" id="insumo-devuelto" name="insumoDevuelto" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" name="cantidad" class="form-input" min="0">
+            </div>
+            <div class="form-group admin-only">
+                <label for="cargado">Cargado</label>
+                <select id="cargado" name="cargado" class="form-input">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="form-group admin-only">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" class="form-input">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="form-btn save">Guardar</button>
+                <button type="button" class="form-btn cancel">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Implantes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="referencias-container">
+        <h2>Gestión de Implantes</h2>
+        <div class="form-container">
+            <form id="implantes-form">
+                <div class="form-row form-row-single">
+                    <div class="form-group ingreso">
+                        <label for="ingreso">Fecha Ingreso</label>
+                        <input type="date" id="ingreso" required>
+                    </div>
+                    <div class="form-group admision">
+                        <label for="admision">Admisión</label>
+                        <input type="text" id="admision" autocomplete="off" required>
+                    </div>
+                    <div class="form-group cotizacion">
+                        <label for="cotizacion">Cotización</label>
+                        <input type="text" id="cotizacion" autocomplete="off" required>
+                    </div>
+                    <div class="form-group referencia">
+                        <label for="referencia">Referencia</label>
+                        <input type="text" id="referencia" autocomplete="off" required>
+                    </div>
+                    <div class="form-group cantidad">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" min="0" autocomplete="off" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" id="registrar-btn">Registrar</button>
+                        <button type="button" id="limpiar-btn">Limpiar</button>
+                    </div>
+                    <div class="form-group lote">
+                        <label for="lote">Lote</label>
+                        <input type="text" id="lote" autocomplete="off">
+                    </div>
+                    <div class="form-group vencimiento">
+                        <label for="vencimiento">Fecha Vencimiento</label>
+                        <input type="text" id="vencimiento" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-row form-row-dual">
+                    <div class="form-group prevision">
+                        <label for="prevision">Previsión</label>
+                        <span id="prevision"></span>
+                    </div>
+                    <div class="form-group convenio">
+                        <label for="convenio">Convenio</label>
+                        <span id="convenio"></span>
+                    </div>
+                    <div class="form-group paciente">
+                        <label for="paciente">Paciente</label>
+                        <span id="paciente"></span>
+                    </div>
+                    <div class="form-group medico">
+                        <label for="medico">Médico</label>
+                        <span id="medico"></span>
+                    </div>
+                    <div class="form-group fecha-cx">
+                        <label for="fecha-cx">Fecha Cx</label>
+                        <span id="fecha-cx"></span>
+                    </div>
+                    <div class="form-group descripcion">
+                        <label for="descripcion">Descripción</label>
+                        <span id="descripcion"></span>
+                    </div>
+                    <div class="form-group proveedor">
+                        <label for="proveedor">Proveedor</label>
+                        <span id="proveedor"></span>
+                    </div>
+                </div>
+                <div class="form-row form-row-dual">
+                    <div class="form-group precio">
+                        <label for="precio">Precio</label>
+                        <span id="precio"></span>
+                    </div>
+                    <div class="form-group codigo">
+                        <label for="codigo">Código</label>
+                        <span id="codigo"></span>
+                    </div>
+                    <div class="form-group total">
+                        <label for="total">Total</label>
+                        <span id="total">0</span>
+                    </div>
+                    <div class="form-group modalidad">
+                        <label for="modalidad">Modalidad</label>
+                        <span id="modalidad"></span>
+                    </div>
+                    <div class="form-group categoria">
+                        <label for="categoria">Categoría</label>
+                        <span id="categoria"></span>
+                    </div>
+                    <div class="form-group total-cotizacion">
+                        <label for="total-cotizacion">Total Cotización</label>
+                        <span id="total-cotizacion"></span>
+                    </div>
+                </div>
+                <div class="form-group-button">
+                    <div class="filter-group">
+                        <label for="year-filter">Año:</label>
+                        <select id="year-filter">
+                            <option value="">Todos los años</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="month-filter">Mes:</label>
+                        <select id="month-filter">
+                            <option value="">Todos los meses</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="day-filter">Día:</label>
+                        <select id="day-filter">
+                            <option value="">Todos los días</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="admision-filter">Admisión</label>
+                        <input type="text" id="admision-filter" placeholder="Buscar por admisión...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="paciente-filter">Paciente</label>
+                        <input type="text" id="paciente-filter" placeholder="Buscar por paciente...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="column-filter">Columna</label>
+                        <select id="column-filter">
+                            <option value="">Seleccionar columna</option>
+                            <option value="codigo">Código</option>
+                            <option value="descripcion">Descripción</option>
+                            <option value="cotizacion">Cotización</option>
+                            <option value="referencia">Referencia</option>
+                            <option value="lote">Lote</option>
+                            <option value="convenio">Convenio</option>
+                            <option value="prevision">Previsión</option>
+                            <option value="medico">Médico</option>
+                            <option value="proveedor">Proveedor</option>
+                            <option value="modalidad">Modalidad</option>
+                            <option value="categoria">Categoría</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="column-search">Buscar</label>
+                        <input type="text" id="column-search" placeholder="Buscar en columna seleccionada...">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="divider"></div>
+        <div class="tables-row">
+            <div class="table-container">
+                <h3>Tabla 1</h3>
+                <table id="tabla1">
+                    <thead>
+                        <tr>
+                            <th class="seleccion"><input type="checkbox" id="select-all"></th>
+                            <th class="fecha-ingreso">Fecha Ingreso<div class="resize-handle"></div>
+                            </th>
+                            <th class="admision">Admisión<div class="resize-handle"></div>
+                            </th>
+                            <th class="codigo">Código<div class="resize-handle"></div>
+                            </th>
+                            <th class="cantidad">Cantidad<div class="resize-handle"></div>
+                            </th>
+                            <th class="venta">Venta<div class="resize-handle"></div>
+                            </th>
+                            <th class="estado">Estado<div class="resize-handle"></div>
+                            </th>
+                            <th class="fecha-carga">Fecha Carga<div class="resize-handle"></div>
+                            </th>
+                            <th class="acciones">Acciones<div class="resize-handle"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <h3>Tabla 2</h3>
+                <table id="tabla2">
+                    <thead>
+                        <tr>
+                            <th class="descripcion">Descripción<div class="resize-handle"></div>
+                            </th>
+                            <th class="validacion">Validación<div class="resize-handle"></div>
+                            </th>
+                            <th class="cotizacion">Cotización<div class="resize-handle"></div>
+                            </th>
+                            <th class="referencia">Referencia<div class="resize-handle"></div>
+                            </th>
+                            <th class="precio">Precio<div class="resize-handle"></div>
+                            </th>
+                            <th class="lote">Lote<div class="resize-handle"></div>
+                            </th>
+                            <th class="fecha-vencimiento">Fecha Vencimiento<div class="resize-handle"></div>
+                            </th>
+                            <th class="corpo">Corpo<div class="resize-handle"></div>
+                            </th>
+                            <th class="total-cotizacion">Total Cotización<div class="resize-handle"></div>
+                            </th>
+                            <th class="total-grupo">Total Grupo<div class="resize-handle"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <h3>Tabla 3</h3>
+                <table id="tabla3">
+                    <thead>
+                        <tr>
+                            <th class="convenio">Convenio<div class="resize-handle"></div>
+                            </th>
+                            <th class="prevision">Previsión<div class="resize-handle"></div>
+                            </th>
+                            <th class="admision">Admisión<div class="resize-handle"></div>
+                            </th>
+                            <th class="paciente">Paciente<div class="resize-handle"></div>
+                            </th>
+                            <th class="medico">Médico<div class="resize-handle"></div>
+                            </th>
+                            <th class="fecha-cx">Fecha Cx<div class="resize-handle"></div>
+                            </th>
+                            <th class="proveedor">Proveedor<div class="resize-handle"></div>
+                            </th>
+                            <th class="codigo">Código<div class="resize-handle"></div>
+                            </th>
+                            <th class="descripcion">Descripción<div class="resize-handle"></div>
+                            </th>
+                            <th class="cantidad">Cantidad<div class="resize-handle"></div>
+                            </th>
+                            <th class="precio-sistema">Precio Sistema<div class="resize-handle"></div>
+                            </th>
+                            <th class="modalidad">Modalidad<div class="resize-handle"></div>
+                            </th>
+                            <th class="categoria">Categoría<div class="resize-handle"></div>
+                            </th>
+                            <th class="total-item">Total Item<div class="resize-handle"></div>
+                            </th>
+                            <th class="margen">Margen<div class="resize-handle"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="pagination">
+            <button id="prev-page" disabled>Anterior</button>
+            <span id="page-info">Página 1 de 1</span>
+            <button id="next-page" disabled>Siguiente</button>
+            <div class="download-container">
+                <button id="download-btn">Descargar</button>
+                <div id="download-options" class="download-options">
+                    <button id="download-year">Todos los registros del año</button>
+                    <button id="download-year-month">Registros por año y mes</button>
+                    <button id="download-all">Libro completo</button>
+                    <button id="download-gestionado">Registros Gestionados</button>
+                    <button id="download-empty-corpo">Registros sin Corpo</button>
+                </div>
+            </div>
+        </div>
+        <div id="download-modal" class="modal">
+            <div class="modal-content">
+                <h2>Seleccionar Filtros de Descarga</h2>
+                <div class="form-group">
+                    <label for="download-year-select">Año:</label>
+                    <select id="download-year-select">
+                        <option value="">Seleccionar año</option>
+                    </select>
+                </div>
+                <div class="form-group" id="download-month-group" style="display: none;">
+                    <label for="download-month-select">Mes:</label>
+                    <select id="download-month-select">
+                        <option value="">Seleccionar mes</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button id="confirmar-download-btn">Descargar</button>
+                    <button id="cancelar-download-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="message-container"></div>
+        <div id="estado-modal" class="modal">
+            <div class="modal-content">
+                <h2>Cambiar Estado</h2>
+                <div class="form-group">
+                    <label for="estado-select">Estado</label>
+                    <select id="estado-select">
+                        <option value="CARGADO">Cargado</option>
+                        <option value="PAD">PAD</option>
+                        <option value="CARPO PENDIENTE">Carpo Pendiente</option>
+                        <option value="CERRADA">Cerrada</option>
+                        <option value="SIN CODIGO">Sin Código</option>
+                        <option value="MODIFICAR PRECIO">Modificar Precio</option>
+                        <option value="REGULAR">Regular</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button id="confirmar-estado-btn">Confirmar</button>
+                    <button id="cancelar-estado-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="lotes-modal" class="modal">
+            <div class="modal-content">
+                <h2>Ingresar Lotes</h2>
+                <div class="form-group">
+                    <label for="lote-input">Lote</label>
+                    <input type="text" id="lote-input">
+                </div>
+                <div class="form-group">
+                    <label for="vencimiento-input">Fecha Vencimiento</label>
+                    <input type="text" id="vencimiento-input">
+                </div>
+                <div class="modal-buttons">
+                    <button id="confirmar-lotes-btn">Confirmar</button>
+                    <button id="cancelar-lotes-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="oc-modal" class="modal">
+            <div class="modal-content">
+                <h2>Solicitud OC</h2>
+                <div class="table-container">
+                    <table id="oc-table"></table>
+                </div>
+                <div class="modal-buttons">
+                    <button id="download-excel-btn" class="success-btn">Descargar Excel</button>
+                    <button id="cancelar-oc-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <h2>Confirmar Eliminación</h2>
+                <p>¿Estás seguro de que deseas eliminar este cargo?</p>
+                <div class="modal-buttons">
+                    <button id="confirmar-delete-btn">Confirmar</button>
+                    <button id="cancelar-delete-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="loading-overlay" class="modal">
+            <div class="modal-content">
+                <div class="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="cargosimp.js"></script>
+</body>
+</html>

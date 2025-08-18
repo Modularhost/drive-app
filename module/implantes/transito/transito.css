@@ -1,0 +1,843 @@
+.transito-container {
+    width: 100%;
+    padding: 15px;
+    margin: 0;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .transito-container {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+.transito-container h2 {
+    color: #2d3748;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+body.dark-mode .transito-container h2 {
+    color: #e2e8f0;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 8px 0;
+}
+
+body.dark-mode .divider {
+    border-top: 1px solid #4a5568;
+}
+
+.table-container {
+    margin-top: 8px;
+    max-height: 550px;
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+}
+
+body.dark-mode .table-container {
+    border-color: #4a5568;
+}
+
+#transito-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    background-color: #ffffff;
+}
+
+body.dark-mode #transito-table {
+    background-color: #2d3748;
+}
+
+.main-row td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #2d3748;
+}
+
+body.dark-mode .main-row td {
+    border-bottom: 1px solid #4a5568;
+    color: #e2e8f0;
+}
+
+.row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.row-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+body.dark-mode .row-title {
+    color: #e2e8f0;
+}
+
+.row-summary {
+    font-size: 12px;
+    color: #4a5568;
+}
+
+body.dark-mode .row-summary {
+    color: #a0aec0;
+}
+
+.mass-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.mass-actions button {
+    padding: 4px 8px;
+    font-size: 11px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#mass-paciente-btn {
+    background-color: #38a169;
+    color: #ffffff;
+}
+
+#mass-paciente-btn:hover {
+    background-color: #2f855a;
+}
+
+#mass-paciente-btn:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+#mass-contenedor-btn {
+    background-color: #6b7280;
+    color: #ffffff;
+}
+
+#mass-contenedor-btn:hover {
+    background-color: #4b5563;
+}
+
+#mass-contenedor-btn:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+#mass-transfer-btn {
+    background-color: #3182ce;
+    color: #ffffff;
+}
+
+#mass-transfer-btn:hover {
+    background-color: #2b6cb0;
+}
+
+#mass-transfer-btn:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+body.dark-mode .mass-actions button:disabled {
+    background-color: #718096;
+}
+
+.sub-table-container {
+    margin-top: 5px;
+}
+
+.sub-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f7fafc;
+}
+
+body.dark-mode .sub-table {
+    background-color: #3c4b64;
+}
+
+.sub-table th,
+.sub-table td {
+    padding: 6px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    color: #2d3748;
+}
+
+body.dark-mode .sub-table th,
+body.dark-mode .sub-table td {
+    border-bottom: 1px solid #4a5568;
+    color: #e2e8f0;
+}
+
+.sub-table input[type="checkbox"] {
+    cursor: pointer;
+}
+
+#entregados-sub-table th:nth-child(1),
+#entregados-sub-table td:nth-child(1) {
+    width: 5%;
+    text-align: center;
+}
+
+#entregados-sub-table th:nth-child(2),
+#entregados-sub-table td:nth-child(2) {
+    width: 14%;
+}
+
+#entregados-sub-table th:nth-child(3),
+#entregados-sub-table td:nth-child(3) {
+    width: 9%;
+}
+
+#entregados-sub-table th:nth-child(4),
+#entregados-sub-table td:nth-child(4) {
+    width: 28%;
+}
+
+#entregados-sub-table th:nth-child(5),
+#ent-gregados-sub-table td:nth-child(5) {
+    width: 19%;
+}
+
+#entregados-sub-table th:nth-child(6),
+#entregados-sub-table td:nth-child(6) {
+    width: 10%;
+}
+
+#entregados-sub-table th:nth-child(7),
+#entregados-sub-table td:nth-child(7) {
+    width: 15%;
+}
+
+.sub-table th {
+    background-color: #edf2f7;
+    font-weight: 600;
+    color: #2d3748;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+body.dark-mode .sub-table th {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.sub-table tr:hover {
+    background-color: #edf2f7;
+}
+
+body.dark-mode .sub-table tr:hover {
+    background-color: #4a5568;
+}
+
+/* Estilos para modales de acción (centrados en pantalla) */
+.modal:not(#success-modal) {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content:not(#success-modal .modal-content) {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    border-radius: 8px;
+}
+
+body.dark-mode .modal-content:not(#success-modal .modal-content) {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+/* Estilos específicos para success-modal (esquina superior derecha) */
+#success-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 20px;
+    right: 20px;
+    left: auto;
+    width: auto;
+    max-width: 400px;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+#success-modal .modal-content {
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+body.dark-mode #success-modal .modal-content {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.success-message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.success-message-container.success .success-message {
+    color: #38a169;
+}
+
+.success-message-container.error .success-message {
+    color: #e53e3e;
+}
+
+.success-icon {
+    font-size: 20px;
+}
+
+.success-message {
+    font-size: 14px;
+}
+
+.sub-table-details {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f7fafc;
+    margin-top: 5px;
+}
+
+body.dark-mode .sub-table-details {
+    background-color: #3c4b64;
+}
+
+.sub-table-details th,
+.sub-table-details td {
+    padding: 6px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    color: #2d3748;
+}
+
+body.dark-mode .sub-table-details th,
+body.dark-mode .sub-table-details td {
+    border-bottom: 1px solid #4a5568;
+    color: #e2e8f0;
+}
+
+.sub-table-details th {
+    background-color: #bee3f8;
+    font-weight: 600;
+    color: #2d3748;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+body.dark-mode .sub-table-details th {
+    background-color: #3182ce;
+    color: #e2e8f0;
+}
+
+.sub-table-details td {
+    background-color: #e6f0fa;
+}
+
+body.dark-mode .sub-table-details td {
+    background-color: #4a5568;
+}
+
+.sub-table-details tr:hover {
+    background-color: #c4e0f7;
+}
+
+body.dark-mode .sub-table-details tr:hover {
+    background-color: #2b6cb0;
+}
+
+/* Contenedor para los botones en una sola fila */
+.sub-table-details .button-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.sub-table-details .paciente-btn,
+.sub-table-details .traspasar-btn,
+.sub-table-details .devolucion-btn,
+.sub-table-details .contenedor-btn {
+    padding: 3px 6px;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.sub-table-details .paciente-btn {
+    background-color: #38a169;
+    color: #ffffff;
+}
+
+.sub-table-details .paciente-btn:hover {
+    background-color: #2f855a;
+}
+
+.sub-table-details .traspasar-btn {
+    background-color: #3182ce;
+    color: #ffffff;
+}
+
+.sub-table-details .traspasar-btn:hover {
+    background-color: #2b6cb0;
+}
+
+.sub-table-details .traspasar-btn:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+body.dark-mode .sub-table-details .traspasar-btn:disabled {
+    background-color: #718096;
+}
+
+.sub-table-details .devolucion-btn {
+    background-color: #e53e3e;
+    color: #ffffff;
+}
+
+.sub-table-details .devolucion-btn:hover {
+    background-color: #c53030;
+}
+
+.sub-table-details .contenedor-btn {
+    background-color: #6b7280;
+    color: #ffffff;
+}
+
+.sub-table-details .contenedor-btn:hover {
+    background-color: #4b5563;
+}
+
+body.dark-mode .sub-table-details .paciente-btn {
+    background-color: #2f855a;
+}
+
+body.dark-mode .sub-table-details .traspasar-btn {
+    background-color: #2b6cb0;
+}
+
+body.dark-mode .sub-table-details .devolucion-btn {
+    background-color: #c53030;
+}
+
+body.dark-mode .sub-table-details .contenedor-btn {
+    background-color: #4b5563;
+}
+
+body.dark-mode .sub-table-details .contenedor-btn:hover {
+    background-color: #374151;
+}
+
+.contenedor-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    background-color: #f7fafc;
+}
+
+body.dark-mode .contenedor-list {
+    border-color: #4a5568;
+    background-color: #3c4b64;
+}
+
+.contenedor-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+body.dark-mode .contenedor-item {
+    border-bottom: 1px solid #4a5568;
+}
+
+.contenedor-item input[type="radio"] {
+    margin-right: 10px;
+}
+
+.contenedor-item label {
+    font-size: 12px;
+    color: #2d3748;
+}
+
+body.dark-mode .contenedor-item label {
+    color: #e2e8f0;
+}
+
+.mass-transfer-item {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.mass-transfer-item p {
+    font-size: 12px;
+    color: #4a5568;
+    margin-bottom: 5px;
+}
+
+body.dark-mode .mass-transfer-item p {
+    color: #a0aec0;
+}
+
+.mass-transfer-item label {
+    font-size: 12px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 5px;
+}
+
+body.dark-mode .mass-transfer-item label {
+    color: #e2e8f0;
+}
+
+.mass-transfer-item input[type="number"] {
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: #f7fafc;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+body.dark-mode .mass-transfer-item input[type="number"] {
+    border-color: #4a5568;
+    background-color: #3c4b64;
+    color: #e2e8f0;
+}
+
+.mass-transfer-item input[type="number"]:focus {
+    outline: none;
+    border-color: #3182ce;
+}
+
+body.dark-mode .mass-transfer-item input[type="number"]:focus {
+    border-color: #2b6cb0;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-buttons button {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-buttons #confirm-contenedor-btn,
+.modal-buttons #confirm-mass-transfer-btn,
+.modal-buttons #confirm-transfer-btn,
+.modal-buttons #confirm-return-btn,
+.modal-buttons #mass-transfer-btn {
+    background-color: #38a169;
+    color: #ffffff;
+}
+
+.modal-buttons #confirm-contenedor-btn:hover,
+.modal-buttons #confirm-mass-transfer-btn:hover,
+.modal-buttons #confirm-transfer-btn:hover,
+.modal-buttons #confirm-return-btn:hover,
+.modal-buttons #mass-transfer-btn:hover {
+    background-color: #2f855a;
+}
+
+.modal-buttons #cancel-contenedor-btn,
+.modal-buttons #cancel-mass-transfer-btn,
+.modal-buttons #cancel-transfer-btn,
+.modal-buttons #cancel-return-btn {
+    background-color: #e53e3e;
+    color: #ffffff;
+}
+
+.modal-buttons #cancel-contenedor-btn:hover,
+.modal-buttons #cancel-mass-transfer-btn:hover,
+.modal-buttons #cancel-transfer-btn:hover,
+.modal-buttons #cancel-return-btn:hover {
+    background-color: #c53030;
+}
+
+body.dark-mode .modal-buttons #confirm-contenedor-btn,
+body.dark-mode .modal-buttons #confirm-mass-transfer-btn,
+body.dark-mode .modal-buttons #confirm-transfer-btn,
+body.dark-mode .modal-buttons #confirm-return-btn,
+body.dark-mode .modal-buttons #mass-transfer-btn {
+    background-color: #2f855a;
+}
+
+body.dark-mode .modal-buttons #confirm-contenedor-btn:hover,
+body.dark-mode .modal-buttons #confirm-mass-transfer-btn:hover,
+body.dark-mode .modal-buttons #confirm-transfer-btn:hover,
+body.dark-mode .modal-buttons #confirm-return-btn:hover,
+body.dark-mode .modal-buttons #mass-transfer-btn:hover {
+    background-color: #276749;
+}
+
+body.dark-mode .modal-buttons #cancel-contenedor-btn,
+body.dark-mode .modal-buttons #cancel-mass-transfer-btn,
+body.dark-mode .modal-buttons #cancel-transfer-btn,
+body.dark-mode .modal-buttons #cancel-return-btn {
+    background-color: #c53030;
+}
+
+body.dark-mode .modal-buttons #cancel-contenedor-btn:hover,
+body.dark-mode .modal-buttons #cancel-mass-transfer-btn:hover,
+body.dark-mode .modal-buttons #cancel-transfer-btn:hover,
+body.dark-mode .modal-buttons #cancel-return-btn:hover {
+    background-color: #9b2c2c;
+}
+
+#transfer-modal .modal-content,
+#mass-transfer-modal .modal-content {
+    text-align: left;
+    padding: 20px;
+}
+
+#transfer-modal .modal-content h2,
+#mass-transfer-modal .modal-content h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2d3748;
+}
+
+body.dark-mode #transfer-modal .modal-content h2,
+body.dark-mode #mass-transfer-modal .modal-content h2 {
+    color: #e2e8f0;
+}
+
+#transfer-modal .modal-content p,
+#mass-transfer-modal .modal-content p {
+    font-size: 12px;
+    color: #4a5568;
+    margin-bottom: 10px;
+}
+
+body.dark-mode #transfer-modal .modal-content p,
+body.dark-mode #mass-transfer-modal .modal-content p {
+    color: #a0aec0;
+}
+
+#transfer-modal .modal-content label,
+#mass-transfer-modal .modal-content label {
+    font-size: 12px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 5px;
+}
+
+body.dark-mode #transfer-modal .modal-content label,
+body.dark-mode #mass-transfer-modal .modal-content label {
+    color: #e2e8f0;
+}
+
+#transfer-modal .modal-content input[type="number"],
+#mass-transfer-modal .modal-content input[type="number"] {
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: #f7fafc;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+body.dark-mode #transfer-modal .modal-content input[type="number"],
+body.dark-mode #mass-transfer-modal .modal-content input[type="number"] {
+    border-color: #4a5568;
+    background-color: #3c4b64;
+    color: #e2e8f0;
+}
+
+#transfer-modal .modal-content input[type="number"]:focus,
+#mass-transfer-modal .modal-content input[type="number"]:focus {
+    outline: none;
+    border-color: #3182ce;
+}
+
+body.dark-mode #transfer-modal .modal-content input[type="number"]:focus,
+body.dark-mode #mass-transfer-modal .modal-content input[type="number"]:focus {
+    border-color: #2b6cb0;
+}
+
+@media (max-width: 768px) {
+    .transito-container {
+        padding: 8px;
+    }
+
+    .table-container {
+        max-height: 450px;
+    }
+
+    .row-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .mass-actions {
+        flex-wrap: wrap;
+        gap: 3px;
+    }
+
+    .mass-actions button {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+
+    .sub-table th,
+    .sub-table td {
+        padding: 4px;
+        font-size: 11px;
+    }
+
+    #entregados-sub-table th:nth-child(1),
+    #entregados-sub-table td:nth-child(1),
+    #entregados-sub-table th:nth-child(2),
+    #entregados-sub-table td:nth-child(2),
+    #entregados-sub-table th:nth-child(3),
+    #entregados-sub-table td:nth-child(3),
+    #entregados-sub-table th:nth-child(4),
+    #entregados-sub-table td:nth-child(4),
+    #entregados-sub-table th:nth-child(5),
+    #entregados-sub-table td:nth-child(5),
+    #entregados-sub-table th:nth-child(6),
+    #entregados-sub-table td:nth-child(6),
+    #entregados-sub-table th:nth-child(7),
+    #entregados-sub-table td:nth-child(7) {
+        width: auto;
+    }
+
+    .sub-table-details th,
+    .sub-table-details td {
+        padding: 4px;
+        font-size: 11px;
+    }
+
+    #entregados-sub-table .sub-table-details th:nth-child(1),
+    #entregados-sub-table .sub-table-details td:nth-child(1),
+    #entregados-sub-table .sub-table-details th:nth-child(2),
+    #entregados-sub-table .sub-table-details td:nth-child(2),
+    #entregados-sub-table .sub-table-details th:nth-child(3),
+    #entregados-sub-table .sub-table-details td:nth-child(3),
+    #entregados-sub-table .sub-table-details th:nth-child(4),
+    #entregados-sub-table .sub-table-details td:nth-child(4),
+    #entregados-sub-table .sub-table-details th:nth-child(5),
+    #entregados-sub-table .sub-table-details td:nth-child(5),
+    #entregados-sub-table .sub-table-details th:nth-child(6),
+    #entregados-sub-table .sub-table-details td:nth-child(6) {
+        width: auto;
+    }
+
+    .sub-table-details .button-container {
+        gap: 2px;
+    }
+
+    .sub-table-details .paciente-btn,
+    .sub-table-details .traspasar-btn,
+    .sub-table-details .devolucion-btn,
+    .sub-table-details .contenedor-btn {
+        padding: 2px 4px;
+        font-size: 9px;
+    }
+
+    .modal-content:not(#success-modal .modal-content) {
+        max-width: 90%;
+    }
+
+    #success-modal .modal-content {
+        max-width: 90%;
+    }
+
+    #transfer-modal .modal-content,
+    #mass-transfer-modal .modal-content {
+        padding: 10px;
+    }
+
+    #transfer-modal .modal-content h2,
+    #mass-transfer-modal .modal-content h2 {
+        font-size: 14px;
+    }
+
+    #transfer-modal .modal-content p,
+    #mass-transfer-modal .modal-content p,
+    #transfer-modal .modal-content label,
+    #mass-transfer-modal .modal-content label {
+        font-size: 11px;
+    }
+
+    #transfer-modal .modal-content input[type="number"],
+    #mass-transfer-modal .modal-content input[type="number"] {
+        padding: 4px;
+        font-size: 11px;
+    }
+
+    .modal-buttons button {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+}
+
+.expandable {
+    cursor: pointer;
+}
+
+.expandable:hover {
+    background-color: #f7fafc;
+}
+
+body.dark-mode .expandable:hover {
+    background-color: #4a5568;
+}

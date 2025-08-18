@@ -1,0 +1,65 @@
+<div class="cargosconsignacion-container">
+    <h2>Ficha de Cargos en Consignación</h2>
+    <div class="quick-filters">
+        <select id="filter-year">
+            <option value="">Todos los años</option>
+        </select>
+        <select id="filter-month">
+            <option value="">Todos los meses</option>
+        </select>
+        <button id="show-all-btn">Mostrar Todo</button>
+        <button id="export-excel-btn">Exportar a Excel</button>
+    </div>
+    <div id="state-buttons"></div>
+    <hr class="divider">
+    <div class="table-container">
+        <table id="cargosconsignacion-table">
+            <thead>
+                <tr>
+                    <th>OC<i class="fas fa-filter filter-icon" data-column="OC"></i></th>
+                    <th>Guía<i class="fas fa-filter filter-icon" data-column="Guia"></i></th>
+                    <th>Factura<i class="fas fa-filter filter-icon" data-column="Factura"></i></th>
+                    <th>Despachado<i class="fas fa-filter filter-icon" data-column="Despachado"></i></th>
+                    <th>Estado<i class="fas fa-filter filter-icon" data-column="estado"></i></th>
+                    <th>Cargo<i class="fas fa-filter filter-icon" data-column="CARGO"></i></th>
+                    <th>Fecha de Cargo<i class="fas fa-filter filter-icon" data-column="fechaCargo"></i></th>
+                    <th>Admisión<i class="fas fa-filter filter-icon" data-column="admision"></i></th>
+                    <th>Nombre Paciente<i class="fas fa-filter filter-icon" data-column="nombrePaciente"></i></th>
+                    <th>Médico<i class="fas fa-filter filter-icon" data-column="medico"></i></th>
+                    <th>Fecha Cx<i class="fas fa-filter filter-icon" data-column="fechaCX"></i></th>
+                    <th>Proveedor<i class="fas fa-filter filter-icon" data-column="proveedor"></i></th>
+                    <th>Código<i class="fas fa-filter filter-icon" data-column="codigo"></i></th>
+                    <th>Descripción<i class="fas fa-filter filter-icon" data-column="descripcion"></i></th>
+                    <th>Cantidad<i class="fas fa-filter filter-icon" data-column="cantidad"></i></th>
+                    <th>Precio<i class="fas fa-filter filter-icon" data-column="precio"></i></th>
+                    <th>Modalidad<i class="fas fa-filter filter-icon" data-column="modalidad"></i></th>
+                    <th>Total<i class="fas fa-filter filter-icon" data-column="total"></i></th>
+                    <th>Usuario<i class="fas fa-filter filter-icon" data-column="usuario"></i></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <span id="page-info">Página 1 de 1</span>
+        <button id="next-btn" disabled>Siguiente</button>
+        <span id="total-records">0</span> registros
+    </div>
+</div>
+
+<div id="loading-modal" class="modal" hidden>
+    <div class="modal-content">
+        <div class="spinner-container">
+            <span class="loader"></span>
+            <span class="spinner-text">Cargando datos... <span id="loading-progress">0%</span></span>
+        </div>
+    </div>
+</div>
+
+<div id="success-modal" class="modal" hidden>
+    <div class="modal-content">
+        <i id="success-icon" class="fas fa-check-circle"></i>
+        <span id="success-message"></span>
+    </div>
+</div>

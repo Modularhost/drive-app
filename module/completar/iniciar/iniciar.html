@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar - Importación de Datos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="iniciar-container">
+        <h2>Iniciar - Importación de Datos</h2>
+        
+        <div class="quick-filters">
+            <select id="filter-year">
+                <option value="">Seleccionar Año</option>
+            </select>
+            <select id="filter-month">
+                <option value="">Seleccionar Mes</option>
+            </select>
+            <button id="show-all-btn">Mostrar Todo</button>
+            <button id="download-template-btn">Descargar Formato Excel</button>
+            <button id="import-excel-btn">Importar Excel</button>
+            <input type="file" id="excel-file-input" accept=".xlsx,.xls" style="display: none;">
+            <div id="state-buttons"></div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="table-container">
+            <div id="loading-spinner" class="loading-spinner" hidden>
+                <div class="spinner"></div>
+                <span>Cargando...</span>
+            </div>
+            
+            <table id="iniciar-table">
+                <thead>
+                    <tr>
+                        <th>Fecha de Ingreso <i class="fas fa-filter filter-icon" data-column="fechaIngreso"></i></th>
+                        <th>Modalidad <i class="fas fa-filter filter-icon" data-column="modalidad"></i></th>
+                        <th>Previsión <i class="fas fa-filter filter-icon" data-column="prevision"></i></th>
+                        <th>Admisión <i class="fas fa-filter filter-icon" data-column="admision"></i></th>
+                        <th>Nombre del Paciente <i class="fas fa-filter filter-icon" data-column="nombrePaciente"></i></th>
+                        <th>Médico <i class="fas fa-filter filter-icon" data-column="medico"></i></th>
+                        <th>Fecha de Cx <i class="fas fa-filter filter-icon" data-column="fechaCX"></i></th>
+                        <th>Proveedor <i class="fas fa-filter filter-icon" data-column="proveedor"></i></th>
+                        <th>Estado <i class="fas fa-filter filter-icon" data-column="estado"></i></th>
+                        <th>Fecha de Cargo <i class="fas fa-filter filter-icon" data-column="fechaCargo"></i></th>
+                        <th>Total Paciente <i class="fas fa-filter filter-icon" data-column="totalPaciente"></i></th>
+                        <th>Usuario <i class="fas fa-filter filter-icon" data-column="usuario"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="12" style="text-align: center; padding: 40px;">Cargando datos...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="pagination-container">
+            <button id="prev-btn" disabled>Anterior</button>
+            <button id="next-btn">Siguiente</button>
+            <button id="export-excel-btn">Descargar Excel</button>
+            <span id="page-info">Página 1 de 1</span>
+            <span id="total-records">Total de registros: 0</span>
+        </div>
+
+        <!-- Modal de progreso de importación -->
+        <div id="import-progress-modal" class="modal" hidden>
+            <div class="modal-content">
+                <h3>Importando Datos</h3>
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+                <p id="progress-text">Procesando...</p>
+                <div id="import-results" hidden>
+                    <h4>Resultados de la Importación:</h4>
+                    <p id="success-count">Registros importados: 0</p>
+                    <p id="error-count">Errores: 0</p>
+                    <div id="error-details" hidden>
+                        <h5>Detalles de errores:</h5>
+                        <ul id="error-list"></ul>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button id="close-import-btn" class="modal-btn cancel-btn" hidden>Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de éxito/error -->
+        <div id="success-modal" class="modal" hidden>
+            <div class="modal-content">
+                <p><i id="success-icon" class="fas"></i> <span id="success-message"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="iniciar.js"></script>
+</body>
+</html>

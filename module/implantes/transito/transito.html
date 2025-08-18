@@ -1,0 +1,98 @@
+<div class="transito-container">
+    <h2>Gestión de Tránsito - Artículos Entregados</h2>
+    <hr class="divider">
+    <div class="table-container">
+        <table id="transito-table">
+            <tbody>
+                <tr class="main-row">
+                    <td>
+                        <div class="row-header">
+                            <span class="row-title">Artículos Entregados</span>
+                            <div class="mass-actions">
+                                <button id="mass-paciente-btn" disabled>Asignar Paciente</button>
+                                <button id="mass-contenedor-btn" disabled>Asignar Contenedor</button>
+                            </div>
+                            <span class="row-summary" id="entregados-summary">Total: 0 unidades</span>
+                        </div>
+                        <div class="sub-table-container">
+                            <table class="sub-table" id="entregados-sub-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="select-all-entregados"></th>
+                                        <th>Referencia</th>
+                                        <th>Código</th>
+                                        <th>Descripción</th>
+                                        <th>Proveedor</th>
+                                        <th>Cantidad</th>
+                                        <th>Fecha de Actualización</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="success-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="success-message-container">
+            <i id="success-icon" class="fas"></i>
+            <div id="success-message" class="success-message"></div>
+        </div>
+    </div>
+</div>
+
+<div id="return-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Devolver Ítem</h2>
+        <p id="return-details"></p>
+        <label for="return-quantity">Cantidad a Devolver:</label>
+        <input type="number" id="return-quantity" min="1" value="1" autocomplete="off">
+        <div class="modal-buttons">
+            <button id="confirm-return-btn">Confirmar Devolución</button>
+            <button id="cancel-return-btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="contenedor-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Seleccionar Contenedor</h2>
+        <div id="contenedor-list" class="contenedor-list"></div>
+        <div class="modal-buttons">
+            <button id="mass-transfer-btn" disabled>Traspasar Seleccionados</button>
+            <button id="cancel-contenedor-btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="mass-transfer-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Traspasar Ítems Seleccionados</h2>
+        <div id="mass-transfer-items"></div>
+        <div class="modal-buttons">
+            <button id="confirm-mass-transfer-btn">Confirmar Traspaso</button>
+            <button id="cancel-mass-transfer-btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="transfer-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Traspasar Ítem</h2>
+        <p id="transfer-details"></p>
+        <label for="transfer-quantity">Cantidad a Traspasar:</label>
+        <input type="number" id="transfer-quantity" min="1" value="1" autocomplete="off">
+        <div class="modal-buttons">
+            <button id="confirm-transfer-btn">Confirmar Traspaso</button>
+            <button id="cancel-transfer-btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script type="module" src="transito.js"></script>

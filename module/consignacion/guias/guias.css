@@ -1,0 +1,405 @@
+/* Variables de color */
+:root {
+    /* Modo claro */
+    --bg-color: #fff;
+    --border-color: #e2e8f0;
+    --text-color: #2d3748;
+    --header-bg: #edf2f7;
+    --hover-bg: #f7fafc;
+    --input-bg: #fff;
+    --button-bg: #e2e8f0;
+    --button-hover-bg: #cbd5e0;
+    --disabled-bg: #e2e8f0;
+    --modal-bg: #fff;
+    --success-bg: #e6fffa;
+    --success-border: #38a169;
+    --error-bg: #fefcbf;
+    --error-border: #f56565;
+    --primary: #3182ce;
+    --primary-hover: #2b6cb0;
+    --success: #38a169;
+    --success-hover: #2f855a;
+    --danger: #f56565;
+    --danger-hover: #e53e3e;
+    --secondary: #6c757d;
+    --secondary-hover: #5a6268;
+    --state-cargado-bg: #c6f6d5;
+    --state-pendiente-bg: #ffedec;
+
+    /* Modo oscuro */
+    --dark-bg-color: #2d3748;
+    --dark-border-color: #4a5568;
+    --dark-text-color: #e2e8f0;
+    --dark-header-bg: #3c4b64;
+    --dark-hover-bg: #3c4b64;
+    --dark-input-bg: #3c4b64;
+    --dark-button-bg: #4a5568;
+    --dark-button-hover-bg: #718096;
+    --dark-disabled-bg: #4a5568;
+    --dark-modal-bg: #2d3748;
+    --dark-success-bg: #2f855a;
+    --dark-error-bg: #742a2a;
+    --dark-primary: #63b3ed;
+    --dark-primary-hover: #4299e1;
+    --dark-success: #68d391;
+    --dark-success-hover: #48bb78;
+    --dark-danger: #f56565;
+    --dark-danger-hover: #e53e3e;
+    --dark-secondary: #a0aec0;
+    --dark-secondary-hover: #6c757d;
+    --dark-state-cargado-bg: #276749;
+    --dark-state-pendiente-bg: #5c2a2a;
+}
+
+/* Contenedor principal */
+.guias-container {
+    width: 100%;
+    padding: 10px; /* Reducido de 15px */
+    margin: 0;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+}
+
+body.dark-mode .guias-container {
+    background-color: var(--dark-bg-color);
+    border-color: var(--dark-border-color);
+}
+
+.guias-container h2 {
+    color: var(--text-color);
+    margin-bottom: 5px; /* Reducido de 10px */
+    font-size: 16px; /* Reducido de 18px */
+}
+
+body.dark-mode .guias-container h2 {
+    color: var(--dark-text-color);
+}
+
+/* Contenedor del formulario */
+.form-container {
+    margin-bottom: 5px; /* Reducido de 10px */
+    padding: 10px; /* Reducido de 15px */
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode .form-container {
+    background-color: var(--dark-bg-color);
+    border-color: var(--dark-border-color);
+}
+
+#guia-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Reducido de 10px */
+    align-items: flex-end;
+}
+
+#guia-form .form-group {
+    flex: 1;
+    min-width: 120px; /* Reducido de 150px */
+    margin-bottom: 0;
+}
+
+#guia-form .form-group label {
+    display: block;
+    font-size: 12px; /* Reducido de 14px */
+    color: var(--text-color);
+    margin-bottom: 3px; /* Reducido de 5px */
+}
+
+body.dark-mode #guia-form .form-group label {
+    color: var(--dark-text-color);
+}
+
+#guia-form .form-input {
+    width: 100%;
+    padding: 6px; /* Reducido de 8px */
+    border: 1px solid var(--border-color);
+    font-size: 12px; /* Reducido de 14px */
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+body.dark-mode #guia-form .form-input {
+    border-color: var(--dark-border-color);
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-color);
+}
+
+#guia-form .form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+body.dark-mode #guia-form .form-input:focus {
+    border-color: var(--dark-primary);
+}
+
+#guia-form .form-actions {
+    display: flex;
+    gap: 5px; /* Reducido de 10px */
+}
+
+#guia-form .form-btn {
+    padding: 6px 12px; /* Reducido de 8px 16px */
+    border: none;
+    cursor: pointer;
+    font-size: 12px; /* Reducido de 14px */
+}
+
+#guia-form .form-btn.save {
+    background-color: var(--success);
+    color: #fff;
+}
+
+body.dark-mode #guia-form .form-btn.save {
+    background-color: var(--dark-success);
+}
+
+#guia-form .form-btn.save:hover {
+    background-color: var(--success-hover);
+}
+
+body.dark-mode #guia-form .form-btn.save:hover {
+    background-color: var(--dark-success-hover);
+}
+
+#guia-form .form-btn.cancel {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+body.dark-mode #guia-form .form-btn.cancel {
+    background-color: var(--dark-secondary);
+}
+
+#guia-form .form-btn.cancel:hover {
+    background-color: var(--secondary-hover);
+}
+
+body.dark-mode #guia-form .form-btn.cancel:hover {
+    background-color: var(--dark-secondary-hover);
+}
+
+/* Separador */
+.divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 5px 0; /* Reducido de 10px */
+}
+
+body.dark-mode .divider {
+    border-top: 1px solid var(--dark-border-color);
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    margin-top: 5px; /* Reducido de 10px */
+    max-height: 700px; /* Reducido de 700px */
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    -webkit-overflow-scrolling: touch;
+}
+
+body.dark-mode .table-container {
+    border-color: var(--dark-border-color);
+}
+
+/* Tabla */
+#guias-table {
+    width: 100%;
+    min-width: 700px; /* Reducido de 800px */
+    border-collapse: collapse;
+    font-size: 10px; /* Reducido de 11px */
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+}
+
+body.dark-mode #guias-table {
+    border-color: var(--dark-border-color);
+    background-color: var(--dark-bg-color);
+}
+
+#guias-table th,
+#guias-table td {
+    padding: 3px; /* Reducido de 4px */
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    height: 18px; /* Reducido de 20px */
+    line-height: 18px; /* Reducido de 20px */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.dark-mode #guias-table th,
+body.dark-mode #guias-table td {
+    border-bottom: 1px solid var(--dark-border-color);
+    color: var(--dark-text-color);
+}
+
+#guias-table th {
+    background-color: var(--header-bg);
+    font-weight: bold;
+    color: var(--text-color);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    min-width: 90px; /* Reducido de 100px */
+}
+
+body.dark-mode #guias-table th {
+    background-color: var(--dark-header-bg);
+    color: var(--dark-text-color);
+}
+
+#guias-table tr {
+    height: 18px; /* Reducido de 20px */
+}
+
+#guias-table tr:hover {
+    background-color: var(--hover-bg);
+}
+
+body.dark-mode #guias-table tr:hover {
+    background-color: var(--dark-hover-bg);
+}
+
+#guias-table tr.state-cargado {
+    background-color: var(--state-cargado-bg);
+}
+
+body.dark-mode #guias-table tr.state-cargado {
+    background-color: var(--dark-state-cargado-bg);
+}
+
+#guias-table tr.state-pendiente {
+    background-color: var(--state-pendiente-bg);
+}
+
+body.dark-mode #guias-table tr.state-pendiente {
+    background-color: var(--dark-state-pendiente-bg);
+}
+
+#guias-table th.admin-only,
+#guias-table td.admin-only {
+    display: none;
+}
+
+#guias-table.admin th.admin-only,
+#guias-table.admin td.admin-only {
+    display: table-cell;
+}
+
+/* Modal de éxito */
+#success-modal {
+    position: fixed;
+    top: 15px; /* Reducido de 20px */
+    right: 15px; /* Reducido de 20px */
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+#success-modal.success .modal-content {
+    background-color: var(--success-bg);
+    border: 2px solid var(--success-border);
+    width: 250px; /* Reducido de 300px */
+    padding: 8px; /* Reducido de 10px */
+}
+
+body.dark-mode #success-modal.success .modal-content {
+    background-color: var(--dark-success-bg);
+    border: 2px solid var(--success-border);
+}
+
+#success-modal.error .modal-content {
+    background-color: var(--error-bg);
+    border: 2px solid var(--error-border);
+    width: 250px; /* Reducido de 300px */
+    padding: 8px; /* Reducido de 10px */
+}
+
+body.dark-mode #success-modal.error .modal-content {
+    background-color: var(--dark-error-bg);
+    border: 2px solid var(--error-border);
+}
+
+#success-icon.fa-check-circle {
+    color: var(--success);
+}
+
+#success-icon.fa-exclamation-circle {
+    color: var(--danger);
+}
+
+body.dark-mode #success-icon.fa-check-circle {
+    color: var(--dark-success);
+}
+
+body.dark-mode #success-icon.fa-exclamation-circle {
+    color: var(--dark-danger);
+}
+
+#success-message {
+    margin-left: 5px; /* Reducido de 10px */
+    color: var(--text-color);
+}
+
+body.dark-mode #success-message {
+    color: var(--dark-text-color);
+}
+
+/* Modal pequeño */
+.small-modal .modal-content {
+    width: 200px; /* Reducido de 250px */
+}
+
+/* Botones de acción */
+.action-btn {
+    padding: 4px 8px; /* Reducido de 6px 12px */
+    border: none;
+    cursor: pointer;
+    font-size: 12px; /* Reducido de 13px */
+    margin-right: 3px; /* Reducido de 5px */
+}
+
+.action-btn.edit {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+body.dark-mode .action-btn.edit {
+    background-color: var(--dark-primary);
+}
+
+.action-btn.edit:hover {
+    background-color: var(--primary-hover);
+}
+
+body.dark-mode .action-btn.edit:hover {
+    background-color: var(--dark-primary-hover);
+}
+
+.action-btn.delete {
+    background-color: var(--danger);
+    color: #fff;
+}
+
+body.dark-mode .action-btn.delete {
+    background-color: var(--dark-danger);
+}
+
+.action-btn.delete:hover {
+    background-color: var(--danger-hover);
+}
+
+body.dark-mode .action-btn.delete:hover {
+    background-color: var(--dark-danger-hover);
+}

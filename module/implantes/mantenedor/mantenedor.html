@@ -1,0 +1,122 @@
+<div class="mantenedor-container">
+    <h2>Mantenedor</h2>
+    <div class="form-container">
+        <div class="form-group">
+            <label for="referencia">Referencia</label>
+            <div class="input-with-icon">
+                <input type="text" id="referencia" placeholder="Referencia" autocomplete="off">
+                <i class="fas fa-list icon-list"></i>
+            </div>
+            <ul id="referencia-suggestions" class="suggestions-list"></ul>
+        </div>
+        <div class="form-group">
+            <label for="codigo">Código</label>
+            <input type="text" id="codigo" readonly>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input type="text" id="descripcion" readonly>
+        </div>
+        <div class="form-group">
+            <label for="proveedor">Proveedor</label>
+            <input type="text" id="proveedor" readonly>
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="text" id="precio" readonly>
+        </div>
+        <div class="form-group form-group-button">
+            <button id="registrar-btn">Registrar</button>
+        </div>
+    </div>
+    <div class="table-container" id="table-container" style="display: none;">
+        <table id="mantenedor-table">
+            <thead>
+                <tr>
+                    <th>ID<i class="fas fa-filter filter-icon" data-column="mantenedorId"></i></th>
+                    <th>Acciones<i class="fas fa-filter filter-icon" data-column="acciones"></i></th>
+                    <th>Referencia<i class="fas fa-filter filter-icon" data-column="referencia"></i></th>
+                    <th>Código<i class="fas fa-filter filter-icon" data-column="codigo"></i></th>
+                    <th>Descripción<i class="fas fa-filter filter-icon" data-column="descripcion"></i></th>
+                    <th>Proveedor<i class="fas fa-filter filter-icon" data-column="proveedor"></i></th>
+                    <th>Cantidad<i class="fas fa-filter filter-icon" data-column="cantidad"></i></th>
+                    <th>Precio<i class="fas fa-filter filter-icon" data-column="precio"></i></th>
+                    <th>Precio Total<i class="fas fa-filter filter-icon" data-column="precioTotal"></i></th>
+                    <th>Fecha Creación<i class="fas fa-filter filter-icon" data-column="fechaCreacion"></i></th>
+                    <th>Usuario<i class="fas fa-filter filter-icon" data-column="usuario"></i></th>
+                    <th>Estado<i class="fas fa-filter filter-icon" data-column="estado"></i></th>
+                </tr>
+            </thead>
+            <tbody id="mantenedor-table-body"></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <span id="page-info">Página 1 de 1</span>
+        <button id="next-btn" disabled>Siguiente</button>
+        <span id="total-records">Total de registros: 0</span>
+        <span id="total-sum">Total General: $0</span>
+        <button id="export-excel-btn">Exportar a Excel</button>
+        <button id="clear-filters-btn">Limpiar Filtros</button>
+    </div>
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <p>Registrando... <span id="register-progress">0%</span></p>
+        </div>
+    </div>
+    <div id="success-modal" class="modal">
+        <div class="modal-content success-message-container">
+            <i id="success-icon" class="fas fa-check-circle"></i>
+            <span id="success-message"></span>
+        </div>
+    </div>
+    <div id="edit-modal" class="modal">
+        <div class="modal-content"></div>
+    </div>
+    <div id="loading-modal" class="modal">
+        <div class="modal-content">
+            <p>Cargando... <span id="loading-progress">0%</span></p>
+        </div>
+    </div>
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn">Eliminar</button>
+                <button id="cancel-delete-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <div id="log-modal" class="modal">
+        <div class="modal-content">
+            <h2>Historial de Cambios</h2>
+            <div id="log-content"></div>
+            <div class="modal-buttons">
+                <button id="close-log-btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    <div id="delivery-modal" class="modal">
+        <div class="modal-content">
+            <h2>Entregar Ítem</h2>
+            <p id="delivery-details"></p>
+            <div class="form-group">
+                <label for="delivery-quantity">Cantidad a Entregar</label>
+                <input type="number" id="delivery-quantity" min="1">
+            </div>
+            <div class="modal-buttons">
+                <button id="confirm-delivery-btn">Confirmar</button>
+                <button id="cancel-delivery-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <div id="barcodeScanner" class="modal">
+        <div class="modal-content">
+            <div id="scanner-container"></div>
+            <div>Resultado: <span id="scanner-result">N/A</span></div>
+            <button id="close-scanner">Cerrar Escáner</button>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@9.6.20/dist/dbr.js"></script>
+<script type="module" src="mantenedor.js"></script>

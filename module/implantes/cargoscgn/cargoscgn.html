@@ -1,0 +1,279 @@
+<div class="cargosconsignacion-container">
+    <h2>Cargos en Consignación</h2>
+    <div class="quick-filters">
+        <select id="filter-year"></select>
+        <select id="filter-month"></select>
+        <button id="show-all-btn">Mostrar Todo</button>
+        <button id="clear-column-filters-btn">Limpiar Filtros de Columna</button> <!-- Nuevo botón -->
+        <button id="bulk-change-state-btn">Cambiar Estado Masivo</button>
+        <button id="bulk-change-fechaCargo-btn">Cambiar Fecha Cargo Masivo</button>
+        <button id="bulk-change-guia-btn">Cambiar Guía Masivo</button>
+        <div id="state-buttons"></div>
+    </div>
+    <hr class="divider">
+    <div class="table-container">
+        <table id="cargosconsignacion-table">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>Seleccionar</th>
+                    <th>Estado <i class="fas fa-filter filter-icon" data-column="estado"></i></th>
+                    <th>ID <i class="fas fa-filter filter-icon" data-column="admision"></i></th>
+                    <th>COD <i class="fas fa-filter filter-icon" data-column="COD"></i></th>
+                    <th>CANTID <i class="fas fa-filter filter-icon" data-column="CANTID"></i></th>
+                    <th>VENTA <i class="fas fa-filter filter-icon" data-column="VENTA"></i></th>
+                    <th>N° Guía <i class="fas fa-filter filter-icon" data-column="nGuia"></i></th>
+                    <th>Lote <i class="fas fa-filter filter-icon" data-column="lote"></i></th>
+                    <th>Fecha Vencimiento <i class="fas fa-filter filter-icon" data-column="fechaVencimiento"></i></th>
+                    <th>CARGO <i class="fas fa-filter filter-icon" data-column="CARGO"></i></th>
+                    <th>Fecha de Cargo <i class="fas fa-filter filter-icon" data-column="fechaCargo"></i></th>
+                    <th>Admisión <i class="fas fa-filter filter-icon" data-column="admision"></i></th>
+                    <th>Nombre Paciente <i class="fas fa-filter filter-icon" data-column="nombrePaciente"></i></th>
+                    <th>Médico <i class="fas fa-filter filter-icon" data-column="medico"></i></th>
+                    <th>Fecha Cx <i class="fas fa-filter filter-icon" data-column="fechaCX"></i></th>
+                    <th>Proveedor <i class="fas fa-filter filter-icon" data-column="proveedor"></i></th>
+                    <th>Código <i class="fas fa-filter filter-icon" data-column="codigo"></i></th>
+                    <th>Descripción <i class="fas fa-filter filter-icon" data-column="descripcion"></i></th>
+                    <th>Cantidad <i class="fas fa-filter filter-icon" data-column="cantidad"></i></th>
+                    <th>Precio <i class="fas fa-filter filter-icon" data-column="precio"></i></th>
+                    <th>Modalidad <i class="fas fa-filter filter-icon" data-column="modalidad"></i></th>
+                    <th>Total <i class="fas fa-filter filter-icon" data-column="total"></i></th>
+                    <th>Referencia <i class="fas fa-filter filter-icon" data-column="referencia"></i></th>
+                    <th>Fecha Creación <i class="fas fa-filter filter-icon" data-column="fechaCreacion"></i></th>
+                    <th>Fecha Traspaso <i class="fas fa-filter filter-icon" data-column="fechaTraspaso"></i></th>
+                    <th>Margen <i class="fas fa-filter filter-icon" data-column="margen"></i></th>
+                    <th>Usuario <i class="fas fa-filter filter-icon" data-column="usuario"></i></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <button id="export-excel-btn">Descargar Excel</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+
+    <div id="edit-cargo-modal" class="modal" hidden>
+        <div class="edit-cargo-modal-content">
+            <h3>Editar Cargo</h3>
+            <label for="edit-id">ID:</label>
+            <input id="edit-id" type="text" readonly>
+            <label for="edit-admision">Admisión:</label>
+            <input id="edit-admision" type="text">
+            <label for="edit-nombrePaciente">Nombre Paciente:</label>
+            <input id="edit-nombrePaciente" type="text">
+            <label for="edit-proveedor">Proveedor:</label>
+            <input id="edit-proveedor" type="text">
+            <label for="edit-descripcion">Descripción:</label>
+            <input id="edit-descripcion" type="text">
+            <label for="edit-cantidad">Cantidad:</label>
+            <input id="edit-cantidad" type="number" min="1">
+            <label for="edit-precio">Precio:</label>
+            <input id="edit-precio" type="number" min="0">
+            <label for="edit-total">Total:</label>
+            <input id="edit-total" type="number" min="0">
+            <label for="edit-estado">Estado:</label>
+            <select id="edit-estado">
+                <option value="Actualizar Precio">Actualizar Precio</option>
+                <option value="Cargado">Cargado</option>
+                <option value="Cargo Pendiente">Cargo Pendiente</option>
+                <option value="Código Pendiente">Código Pendiente</option>
+                <option value="Cotización Pendiente">Cotización Pendiente</option>
+                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                <option value="Reposición">Reposición</option>
+            </select>
+            <label for="edit-fechaTraspaso">Fecha Traspaso:</label>
+            <input id="edit-fechaTraspaso" type="date">
+            <label for="edit-fechaCargo">Fecha de Cargo:</label>
+            <input id="edit-fechaCargo" type="date">
+            <label for="edit-fechaCX">Fecha Cx:</label>
+            <input id="edit-fechaCX" type="date">
+            <label for="edit-medico">Médico:</label>
+            <input id="edit-medico" type="text">
+            <label for="edit-modalidad">Modalidad:</label>
+            <input id="edit-modalidad" type="text">
+            <label for="edit-referencia">Referencia:</label>
+            <input id="edit-referencia" type="text">
+            <label for="edit-lote">Lote:</label>
+            <input id="edit-lote" type="text">
+            <label for="edit-nGuia">N° Guía:</label>
+            <input id="edit-nGuia" type="text">
+            <label for="edit-fechaVencimiento">Fecha Vencimiento:</label>
+            <input id="edit-fechaVencimiento" type="date">
+            <label for="edit-CANTID">CANTID:</label>
+            <input id="edit-CANTID" type="number" min="1">
+            <label for="edit-CARGO">CARGO:</label>
+            <input id="edit-CARGO" type="text">
+            <label for="edit-COD">COD:</label>
+            <input id="edit-COD" type="text">
+            <label for="edit-VENTA">VENTA:</label>
+            <input id="edit-VENTA" type="number" min="0">
+            <label for="edit-margen">Margen:</label>
+            <input id="edit-margen" type="text">
+            <label for="edit-codigo">Código:</label>
+            <input id="edit-codigo" type="text">
+            <div class="modal-buttons">
+                <button id="save-edit-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-edit-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="change-state-modal" class="modal" hidden>
+        <div class="change-state-modal-content">
+            <h3>Cambiar Estado</h3>
+            <label for="change-state-select">Estado:</label>
+            <select id="change-state-select">
+                <option value="Actualizar Precio">Actualizar Precio</option>
+                <option value="Cargado">Cargado</option>
+                <option value="Cargo Pendiente">Cargo Pendiente</option>
+                <option value="Código Pendiente">Código Pendiente</option>
+                <option value="Cotización Pendiente">Cotización Pendiente</option>
+                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                <option value="Reposición">Reposición</option>
+            </select>
+            <div class="modal-buttons">
+                <button id="save-state-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-state-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bulk-change-state-modal" class="modal" hidden>
+        <div class="bulk-change-state-modal-content">
+            <h3>Cambiar Estado Masivo</h3>
+            <p id="bulk-change-message"></p>
+            <label for="bulk-change-state-select">Estado:</label>
+            <select id="bulk-change-state-select">
+                <option value="Actualizar Precio">Actualizar Precio</option>
+                <option value="Cargado">Cargado</option>
+                <option value="Cargo Pendiente">Cargo Pendiente</option>
+                <option value="Código Pendiente">Código Pendiente</option>
+                <option value="Cotización Pendiente">Cotización Pendiente</option>
+                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                <option value="Reposición">Reposición</option>
+            </select>
+            <div class="modal-buttons">
+                <button id="save-bulk-state-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-bulk-state-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bulk-change-fechaCargo-modal" class="modal" hidden>
+        <div class="bulk-change-fechaCargo-modal-content">
+            <h3>Cambiar Fecha de Cargo Masivo</h3>
+            <p id="bulk-change-fechaCargo-message"></p>
+            <label for="bulk-fechaCargo-input">Fecha de Cargo:</label>
+            <input id="bulk-fechaCargo-input" type="date">
+            <div class="modal-buttons">
+                <button id="save-bulk-fechaCargo-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-bulk-fechaCargo-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bulk-change-guia-modal" class="modal" hidden>
+        <div class="bulk-change-guia-modal-content">
+            <h3>Cambiar Guía Masivo</h3>
+            <p id="bulk-change-guia-message"></p>
+            <label for="bulk-lote-input">Lote:</label>
+            <input id="bulk-lote-input" type="text">
+            <label for="bulk-nGuia-input">N° Guía:</label>
+            <input id="bulk-nGuia-input" type="text">
+            <label for="bulk-fechaVencimiento-input">Fecha de Vencimiento:</label>
+            <input id="bulk-fechaVencimiento-input" type="date">
+            <div class="modal-buttons">
+                <button id="save-bulk-guia-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-bulk-guia-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-cargo-modal" class="modal" hidden>
+        <div class="delete-cargo-modal-content">
+            <h3>Confirmar Eliminación</h3>
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn" class="modal-btn confirm-btn">Confirmar</button>
+                <button id="cancel-delete-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="log-modal" class="modal" hidden>
+        <div class="log-modal-content">
+            <h3>Historial de Cambios</h3>
+            <div id="log-content"></div>
+            <div class="modal-buttons">
+                <button id="close-log-btn" class="modal-btn cancel-btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" hidden>
+        <div class="success-modal-content">
+            <p><i id="success-icon" class="fas"></i><span id="success-message"></span></p>
+        </div>
+    </div>
+
+    <div id="quick-edit-modal" class="modal" hidden>
+        <div class="quick-edit-modal-content">
+            <h3>Editar Lote, Guía y Expedición</h3>
+            <label for="quick-lote">Lote:</label>
+            <input id="quick-lote" type="text">
+            <label for="quick-nGuia">N° Guía:</label>
+            <input id="quick-nGuia" type="text">
+            <label for="quick-fechaVencimiento">Fecha Expedición:</label>
+            <input id="quick-fechaVencimiento" type="date">
+            <div class="modal-buttons">
+                <button id="save-quick-edit-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-quick-edit-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="package-modal" class="modal" hidden>
+        <div class="package-modal-content">
+            <h3 id="package-modal-title">Paquete</h3>
+            <div class="field">
+                <label for="package-nGuia">N° de Guía:</label>
+                <input id="package-nGuia" type="text" placeholder="N° de Guía">
+            </div>
+            <div id="package-items-container" class="package-items"></div>
+            <button id="add-item-btn" class="modal-btn add-btn">Añadir Item</button>
+            <div class="modal-buttons">
+                <button id="save-package-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-package-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="package-item-edit-modal" class="modal" hidden>
+        <div class="package-item-edit-modal-content">
+            <h3>Editar Ítem de Paquete</h3>
+            <label for="edit-item-referencia">Referencia:</label>
+            <div class="autocomplete-container">
+                <input id="edit-item-referencia" type="text" placeholder="Buscar referencia" required>
+                <i id="edit-item-referencia-search" class="fas fa-search search-icon"
+                    title="Mostrar todas las referencias"></i>
+                <ul id="edit-item-referencia-list" class="autocomplete-list"></ul>
+            </div>
+            <label for="edit-item-descripcion">Descripción:</label>
+            <input id="edit-item-descripcion" type="text" readonly>
+            <label for="edit-item-cantidad">Cantidad:</label>
+            <input id="edit-item-cantidad" type="number" min="1">
+            <label for="edit-item-lote">Lote:</label>
+            <input id="edit-item-lote" type="text">
+            <label for="edit-item-fechaVencimiento">Fecha Vencimiento:</label>
+            <input id="edit-item-fechaVencimiento" type="date">
+            <div class="modal-buttons">
+                <button id="save-item-edit-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-item-edit-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

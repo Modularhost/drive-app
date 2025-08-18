@@ -1,0 +1,298 @@
+<div class="referencias-container">
+    <h2>Gestión de Asignaciones</h2>
+    <hr class="divider">
+
+    <div class="form-container" id="asignacion-form">
+        <div class="form-row form-row-7">
+            <div class="form-group">
+                <label for="fecha-ingreso">Fecha de Ingreso</label>
+                <input type="date" id="fecha-ingreso" placeholder="Fecha de ingreso" autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <label for="admisión">Admisión</label>
+                <input type="text" id="admisión" placeholder="Ingrese la admisión" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="nombrePaciente">Nombre del Paciente</label>
+                <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="fechaCX">Fecha de CX</label>
+                <input type="date" id="fechaCX">
+            </div>
+            <div class="form-group">
+                <label for="medico">Médico</label>
+                <div class="input-wrapper">
+                    <input type="text" id="medico" name="medico" autocomplete="off" required>
+                    <button type="button" id="medico-search" class="search-icon"><i class="fas fa-search"></i></button>
+                    <ul id="medico-list" class="suggestions-list"></ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <div class="input-with-icon">
+                    <input type="text" id="descripcion" placeholder="Descripción" autocomplete="off">
+                    <i id="descripcion-search" class="fas fa-search"></i>
+                    <i id="descripcion-mode-toggle" class="fas fa-toggle-on" title="Consignación"></i>
+                </div>
+                <ul id="descripcion-list" class="suggestions-list"></ul>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" placeholder="1" min="1" value="1">
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <select id="estado">
+                    <option value="Reposición">Reposición</option>
+                    <option value="Regular">Regular</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row form-row-7">
+            <div class="form-group">
+                <label for="codigo">Código</label>
+                <input type="text" id="codigo" placeholder="Código" autocomplete="off" readonly>
+            </div>
+            <div class="form-group">
+                <label for="referencia">Referencia</label>
+                <input type="text" id="referencia" placeholder="Referencia" autocomplete="off" readonly>
+            </div>
+            <div class="form-group">
+                <label for="proveedor">Proveedor</label>
+                <div class="input-with-icon">
+                    <input type="text" id="proveedor" placeholder="Seleccione proveedor" autocomplete="off" readonly>
+                    <i class="fas fa-list icon-list" id="proveedor-search"></i>
+                    <ul class="suggestions-list" id="proveedor-list"></ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="modalidad">Modalidad</label>
+                <select id="modalidad" disabled>
+                    <option value="Consignación">Consignación</option>
+                    <option value="Cotización">Cotización</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio ($)</label>
+                <input type="text" id="precio" placeholder="0" autocomplete="off" readonly>
+            </div>
+            <div class="form-group">
+                <label for="total">Total ($)</label>
+                <input type="text" id="total" readonly>
+            </div>
+            <div class="form-group form-group-button">
+                <button id="registrar-btn">Registrar</button>
+                <button id="limpiar-btn">Limpiar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="asignaciones-table">
+            <thead>
+                <tr>
+                    <th>Fecha de Ingreso</th>
+                    <th>Admisión</th>
+                    <th>Nombre Paciente</th>
+                    <th>Fecha CX</th>
+                    <th>Médico</th>
+                    <th>Proveedor</th>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Referencia</th>
+                    <th>Modalidad</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="traspaso-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h2>Traspasar Asignaciones</h2>
+            <p>Fecha actual: <span id="current-date"></span></p>
+            <div class="form-group">
+                <label for="traspaso-type">Tipo de Traspaso</label>
+                <select id="traspaso-type">
+                    <option value="all">Traspasar Todo</option>
+                    <option value="single">Traspasar una Asignación</option>
+                    <option value="select">Seleccionar Asignaciones</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="traspaso-select">Seleccionar Asignación</label>
+                <select id="traspaso-select"></select>
+            </div>
+            <div class="modal-actions">
+                <button id="confirm-traspaso-btn" class="btn">Confirmar</button>
+                <button id="cancel-traspaso-btn" class="btn btn-cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="select-asignaciones-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h2>Seleccionar Asignaciones para Traspaso</h2>
+            <div class="table-container">
+                <table id="select-asignaciones-table">
+                    <thead>
+                        <tr>
+                            <th>Seleccionar</th>
+                            <th>Admisión</th>
+                            <th>Nombre Paciente</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-actions">
+                <button id="confirm-select-btn" class="btn">Confirmar</button>
+                <button id="cancel-select-btn" class="btn btn-cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h2>Editar Asignación</h2>
+            <form id="edit-form">
+                <div class="form-row form-row-edit">
+                    <div class="form-group">
+                        <label for="edit-fecha-ingreso">Fecha de Ingreso</label>
+                        <input type="date" id="edit-fecha-ingreso" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-admisión">Admisión</label>
+                        <input type="text" id="edit-admisión" placeholder="Ingrese la admisión" autocomplete="off"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-nombrePaciente">Nombre del Paciente</label>
+                        <input type="text" id="edit-nombrePaciente" placeholder="Nombre del paciente" autocomplete="off"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-fechaCX">Fecha de Cirugía</label>
+                        <input type="date" id="edit-fechaCX" required>
+                    </div>
+                </div>
+                <div class="form-row form-row-edit">
+                    <div class="form-group">
+                        <label for="edit-medico">Médico</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="edit-medico" autocomplete="off" required>
+                            <button type="button" id="edit-medico-search" class="search-icon"><i
+                                    class="fas fa-search"></i></button>
+                            <ul id="edit-medico-list" class="suggestions-list"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-descripcion">Descripción</label>
+                        <div class="input-with-icon">
+                            <input type="text" id="edit-descripcion" placeholder="Descripción" autocomplete="off">
+                            <i id="edit-descripcion-search" class="fas fa-search"></i>
+                            <i id="edit-descripcion-mode-toggle" class="fas fa-toggle-on" title="Consignación"></i>
+                            <ul id="edit-descripcion-list" class="suggestions-list"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-cantidad">Cantidad</label>
+                        <input type="number" id="edit-cantidad" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-estado">Estado</label>
+                        <select id="edit-estado">
+                            <option value="Reposición">Reposición</option>
+                            <option value="Regular">Regular</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row form-row-edit">
+                    <div class="form-group">
+                        <label for="edit-codigo">Código</label>
+                        <input type="text" id="edit-codigo" placeholder="Código" autocomplete="off" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-referencia">Referencia</label>
+                        <input type="text" id="edit-referencia" placeholder="Referencia" autocomplete="off" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-proveedor">Proveedor</label>
+                        <div class="input-with-icon">
+                            <input type="text" id="edit-proveedor" placeholder="Seleccione proveedor" autocomplete="off"
+                                readonly>
+                            <i class="fas fa-list icon-list" id="edit-proveedor-search"></i>
+                            <ul id="edit-proveedor-list" class="suggestions-list"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-modalidad">Modalidad</label>
+                        <select id="edit-modalidad" disabled>
+                            <option value="Consignación">Consignación</option>
+                            <option value="Cotización">Cotización</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row form-row-edit">
+                    <div class="form-group">
+                        <label for="edit-precio">Precio ($)</label>
+                        <input type="text" id="edit-precio" placeholder="0" autocomplete="off" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-total">Total ($)</label>
+                        <input type="text" id="edit-total" readonly>
+                    </div>
+                    <div class="form-group form-group-button">
+                        <button type="button" id="save-edit-btn" class="btn">Guardar</button>
+                        <button type="button" id="cancel-edit-btn" class="btn btn-cancel">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h2>Confirmar Eliminación</h2>
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn">Confirmar</button>
+                <button id="cancel-delete-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" hidden>
+        <div class="modal-content success">
+            <div class="success-message-container">
+                <i id="success-icon" class="fas fa-check-circle"></i>
+                <p id="success-message" class="success-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="log-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h2>Historial de Cambios</h2>
+            <div id="log-content"></div>
+            <div class="modal-buttons">
+                <button id="close-log-btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-modal" class="modal" hidden>
+        <div class="modal-content loading">
+            <div class="spinner"></div>
+            <p>Cargando datos...</p>
+        </div>
+    </div>
+</div>

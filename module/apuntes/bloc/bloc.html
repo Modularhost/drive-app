@@ -1,0 +1,59 @@
+<div class="bloc-container">
+    <h2>Bloc</h2>
+    <div class="tabs-container">
+        <button id="crear-bloc-btn" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Crear Entrada
+        </button>
+    </div>
+    <div class="divider"></div>
+    <div class="bloc-list-container">
+        <ul id="bloc-list" class="bloc-list"></ul>
+    </div>
+</div>
+
+<div id="bloc-modal" class="modal" style="display: none;">
+    <div class="edit-modal-content">
+        <h2 id="bloc-modal-title">Crear Nueva Entrada</h2>
+        <div class="edit-form-container">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="bloc-titulo">Título</label>
+                    <input type="text" id="bloc-titulo" class="wide-input" placeholder="Ingrese el título de la entrada"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="bloc-contenido">Contenido</label>
+                    <textarea id="bloc-contenido" class="wide-input" rows="10" placeholder="Escriba su entrada aquí"
+                        required></textarea>
+                </div>
+            </div>
+            <div class="form-row form-group-button">
+                <button id="save-bloc-btn" class="btn btn-primary">Guardar</button>
+                <button id="cancel-bloc-btn" class="btn btn-secondary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="delete-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p id="delete-message">¿Estás seguro de que deseas eliminar esta entrada?</p>
+        <div class="modal-buttons">
+            <button id="confirm-delete-btn" class="btn btn-danger">Eliminar</button>
+            <button id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="success-modal" class="success-modal">
+    <div class="modal-content">
+        <div class="success-message-container">
+            <i id="success-icon" class="fas"></i>
+            <span class="success-message"></span>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="bloc.js"></script>

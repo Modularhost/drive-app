@@ -1,0 +1,97 @@
+<div class="datos-historico-container">
+    <h2>Datos Histórico</h2>
+    <hr class="divider">
+    <div class="controls-container">
+        <div class="import-export-container">
+            <button id="download-format-btn">Descargar Formato</button>
+            <label for="import-file" class="import-btn">Importar
+                <input type="file" id="import-file" accept=".xlsx, .xls" style="display: none;">
+            </label>
+            <button id="export-excel-btn">Descargar Excel</button>
+        </div>
+        <div class="filters">
+            <label for="year-filter">Año:</label>
+            <select id="year-filter"></select>
+            <label for="month-filter">Mes:</label>
+            <select id="month-filter"></select>
+        </div>
+    </div>
+    <div id="oc-monto-total" class="oc-monto-total">Total OC_MONTO: 0</div>
+    <div class="table-container" id="table-container">
+        <table id="historico-table">
+            <colgroup>
+                <col class="col-id-pacient">
+                <col class="col-paciente">
+                <col class="col-medico">
+                <col class="col-fecha-cirugia">
+                <col class="col-proveedor">
+                <col class="col-codigo-clinica">
+                <col class="col-codigo-proveedor">
+                <col class="col-cantidad">
+                <col class="col-precio-unitario">
+                <col class="col-atributo">
+                <col class="col-oc">
+                <col class="col-oc-monto">
+                <col class="col-estado">
+                <col class="col-fecha-recepcion">
+                <col class="col-fecha-cargo">
+                <col class="col-numero-guia">
+                <col class="col-numero-factura">
+                <col class="col-fecha-emision">
+                <col class="col-fecha-ingreso">
+                <col class="col-lote">
+                <col class="col-fecha-vencimiento">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="resizeable">ID_PACIENT <i class="fas fa-filter filter-icon" data-column="id_pacient"></i></th>
+                    <th class="resizeable">PACIENTE <i class="fas fa-filter filter-icon" data-column="paciente"></i></th>
+                    <th class="resizeable">MEDICO <i class="fas fa-filter filter-icon" data-column="medico"></i></th>
+                    <th class="resizeable">FECHA_CIRUGIA <i class="fas fa-filter filter-icon" data-column="fecha_cirugia"></i></th>
+                    <th class="resizeable">PROVEEDOR <i class="fas fa-filter filter-icon" data-column="proveedor"></i></th>
+                    <th class="resizeable">CODIGO_CLINICA <i class="fas fa-filter filter-icon" data-column="codigo_clinica"></i></th>
+                    <th class="resizeable">CODIGO_PROVEEDOR <i class="fas fa-filter filter-icon" data-column="codigo_proveedor"></i></th>
+                    <th class="resizeable">CANTIDAD <i class="fas fa-filter filter-icon" data-column="cantidad"></i></th>
+                    <th class="resizeable">PRECIO_UNITARIO <i class="fas fa-filter filter-icon" data-column="precio_unitario"></i></th>
+                    <th class="resizeable">ATRIBUTO <i class="fas fa-filter filter-icon" data-column="atributo"></i></th>
+                    <th class="resizeable">OC <i class="fas fa-filter filter-icon" data-column="oc"></i></th>
+                    <th class="resizeable">OC_MONTO <i class="fas fa-filter filter-icon" data-column="oc_monto"></i></th>
+                    <th class="resizeable">ESTADO <i class="fas fa-filter filter-icon" data-column="estado"></i></th>
+                    <th class="resizeable">FECHA_RECEPCION <i class="fas fa-filter filter-icon" data-column="fecha_recepcion"></i></th>
+                    <th class="resizeable">FECHA_CARGO <i class="fas fa-filter filter-icon" data-column="fecha_cargo"></i></th>
+                    <th class="resizeable">NUMERO_GUIA <i class="fas fa-filter filter-icon" data-column="numero_guia"></i></th>
+                    <th class="resizeable">NUMERO_FACTURA <i class="fas fa-filter filter-icon" data-column="numero_factura"></i></th>
+                    <th class="resizeable">FECHA_EMISION <i class="fas fa-filter filter-icon" data-column="fecha_emision"></i></th>
+                    <th class="resizeable">FECHA_INGRESO <i class="fas fa-filter filter-icon" data-column="fecha_ingreso"></i></th>
+                    <th class="resizeable">LOTE <i class="fas fa-filter filter-icon" data-column="lote"></i></th>
+                    <th class="resizeable">FECHA_VENCIMIENTO <i class="fas fa-filter filter-icon" data-column="fecha_vencimiento"></i></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Cargando datos... <span id="loading-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-message-container">
+                <i id="success-icon" class="fas"></i>
+                <div id="success-message" class="success-message"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script type="module" src="datos-historicos.js"></script>

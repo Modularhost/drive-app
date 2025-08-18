@@ -1,0 +1,1488 @@
+:root {
+    --bg-color: #fff;
+    --border-color: #e2e8f0;
+    --text-color: #2d3748;
+    --header-bg: #edf2f7;
+    --hover-bg: #f7fafc;
+    --input-bg: #fff;
+    --button-bg: #e2e8f0;
+    --button-hover-bg: #cbd5e0;
+    --filter-bg: #fff;
+    --disabled-bg: #e2e8f0;
+    --modal-bg: #fff;
+    --success-bg: #e6fffa;
+    --success-border: #38a169;
+    --error-bg: #fefcbf;
+    --error-border: #f56565;
+    --log-bg: #f7fafc;
+    --primary: #3182ce;
+    --primary-hover: #2b6cb0;
+    --danger: #f56565;
+    --danger-hover: #e53e3e;
+    --secondary: #6c757d;
+    --secondary-hover: #5a6268;
+    --success: #38a169;
+    --success-hover: #2f855a;
+    --info: #2196f3;
+    --info-hover: #1976d2;
+    --state-actualizar-precio-bg: #f7fafc;
+    --state-cargo-pendiente-bg: #ffedec;
+    --state-código-pendiente-bg: #ffe6e6;
+    --state-cotización-pendiente-bg: #ffcccc;
+    --state-cuenta-cerrada-bg: #e2e8f0;
+    --state-reposición-bg: #d1ecf1;
+    --state-cargado-bg: #ffffff;
+    --dark-bg-color: #2d3748;
+    --dark-border-color: #4a5568;
+    --dark-text-color: #e2e8f0;
+    --dark-header-bg: #3c4b64;
+    --dark-hover-bg: #3c4b64;
+    --dark-input-bg: #3c4b64;
+    --dark-button-bg: #4a5568;
+    --dark-button-hover-bg: #718096;
+    --dark-filter-bg: #3c4b64;
+    --dark-disabled-bg: #4a5568;
+    --dark-modal-bg: #2d3748;
+    --dark-success-bg: #2f855a;
+    --dark-error-bg: #742a2a;
+    --dark-log-bg: #3c4b64;
+    --dark-primary: #63b3ed;
+    --dark-primary-hover: #4299e1;
+    --dark-danger: #f56565;
+    --dark-danger-hover: #e53e3e;
+    --dark-secondary: #a0aec0;
+    --dark-secondary-hover: #6c757d;
+    --dark-success: #68d391;
+    --dark-success-hover: #48bb78;
+    --dark-info: #64b5f6;
+    --dark-info-hover: #42a5f5;
+    --dark-state-actualizar-precio-bg: #3c4b64;
+    --dark-state-cargo-pendiente-bg: #5c2a2a;
+    --dark-state-código-pendiente-bg: #742a2a;
+    --dark-state-cotización-pendiente-bg: #923232;
+    --dark-state-cuenta-cerrada-bg: #4a5568;
+    --dark-state-reposición-bg: #285e61;
+    --dark-state-cargado-bg: #2d3748;
+}
+
+.cargosconsignacion-container {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    margin: 0;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+}
+
+body.dark-mode .cargosconsignacion-container {
+    background-color: var(--dark-bg-color);
+    border-color: var(--dark-border-color);
+}
+
+.cargosconsignacion-container h2 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+body.dark-mode .cargosconsignacion-container h2 {
+    color: var(--dark-text-color);
+}
+
+.quick-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.quick-filters select {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+body.dark-mode .quick-filters select {
+    background-color: var(--dark-button-bg);
+    color: var(--dark-text-color);
+}
+
+.quick-filters select:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+body.dark-mode .quick-filters select:focus {
+    border: 1px solid var(--dark-primary);
+}
+
+.quick-filters button {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s, transform 0.1s;
+    color: #fff;
+}
+
+body.dark-mode .quick-filters button {
+    color: #fff;
+}
+
+#show-all-btn {
+    background-color: var(--success);
+}
+
+body.dark-mode #show-all-btn {
+    background-color: var(--dark-success);
+}
+
+#show-all-btn:hover {
+    background-color: var(--success-hover);
+}
+
+body.dark-mode #show-all-btn:hover {
+    background-color: var(--dark-success-hover);
+}
+
+#clear-column-filters-btn {
+    background-color: var(--danger);
+}
+
+body.dark-mode #clear-column-filters-btn {
+    background-color: var(--dark-danger);
+}
+
+#clear-column-filters-btn:hover {
+    background-color: var(--danger-hover);
+}
+
+body.dark-mode #clear-column-filters-btn:hover {
+    background-color: var(--dark-danger-hover);
+}
+
+#bulk-change-state-btn,
+#bulk-change-fechaCargo-btn,
+#bulk-change-guia-btn {
+    background-color: var(--primary);
+}
+
+body.dark-mode #bulk-change-state-btn,
+body.dark-mode #bulk-change-fechaCargo-btn,
+body.dark-mode #bulk-change-guia-btn {
+    background-color: var(--dark-primary);
+}
+
+#bulk-change-state-btn:hover,
+#bulk-change-fechaCargo-btn:hover,
+#bulk-change-guia-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+body.dark-mode #bulk-change-state-btn:hover,
+body.dark-mode #bulk-change-fechaCargo-btn:hover,
+body.dark-mode #bulk-change-guia-btn:hover {
+    background-color: var(--dark-primary-hover);
+}
+
+#bulk-change-state-btn:disabled,
+#bulk-change-fechaCargo-btn:disabled,
+#bulk-change-guia-btn:disabled {
+    background-color: var(--disabled-bg);
+    cursor: not-allowed;
+    color: var(--text-color);
+}
+
+body.dark-mode #bulk-change-state-btn:disabled,
+body.dark-mode #bulk-change-fechaCargo-btn:disabled,
+body.dark-mode #bulk-change-guia-btn:disabled {
+    background-color: var(--dark-disabled-bg);
+    color: var(--dark-text-color);
+}
+
+#state-buttons {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.state-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff; /* Texto blanco para alto contraste */
+    transition: background-color 0.3s ease, opacity 0.2s ease, transform 0.1s ease;
+}
+
+body.dark-mode .state-button {
+    color: #fff; /* Mantener texto blanco en modo oscuro */
+}
+
+.state-button:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.state-button.active {
+    opacity: 0.7; /* Reducir opacidad para el botón activo */
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+body.dark-mode .state-button.active {
+    box-shadow: 0 0 0 2px var(--dark-primary);
+}
+
+.state-button[data-state="actualizar-precio"] {
+    background-color: var(--info);
+}
+
+body.dark-mode .state-button[data-state="actualizar-precio"] {
+    background-color: var(--dark-info);
+}
+
+.state-button[data-state="cargado"] {
+    background-color: var(--success);
+}
+
+body.dark-mode .state-button[data-state="cargado"] {
+    background-color: var(--dark-success);
+}
+
+.state-button[data-state="cargo-pendiente"] {
+    background-color: var(--danger);
+}
+
+body.dark-mode .state-button[data-state="cargo-pendiente"] {
+    background-color: var(--dark-danger);
+}
+
+.state-button[data-state="código-pendiente"] {
+    background-color: var(--danger-hover);
+}
+
+body.dark-mode .state-button[data-state="código-pendiente"] {
+    background-color: var(--dark-danger-hover);
+}
+
+.state-button[data-state="cotización-pendiente"] {
+    background-color: #f6b93b; /* Amarillo cálido para mayor contraste */
+    color: #2d3748; /* Texto oscuro para legibilidad */
+}
+
+body.dark-mode .state-button[data-state="cotización-pendiente"] {
+    background-color: #e1a107;
+    color: #e2e8f0;
+}
+
+.state-button[data-state="cuenta-cerrada"] {
+    background-color: var(--secondary);
+}
+
+body.dark-mode .state-button[data-state="cuenta-cerrada"] {
+    background-color: var(--dark-secondary);
+}
+
+.state-button[data-state="reposición"] {
+    background-color: var(--primary);
+}
+
+body.dark-mode .state-button[data-state="reposición"] {
+    background-color: var(--dark-primary);
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 10px 0;
+}
+
+body.dark-mode .divider {
+    border-top: 1px solid var(--dark-border-color);
+}
+
+.table-container {
+    margin-top: 10px;
+    height: 720px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    -webkit-overflow-scrolling: touch;
+}
+
+body.dark-mode .table-container {
+    border-color: var(--dark-border-color);
+}
+
+#cargosconsignacion-table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    font-size: 11px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+}
+
+body.dark-mode #cargosconsignacion-table {
+    border-color: var(--dark-border-color);
+    background-color: var(--dark-bg-color);
+}
+
+#cargosconsignacion-table th,
+#cargosconsignacion-table td {
+    width: auto;
+    padding: 4px 6px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    color: var(--text-color);
+    position: relative;
+    height: 14px;
+    line-height: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.dark-mode #cargosconsignacion-table th,
+body.dark-mode #cargosconsignacion-table td {
+    border-bottom: 1px solid var(--dark-border-color);
+    border-right: 1px solid var(--dark-border-color);
+    color: var(--dark-text-color);
+}
+
+#cargosconsignacion-table th:last-child,
+#cargosconsignacion-table td:last-child {
+    border-right: none;
+}
+
+#cargosconsignacion-table th {
+    background-color: var(--header-bg) !important;
+    font-weight: bold;
+    color: var(--text-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+body.dark-mode #cargosconsignacion-table th {
+    background-color: var(--dark-header-bg) !important;
+    color: var(--dark-text-color);
+}
+
+#cargosconsignacion-table th:nth-child(1),
+#cargosconsignacion-table td:nth-child(1) {
+    width: 120px;
+}
+
+#cargosconsignacion-table th:nth-child(2),
+#cargosconsignacion-table td:nth-child(2) {
+    width: 60px;
+}
+
+#cargosconsignacion-table th:nth-child(19),
+#cargosconsignacion-table td:nth-child(19) {
+    max-width: 200px;
+}
+
+#cargosconsignacion-table tr {
+    height: 20px;
+}
+
+#cargosconsignacion-table tr:hover {
+    background-color: var(--hover-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr:hover {
+    background-color: var(--dark-hover-bg);
+}
+
+#cargosconsignacion-table tr.state-cargado:hover {
+    background-color: var(--hover-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-cargado:hover {
+    background-color: var(--dark-hover-bg);
+}
+
+#cargosconsignacion-table tr:not(.sub-row):not(.package-sub-row):hover {
+    background-color: var(--hover-bg) !important;
+}
+
+body.dark-mode #cargosconsignacion-table tr:not(.sub-row):not(.package-sub-row):hover {
+    background-color: var(--dark-hover-bg) !important;
+}
+
+#cargosconsignacion-table tr.state-actualizar-precio {
+    background-color: var(--state-actualizar-precio-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-actualizar-precio {
+    background-color: var(--dark-state-actualizar-precio-bg);
+}
+
+#cargosconsignacion-table tr.state-cargado {
+    background-color: var(--state-cargado-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-cargado {
+    background-color: var(--dark-state-cargado-bg);
+}
+
+#cargosconsignacion-table tr.state-cargo-pendiente {
+    background-color: var(--state-cargo-pendiente-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-cargo-pendiente {
+    background-color: var(--dark-state-cargo-pendiente-bg);
+}
+
+#cargosconsignacion-table tr.state-código-pendiente {
+    background-color: var(--state-código-pendiente-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-código-pendiente {
+    background-color: var(--dark-state-código-pendiente-bg);
+}
+
+#cargosconsignacion-table tr.state-cotización-pendiente {
+    background-color: var(--state-cotización-pendiente-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-cotización-pendiente {
+    background-color: var(--dark-state-cotización-pendiente-bg);
+}
+
+#cargosconsignacion-table tr.state-cuenta-cerrada {
+    background-color: var(--state-cuenta-cerrada-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-cuenta-cerrada {
+    background-color: var(--dark-state-cuenta-cerrada-bg);
+}
+
+#cargosconsignacion-table tr.state-reposición {
+    background-color: var(--state-reposición-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-reposición {
+    background-color: var(--dark-state-reposición-bg);
+}
+
+#cargosconsignacion-table tr.state-PAD {
+    background-color: var(--state-reposición-bg);
+}
+
+body.dark-mode #cargosconsignacion-table tr.state-PAD {
+    background-color: var(--dark-state-reposición-bg);
+}
+
+#cargosconsignacion-table tr.sub-row {
+    background-color: var(--log-bg);
+    font-size: 10px;
+    padding-left: 20px;
+}
+
+body.dark-mode #cargosconsignacion-table tr.sub-row {
+    background-color: var(--dark-log-bg);
+}
+
+#cargosconsignacion-table tr.package-sub-row {
+    background-color: #e6fffa;
+    font-size: 10px;
+    padding-left: 30px;
+}
+
+body.dark-mode #cargosconsignacion-table tr.package-sub-row {
+    background-color: #566068;
+}
+
+#cargosconsignacion-table tr.sub-row td,
+#cargosconsignacion-table tr.package-sub-row td {
+    padding-left: 20px;
+    border-right: none;
+}
+
+#cargosconsignacion-table tr.sub-row-hidden,
+#cargosconsignacion-table tr.package-sub-row-hidden {
+    display: none;
+}
+
+#cargosconsignacion-table .fas {
+    font-size: 12px;
+}
+
+#cargosconsignacion-table .action-icon {
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+#cargosconsignacion-table .checkbox-cell input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+#cargosconsignacion-table .fa-edit {
+    color: var(--primary);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-edit {
+    color: var(--dark-primary);
+}
+
+#cargosconsignacion-table .fa-edit:hover {
+    color: var(--primary-hover);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-edit:hover {
+    color: var(--dark-primary-hover);
+}
+
+#cargosconsignacion-table .fa-trash {
+    color: var(--danger);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-trash {
+    color: var(--dark-danger);
+}
+
+#cargosconsignacion-table .fa-trash:hover {
+    color: var(--danger-hover);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-trash:hover {
+    color: var(--dark-danger-hover);
+}
+
+#cargosconsignacion-table .fa-history {
+    color: var(--secondary);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-history {
+    color: var(--dark-secondary);
+}
+
+#cargosconsignacion-table .fa-history:hover {
+    color: var(--secondary-hover);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-history:hover {
+    color: var(--dark-secondary-hover);
+}
+
+#cargosconsignacion-table .package-add {
+    color: var(--info);
+}
+
+body.dark-mode #cargosconsignacion-table .package-add {
+    color: var(--dark-info);
+}
+
+#cargosconsignacion-table .package-add:hover {
+    color: var(--info-hover);
+}
+
+body.dark-mode #cargosconsignacion-table .package-add:hover {
+    color: var(--dark-info-hover);
+}
+
+#cargosconsignacion-table .quick-add {
+    color: var(--success);
+}
+
+body.dark-mode #cargosconsignacion-table .quick-add {
+    color: var(--dark-success);
+}
+
+#cargosconsignacion-table .quick-add:hover {
+    color: var(--success-hover);
+}
+
+body.dark-mode #cargosconsignacion-table .quick-add:hover {
+    color: var(--dark-success-hover);
+}
+
+#cargosconsignacion-table .fa-chevron-down,
+#cargosconsignacion-table .fa-chevron-up {
+    color: var(--secondary);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-chevron-down,
+body.dark-mode #cargosconsignacion-table .fa-chevron-up {
+    color: var(--dark-secondary);
+}
+
+#cargosconsignacion-table .fa-chevron-down:hover,
+#cargosconsignacion-table .fa-chevron-up:hover {
+    color: var(--secondary-hover);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-chevron-down:hover,
+body.dark-mode #cargosconsignacion-table .fa-chevron-up:hover {
+    color: var(--dark-secondary-hover);
+}
+
+#cargosconsignacion-table .fa-box {
+    color: var(--info);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-box {
+    color: var(--dark-info);
+}
+
+#cargosconsignacion-table .fa-box:hover {
+    color: var(--info-hover);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-box:hover {
+    color: var(--dark-info-hover);
+}
+
+#cargosconsignacion-table .fa-filter,
+#cargosconsignacion-table .fa-filter-circle-xmark {
+    color: var(--secondary);
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 12px;
+    transition: color 0.2s ease;
+}
+
+body.dark-mode #cargosconsignacion-table .fa-filter,
+body.dark-mode #cargosconsignacion-table .fa-filter-circle-xmark {
+    color: var(--dark-secondary);
+}
+
+#cargosconsignacion-table .fa-filter:hover,
+#cargosconsignacion-table .fa-filter-circle-xmark:hover,
+#cargosconsignacion-table .fa-filter.active,
+#cargosconsignacion-table .fa-filter-circle-xmark.active {
+    color: var(--primary);
+}
+
+body.dark-mode #cargosconsignacion-table .fa-filter:hover,
+body.dark-mode #cargosconsignacion-table .fa-filter-circle-xmark:hover,
+body.dark-mode #cargosconsignacion-table .fa-filter.active,
+body.dark-mode #cargosconsignacion-table .fa-filter-circle-xmark.active {
+    color: var(--dark-primary);
+}
+
+.filter-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.filter-input {
+    padding: 6px 24px 6px 8px;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    margin-left: 5px;
+}
+
+body.dark-mode .filter-input {
+    border: 1px solid var(--dark-border-color);
+    background: var(--dark-input-bg);
+    color: var(--dark-text-color);
+}
+
+.clear-filter-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--danger);
+    font-size: 0.9rem;
+}
+
+body.dark-mode .clear-filter-icon {
+    color: var(--dark-danger);
+}
+
+.clear-filter-icon:hover {
+    color: var(--primary);
+}
+
+body.dark-mode .clear-filter-icon:hover {
+    color: var(--dark-primary);
+}
+
+.pagination-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#prev-btn,
+#next-btn,
+#export-excel-btn {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#prev-btn,
+#next-btn {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+#export-excel-btn {
+    background-color: var(--success);
+    color: #fff;
+}
+
+body.dark-mode #prev-btn,
+body.dark-mode #next-btn {
+    background-color: var(--dark-primary);
+}
+
+body.dark-mode #export-excel-btn {
+    background-color: var(--dark-success);
+}
+
+#prev-btn:disabled,
+#next-btn:disabled {
+    background-color: var(--disabled-bg);
+    cursor: not-allowed;
+}
+
+body.dark-mode #prev-btn:disabled,
+body.dark-mode #next-btn:disabled {
+    background-color: var(--dark-disabled-bg);
+}
+
+#prev-btn:hover:not(:disabled),
+#next-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+#export-excel-btn:hover {
+    background-color: var(--success-hover);
+}
+
+body.dark-mode #prev-btn:hover:not(:disabled),
+body.dark-mode #next-btn:hover:not(:disabled) {
+    background-color: var(--dark-primary-hover);
+}
+
+body.dark-mode #export-excel-btn:hover {
+    background-color: var(--dark-success-hover);
+}
+
+#page-info,
+#total-records {
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+body.dark-mode #page-info,
+body.dark-mode #total-records {
+    color: var(--dark-text-color);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.modal:not([hidden]) {
+    display: flex;
+}
+
+.edit-cargo-modal-content,
+.bulk-change-state-modal-content {
+    background-color: var(--modal-bg);
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 800px;
+    max-width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .edit-cargo-modal-content,
+body.dark-mode .bulk-change-state-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.change-state-modal-content {
+    background-color: var(--modal-bg);
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    max-width: 80%;
+    max-height: 60vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .change-state-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.delete-cargo-modal-content {
+    background-color: var(--modal-bg);
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 85%;
+    max-height: 50vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .delete-cargo-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.log-modal-content {
+    background-color: var(--modal-bg);
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    max-width: 90%;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .log-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.success-modal-content {
+    background-color: var(--success-bg);
+    border: 2px solid var(--success-border);
+    padding: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    max-width: 80%;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .success-modal-content {
+    background-color: var(--dark-success-bg);
+    border: 2px solid var(--success-border);
+    color: var(--dark-text-color);
+}
+
+.success-modal-content.error {
+    background-color: var(--error-bg);
+    border: 2px solid var(--error-border);
+}
+
+body.dark-mode .success-modal-content.error {
+    background-color: var(--error-bg);
+    border: 2px solid var(--error-border);
+}
+
+.quick-edit-modal-content {
+    background-color: var(--modal-bg);
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    max-width: 80%;
+    max-height: 60vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .quick-edit-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.package-modal-content {
+    background-color: var(--modal-bg);
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 900px;
+    max-width: 90%;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+}
+
+body.dark-mode .package-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.package-item-edit-modal-content {
+    background-color: var(--modal-bg);
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 85%;
+    max-height: 65vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .package-item-edit-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.edit-cargo-modal-content h3,
+.change-state-modal-content h3,
+.bulk-change-state-modal-content h3,
+.delete-cargo-modal-content h3,
+.log-modal-content h3,
+.quick-edit-modal-content h3,
+.package-modal-content h3,
+.package-item-edit-modal-content h3 {
+    margin: 0 0 1rem;
+    font-size: 11px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+body.dark-mode .edit-cargo-modal-content h3,
+body.dark-mode .change-state-modal-content h3,
+body.dark-mode .bulk-change-state-modal-content h3,
+body.dark-mode .delete-cargo-modal-content h3,
+body.dark-mode .log-modal-content h3,
+body.dark-mode .quick-edit-modal-content h3,
+body.dark-mode .package-modal-content h3,
+body.dark-mode .package-item-edit-modal-content h3 {
+    color: var(--dark-text-color);
+}
+
+.edit-cargo-modal-content label,
+.change-state-modal-content label,
+.bulk-change-state-modal-content label,
+.delete-cargo-modal-content label,
+.log-modal-content label,
+.quick-edit-modal-content label,
+.package-modal-content label,
+.package-item-edit-modal-content label {
+    display: block;
+    margin-top: 8px;
+    color: var(--text-color);
+    font-size: 9px;
+}
+
+body.dark-mode .edit-cargo-modal-content label,
+body.dark-mode .change-state-modal-content label,
+body.dark-mode .bulk-change-state-modal-content label,
+body.dark-mode .delete-cargo-modal-content label,
+body.dark-mode .log-modal-content label,
+body.dark-mode .quick-edit-modal-content label,
+body.dark-mode .package-modal-content label,
+body.dark-mode .package-item-edit-modal-content label {
+    color: var(--dark-text-color);
+}
+
+.edit-cargo-modal-content input,
+.edit-cargo-modal-content select,
+.change-state-modal-content input,
+.change-state-modal-content select,
+.bulk-change-state-modal-content input,
+.bulk-change-state-modal-content select,
+.delete-cargo-modal-content input,
+.delete-cargo-modal-content select,
+.log-modal-content input,
+.log-modal-content select,
+.quick-edit-modal-content input,
+.quick-edit-modal-content select,
+.package-modal-content input,
+.package-modal-content select,
+.package-item-edit-modal-content input,
+.package-item-edit-modal-content select {
+    width: 100%;
+    padding: 4px;
+    margin-top: 4px;
+    border: 1px solid var(--border-color);
+    font-size: 11px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+body.dark-mode .edit-cargo-modal-content input,
+body.dark-mode .edit-cargo-modal-content select,
+body.dark-mode .change-state-modal-content input,
+body.dark-mode .change-state-modal-content select,
+body.dark-mode .bulk-change-state-modal-content input,
+body.dark-mode .bulk-change-state-modal-content select,
+body.dark-mode .delete-cargo-modal-content input,
+body.dark-mode .delete-cargo-modal-content select,
+body.dark-mode .log-modal-content input,
+body.dark-mode .log-modal-content select,
+body.dark-mode .quick-edit-modal-content input,
+body.dark-mode .quick-edit-modal-content select,
+body.dark-mode .package-modal-content input,
+body.dark-mode .package-modal-content select,
+body.dark-mode .package-item-edit-modal-content input,
+body.dark-mode .package-item-edit-modal-content select {
+    border: 1px solid var(--dark-border-color);
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-color);
+}
+
+.edit-cargo-modal-content input:focus,
+.edit-cargo-modal-content select:focus,
+.change-state-modal-content input:focus,
+.change-state-modal-content select:focus,
+.bulk-change-state-modal-content input:focus,
+.bulk-change-state-modal-content select:focus,
+.delete-cargo-modal-content input:focus,
+.delete-cargo-modal-content select:focus,
+.log-modal-content input:focus,
+.log-modal-content select:focus,
+.quick-edit-modal-content input:focus,
+.quick-edit-modal-content select:focus,
+.package-modal-content input:focus,
+.package-modal-content select:focus,
+.package-item-edit-modal-content input:focus,
+.package-item-edit-modal-content select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+body.dark-mode .edit-cargo-modal-content input:focus,
+body.dark-mode .edit-cargo-modal-content select:focus,
+body.dark-mode .change-state-modal-content input:focus,
+body.dark-mode .change-state-modal-content select:focus,
+body.dark-mode .bulk-change-state-modal-content input:focus,
+body.dark-mode .bulk-change-state-modal-content select:focus,
+body.dark-mode .delete-cargo-modal-content input:focus,
+body.dark-mode .delete-cargo-modal-content select:focus,
+body.dark-mode .log-modal-content input:focus,
+body.dark-mode .log-modal-content select:focus,
+body.dark-mode .quick-edit-modal-content input:focus,
+body.dark-mode .quick-edit-modal-content select:focus,
+body.dark-mode .package-modal-content input:focus,
+body.dark-mode .package-modal-content select:focus,
+body.dark-mode .package-item-edit-modal-content input:focus,
+body.dark-mode .package-item-edit-modal-content select:focus {
+    border-color: var(--dark-primary);
+}
+
+.modal-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.modal-btn {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.confirm-btn {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.cancel-btn {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+}
+
+body.dark-mode .confirm-btn {
+    background-color: var(--dark-primary);
+}
+
+body.dark-mode .cancel-btn {
+    background-color: var(--dark-button-bg);
+    color: var(--dark-text-color);
+}
+
+.confirm-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.cancel-btn:hover {
+    background-color: var(--button-hover-bg);
+}
+
+body.dark-mode .confirm-btn:hover {
+    background-color: var(--dark-primary-hover);
+}
+
+body.dark-mode .cancel-btn:hover {
+    background-color: var(--dark-button-hover-bg);
+}
+
+#success-modal {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+#success-icon.fa-check-circle {
+    color: var(--success);
+}
+
+#success-icon.fa-exclamation-circle {
+    color: var(--danger);
+}
+
+body.dark-mode #success-icon.fa-check-circle {
+    color: var(--dark-success);
+}
+
+body.dark-mode #success-icon.fa-exclamation-circle {
+    color: var(--dark-danger);
+}
+
+#success-message {
+    margin-left: 10px;
+    color: var(--text-color);
+}
+
+body.dark-mode #success-message {
+    color: var(--dark-text-color);
+}
+
+#log-content .log {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--log-bg);
+}
+
+body.dark-mode #log-content .log {
+    background-color: var(--dark-log-bg);
+}
+
+.log-entry {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .log-entry {
+    border-bottom-color: var(--dark-border-color);
+}
+
+.log-entry strong {
+    color: var(--text-color);
+}
+
+body.dark-mode .log-entry strong {
+    color: var(--dark-text-color);
+}
+
+.log-entry small {
+    color: var(--text-color);
+}
+
+body.dark-mode .log-entry small {
+    color: var(--dark-text-color);
+}
+
+#package-modal-title {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+body.dark-mode #package-modal-title {
+    color: var(--dark-text-color);
+}
+
+#package-items-container {
+    margin-bottom: 1rem;
+}
+
+.package-item {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 0.8fr 1fr 1fr 0.4fr;
+    gap: 6px;
+    align-items: start;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    margin-bottom: 0.5rem;
+}
+
+body.dark-mode .package-item {
+    border-bottom: 1px solid var(--dark-border-color);
+    background-color: var(--dark-input-bg);
+}
+
+.package-item:last-child {
+    border-bottom: none;
+}
+
+.package-item .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.package-item .field label {
+    font-size: 9px;
+    color: var(--text-color);
+    margin-bottom: 2px;
+    font-weight: 500;
+    text-align: left;
+}
+
+body.dark-mode .package-item .field label {
+    color: var(--dark-text-color);
+}
+
+.package-item input {
+    padding: 4px;
+    font-size: 0.75rem;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s;
+}
+
+body.dark-mode .package-item input {
+    border-color: var(--dark-border-color);
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-color);
+}
+
+.package-item input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+body.dark-mode .package-item input:focus {
+    border-color: var(--dark-primary);
+}
+
+.package-item input:invalid:not(:placeholder-shown) {
+    border-color: var(--danger);
+}
+
+body.dark-mode .package-item input:invalid:not(:placeholder-shown) {
+    border-color: var(--dark-danger);
+}
+
+.package-item .remove-item-btn {
+    cursor: pointer;
+    color: var(--danger);
+    font-size: 1rem;
+    text-align: center;
+    transition: color 0.3s;
+    align-self: center;
+}
+
+body.dark-mode .package-item .remove-item-btn {
+    color: var(--dark-danger);
+}
+
+.package-item .remove-item-btn:hover {
+    color: var(--danger-hover);
+}
+
+body.dark-mode .package-item .remove-item-btn:hover {
+    color: var(--dark-danger-hover);
+}
+
+#add-item-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    background-color: var(--info);
+    color: #fff;
+    display: block;
+    margin: 0 auto 0.75rem;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode #add-item-btn {
+    background-color: var(--dark-info);
+}
+
+#add-item-btn:hover {
+    background-color: var(--info-hover);
+}
+
+body.dark-mode #add-item-btn:hover {
+    background-color: var(--dark-info-hover);
+}
+
+@media (max-width: 768px) {
+    .edit-cargo-modal-content,
+    .change-state-modal-content,
+    .bulk-change-state-modal-content,
+    .delete-cargo-modal-content,
+    .log-modal-content,
+    .quick-edit-modal-content,
+    .package-modal-content,
+    .package-item-edit-modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .package-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .package-item .field {
+        margin-bottom: 0.5rem;
+    }
+
+    .package-item .remove-item-btn {
+        text-align: left;
+        align-self: flex-start;
+    }
+
+    .modal-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+.modal-btn {
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.confirm-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.cancel-btn {
+    background: var(--secondary);
+    color: white;
+}
+
+body.dark-mode .confirm-btn {
+    background: var(--dark-primary);
+}
+
+body.dark-mode .cancel-btn {
+    background: var(--dark-secondary);
+}
+
+.bulk-change-fechaCargo-modal-content,
+.bulk-change-guia-modal-content {
+    background-color: var(--modal-bg);
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    max-width: 80%;
+    max-height: 60vh;
+    overflow-y: auto;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body.dark-mode .bulk-change-fechaCargo-modal-content,
+body.dark-mode .bulk-change-guia-modal-content {
+    background-color: var(--dark-modal-bg);
+    color: var(--dark-text-color);
+}
+
+.bulk-change-fechaCargo-modal-content h3,
+.bulk-change-guia-modal-content h3 {
+    margin: 0 0 1rem;
+    font-size: 11px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+body.dark-mode .bulk-change-fechaCargo-modal-content h3,
+body.dark-mode .bulk-change-guia-modal-content h3 {
+    color: var(--dark-text-color);
+}
+
+.bulk-change-fechaCargo-modal-content label,
+.bulk-change-guia-modal-content label {
+    display: block;
+    margin-top: 8px;
+    color: var(--text-color);
+    font-size: 9px;
+}
+
+body.dark-mode .bulk-change-fechaCargo-modal-content label,
+body.dark-mode .bulk-change-guia-modal-content label {
+    color: var(--dark-text-color);
+}
+
+.bulk-change-fechaCargo-modal-content input,
+.bulk-change-guia-modal-content input {
+    width: 100%;
+    padding: 4px;
+    margin-top: 4px;
+    border: 1px solid var(--border-color);
+    font-size: 11px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+body.dark-mode .bulk-change-fechaCargo-modal-content input,
+body.dark-mode .bulk-change-guia-modal-content input {
+    border: 1px solid var(--dark-border-color);
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-color);
+}
+
+.bulk-change-fechaCargo-modal-content input:focus,
+.bulk-change-guia-modal-content input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+body.dark-mode .bulk-change-fechaCargo-modal-content input:focus,
+body.dark-mode .bulk-change-guia-modal-content input:focus {
+    border-color: var(--dark-primary);
+}

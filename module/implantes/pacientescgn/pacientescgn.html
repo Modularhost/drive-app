@@ -1,0 +1,151 @@
+<div class="pacientesconsignacion-container">
+    <h2>Pacientes en Consignación</h2>
+    <div class="quick-filters">
+        <select id="filter-year"></select>
+        <select id="filter-month"></select>
+        <button id="show-all-btn">Mostrar Todo</button>
+        <button id="massive-state-btn" hidden>Estado Masivo</button>
+        <div id="state-buttons"></div>
+    </div>
+    <hr class="divider">
+    <div class="table-container">
+        <div id="loading-spinner" class="loading-spinner" hidden>
+            <div class="spinner"></div>
+            <span>Cargando...</span>
+        </div>
+        <table id="pacientesconsignacion-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all-checkbox"></th>
+                    <th>Acciones</th>
+                    <th>Fecha de Ingreso <i class="fas fa-filter filter-icon" data-column="fechaIngreso"></i></th>
+                    <th>Modalidad <i class="fas fa-filter filter-icon" data-column="atributo"></i></th>
+                    <th>Previsión <i class="fas fa-filter filter-icon" data-column="prevision"></i></th>
+                    <th>Admisión <i class="fas fa-filter filter-icon" data-column="admision"></i></th>
+                    <th>Nombre del Paciente <i class="fas fa-filter filter-icon" data-column="nombrePaciente"></i></th>
+                    <th>Médico <i class="fas fa-filter filter-icon" data-column="medico"></i></th>
+                    <th>Fecha de Cx <i class="fas fa-filter filter-icon" data-column="fechaCX"></i></th>
+                    <th>Proveedor <i class="fas fa-filter filter-icon" data-column="proveedor"></i></th>
+                    <th>Estado <i class="fas fa-filter filter-icon" data-column="estado"></i></th>
+                    <th>Fecha de Cargo <i class="fas fa-filter filter-icon" data-column="fechaCargo"></i></th>
+                    <th>Total Paciente <i class="fas fa-filter filter-icon" data-column="totalPaciente"></i></th>
+                    <th>Usuario <i class="fas fa-filter filter-icon" data-column="usuario"></i></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <button id="export-excel-btn">Descargar Excel</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+
+    <div id="edit-paciente-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h3>Editar Paciente</h3>
+            <label for="edit-fechaIngreso">Fecha de Ingreso:</label>
+            <input id="edit-fechaIngreso" type="date">
+            <label for="edit-admision">Admisión:</label>
+            <input id="edit-admision" type="text">
+            <label for="edit-nombrePaciente">Nombre Paciente:</label>
+            <input id="edit-nombrePaciente" type="text">
+            <label for="edit-fechaCX">Fecha de Cx:</label>
+            <input id="edit-fechaCX" type="date">
+            <label for="edit-medico">Médico:</label>
+            <input id="edit-medico" type="text">
+            <label for="edit-proveedor">Proveedor:</label>
+            <input id="edit-proveedor" type="text">
+            <label for="edit-prevision">Previsión:</label>
+            <input id="edit-prevision" type="text">
+            <label for="edit-atributo">Modalidad:</label>
+            <input id="edit-atributo" type="text">
+            <label for="edit-estado">Estado:</label>
+            <select id="edit-estado">
+                <option value="Actualizar Precio">Actualizar Precio</option>
+                <option value="Cargado">Cargado</option>
+                <option value="Cargo Pendiente">Cargo Pendiente</option>
+                <option value="Código Pendiente">Código Pendiente</option>
+                <option value="Cotización Pendiente">Cotización Pendiente</option>
+                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+            </select>
+            <label for="edit-fechaCargo">Fecha de Cargo:</label>
+            <input id="edit-fechaCargo" type="date">
+            <label for="edit-totalPaciente">Total Paciente:</label>
+            <input id="edit-totalPaciente" type="text">
+            <div class="modal-buttons">
+                <button id="save-edit-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-edit-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="massive-state-modal" class="modal" hidden>
+        <div class="modal-content small-modal">
+            <h3>Cambiar Estado Masivo</h3>
+            <label for="massive-state-select">Estado:</label>
+            <select id="massive-state-select">
+                <option value="Actualizar Precio">Actualizar Precio</option>
+                <option value="Cargado">Cargado</option>
+                <option value="Cargo Pendiente">Cargo Pendiente</option>
+                <option value="Código Pendiente">Código Pendiente</option>
+                <option value="Cotización Pendiente">Cotización Pendiente</option>
+                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+            </select>
+            <label for="massive-fechaCargo">Fecha de Cargo:</label>
+            <input id="massive-fechaCargo" type="date">
+            <div class="modal-buttons">
+                <button id="save-massive-state-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-massive-state-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="change-state-modal" class="modal" hidden>
+        <div class="modal-content small-modal">
+            <h3>Cambiar Estado</h3>
+            <label for="change-state-select">Estado:</label>
+            <select id="change-state-select">
+                <option value="Actualizar Precio">Actualizar Precio</option>
+                <option value="Cargado">Cargado</option>
+                <option value="Cargo Pendiente">Cargo Pendiente</option>
+                <option value="Código Pendiente">Código Pendiente</option>
+                <option value="Cotización Pendiente">Cotización Pendiente</option>
+                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+            </select>
+            <div class="modal-buttons">
+                <button id="save-state-btn" class="modal-btn confirm-btn">Guardar</button>
+                <button id="cancel-state-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-paciente-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h3>Confirmar Eliminación</h3>
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn" class="modal-btn confirm-btn">Confirmar</button>
+                <button id="cancel-delete-btn" class="modal-btn cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="log-modal" class="modal" hidden>
+        <div class="modal-content">
+            <h3>Historial de Cambios</h3>
+            <div id="log-content"></div>
+            <div class="modal-buttons">
+                <button id="close-log-btn" class="modal-btn cancel-btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" hidden>
+        <div class="modal-content">
+            <p><i id="success-icon" class="fas"></i><span id="success-message"></span></p>
+        </div>
+    </div>
+</div>

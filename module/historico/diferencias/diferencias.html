@@ -1,0 +1,96 @@
+<div class="datos-historico-container">
+    <h2>Diferencias</h2>
+    <div class="divider"></div>
+    <div class="controls-container">
+        <div class="import-export-container">
+            <button id="download-format-btn">Descargar Formato</button>
+            <label for="import-file" class="import-btn">Importar <input type="file" id="import-file" accept=".xlsx"
+                    style="display: none;"></label>
+            <button id="export-excel-btn">Exportar Excel</button>
+        </div>
+        <div class="filters">
+            <label for="year-filter">Año:</label>
+            <select id="year-filter"></select>
+            <label for="month-filter">Mes:</label>
+            <select id="month-filter"></select>
+            <label for="provider-filter">Proveedor:</label>
+            <select id="provider-filter"></select>
+        </div>
+        <div id="empresa-rut-display" class="empresa-rut-display">RUT: -</div>
+    </div>
+    <div class="oc-monto-total" id="oc-monto-total">Total OC_MONTO: 0</div>
+    <div class="table-container">
+        <table id="diferencias-table">
+            <thead>
+                <tr>
+                    <th class="resizeable">ID_PACIENT <i class="fas fa-filter filter-icon" data-column="id_pacient"></i>
+                    </th>
+                    <th class="resizeable">PACIENTE <i class="fas fa-filter filter-icon" data-column="paciente"></i>
+                    </th>
+                    <th class="resizeable">MEDICO <i class="fas fa-filter filter-icon" data-column="medico"></i></th>
+                    <th class="resizeable">FECHA_CIRUGIA <i class="fas fa-filter filter-icon"
+                            data-column="fecha_cirugia"></i></th>
+                    <th class="resizeable">PROVEEDOR <i class="fas fa-filter filter-icon" data-column="proveedor"></i>
+                    </th>
+                    <th class="resizeable">CODIGO_CLINICA <i class="fas fa-filter filter-icon"
+                            data-column="codigo_clinica"></i></th>
+                    <th class="resizeable">CODIGO_PROVEEDOR <i class="fas fa-filter filter-icon"
+                            data-column="codigo_proveedor"></i></th>
+                    <th class="resizeable">CANTIDAD <i class="fas fa-filter filter-icon" data-column="cantidad"></i>
+                    </th>
+                    <th class="resizeable">PRECIO_UNITARIO <i class="fas fa-filter filter-icon"
+                            data-column="precio_unitario"></i></th>
+                    <th class="resizeable">ATRIBUTO <i class="fas fa-filter filter-icon" data-column="atributo"></i>
+                    </th>
+                    <th class="resizeable">OC <i class="fas fa-filter filter-icon" data-column="oc"></i></th>
+                    <th class="resizeable">OC_MONTO <i class="fas fa-filter filter-icon" data-column="oc_monto"></i>
+                    </th>
+                    <th class="resizeable">ESTADO <i class="fas fa-filter filter-icon" data-column="estado"></i></th>
+                    <th class="resizeable">FECHA_RECEPCION <i class="fas fa-filter filter-icon"
+                            data-column="fecha_recepcion"></i></th>
+                    <th class="resizeable">FECHA_CARGO <i class="fas fa-filter filter-icon"
+                            data-column="fecha_cargo"></i></th>
+                    <th class="resizeable">NUMERO_GUIA <i class="fas fa-filter filter-icon"
+                            data-column="numero_guia"></i></th>
+                    <th class="resizeable">NUMERO_FACTURA <i class="fas fa-filter filter-icon"
+                            data-column="numero_factura"></i></th>
+                    <th class="resizeable">FECHA_EMISION <i class="fas fa-filter filter-icon"
+                            data-column="fecha_emision"></i></th>
+                    <th class="resizeable">FECHA_INGRESO <i class="fas fa-filter filter-icon"
+                            data-column="fecha_ingreso"></i></th>
+                    <th class="resizeable">LOTE <i class="fas fa-filter filter-icon" data-column="lote"></i></th>
+                    <th class="resizeable">FECHA_VENCIMIENTO <i class="fas fa-filter filter-icon"
+                            data-column="fecha_vencimiento"></i></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <button id="prev-btn">Anterior</button>
+        <span id="page-info"></span>
+        <button id="next-btn">Siguiente</button>
+        <span id="total-records"></span>
+    </div>
+    <div id="loading-modal" class="modal">
+        <div class="modal-content">
+            <div class="spinner-container">
+                <div class="loader"></div>
+                <span id="loading-progress" class="spinner-text">0%</span>
+            </div>
+        </div>
+    </div>
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="success-message-container">
+                <i id="success-icon" class="fas"></i>
+                <p id="success-message" class="success-message"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="diferencias.js"></script>

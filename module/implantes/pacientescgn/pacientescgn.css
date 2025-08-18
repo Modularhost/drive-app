@@ -1,0 +1,795 @@
+.pacientesconsignacion-container {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #e2e8f0;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+body.dark-mode .pacientesconsignacion-container {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+.pacientesconsignacion-container h2 {
+    color: #2d3748;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+body.dark-mode .pacientesconsignacion-container h2 {
+    color: #e2e8f0;
+}
+
+.quick-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.quick-filters select,
+.quick-filters button {
+    padding: 4px 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    background-color: #e2e8f0;
+    color: #2d3748;
+}
+
+body.dark-mode .quick-filters select,
+body.dark-mode .quick-filters button {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.quick-filters select:focus,
+.quick-filters button:focus {
+    outline: none;
+    border: 1px solid #3182ce;
+}
+
+body.dark-mode .quick-filters select:focus,
+body.dark-mode .quick-filters button:focus {
+    border-color: #63b3ed;
+}
+
+.quick-filters button:hover {
+    background-color: #cbd5e0;
+}
+
+body.dark-mode .quick-filters button:hover {
+    background-color: #718096;
+}
+
+#massive-state-btn {
+    background-color: #3182ce;
+    color: #fff;
+}
+
+body.dark-mode #massive-state-btn {
+    background-color: #63b3ed;
+}
+
+#massive-state-btn:hover {
+    background-color: #2b6cb0;
+}
+
+body.dark-mode #massive-state-btn:hover {
+    background-color: #4299e1;
+}
+
+#state-buttons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.state-button {
+    padding: 4px 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    color: #2d3748;
+    transition: opacity 0.2s ease;
+}
+
+body.dark-mode .state-button {
+    color: #e2e8f0;
+}
+
+.state-button.active {
+    opacity: 0.5;
+}
+
+.state-button[data-state="cargado"] {
+    background-color: #C6F6D5;
+}
+
+body.dark-mode .state-button[data-state="cargado"] {
+    background-color: #07b44a;
+}
+
+.state-button[data-state="cargo-pendiente"] {
+    background-color: #FED7D7;
+}
+
+body.dark-mode .state-button[data-state="cargo-pendiente"] {
+    background-color: #FC8181;
+}
+
+.state-button[data-state="código-pendiente"] {
+    background-color: #FC8181;
+}
+
+body.dark-mode .state-button[data-state="código-pendiente"] {
+    background-color: #F56565;
+}
+
+.state-button[data-state="cotización-pendiente"] {
+    background-color: #E53E3E;
+}
+
+body.dark-mode .state-button[data-state="cotización-pendiente"] {
+    background-color: #C53030;
+}
+
+.state-button[data-state="cuenta-cerrada"] {
+    background-color: #E2E8F0;
+}
+
+body.dark-mode .state-button[data-state="cuenta-cerrada"] {
+    background-color: #A0AEC0;
+}
+
+.state-button[data-state="actualizar-precio"] {
+    background-color: #F7FAFC;
+}
+
+body.dark-mode .state-button[data-state="actualizar-precio"] {
+    background-color: #3C4B64;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 8px 0;
+}
+
+body.dark-mode .divider {
+    border-top: 1px solid #4a5568;
+}
+
+.table-container {
+    margin-top: 8px;
+    height: 750px;
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+    position: relative;
+}
+
+body.dark-mode .table-container {
+    border-color: #4a5568;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+}
+
+body.dark-mode .loading-spinner {
+    background-color: rgba(45, 55, 72, 0.8);
+}
+
+.loading-spinner .spinner {
+    border: 3px solid #e2e8f0;
+    border-top: 3px solid #3182ce;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+body.dark-mode .loading-spinner .spinner {
+    border: 3px solid #4a5568;
+    border-top: 3px solid #63b3ed;
+}
+
+.loading-spinner span {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #2d3748;
+}
+
+body.dark-mode .loading-spinner span {
+    color: #e2e8f0;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#pacientesconsignacion-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    border: 1px solid #e2e8f0;
+    background-color: #fff;
+}
+
+body.dark-mode #pacientesconsignacion-table {
+    border-color: #4a5568;
+    background-color: #2d3748;
+}
+
+#pacientesconsignacion-table th,
+#pacientesconsignacion-table td {
+    padding: 2px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0; /* Líneas verticales añadidas */
+    color: #2d3748;
+    position: relative;
+    height: 15px;
+    line-height: 15px;
+}
+
+body.dark-mode #pacientesconsignacion-table th,
+body.dark-mode #pacientesconsignacion-table td {
+    border-bottom: 1px solid #4a5568;
+    border-right: 1px solid #4a5568; /* Líneas verticales para modo oscuro */
+    color: #e2e8f0;
+}
+
+/* Eliminar el borde derecho de la última celda en cada fila */
+#pacientesconsignacion-table th:last-child,
+#pacientesconsignacion-table td:last-child {
+    border-right: none;
+}
+
+#pacientesconsignacion-table th {
+    background-color: #edf2f7;
+    font-weight: bold;
+    color: #2d3748;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+body.dark-mode #pacientesconsignacion-table th {
+    background-color: #3c4b64;
+    color: #e2e8f0;
+}
+
+#pacientesconsignacion-table tr {
+    height: 15px;
+}
+
+#pacientesconsignacion-table tr.state-cargo-pendiente {
+    background-color: #FED7D7;
+}
+
+body.dark-mode #pacientesconsignacion-table tr.state-cargo-pendiente {
+    background-color: #FC8181;
+}
+
+#pacientesconsignacion-table tr.state-código-pendiente {
+    background-color: #FC8181;
+}
+
+body.dark-mode #pacientesconsignacion-table tr.state-código-pendiente {
+    background-color: #F56565;
+}
+
+#pacientesconsignacion-table tr.state-cotización-pendiente {
+    background-color: #E53E3E;
+}
+
+body.dark-mode #pacientesconsignacion-table tr.state-cotización-pendiente {
+    background-color: #C53030;
+}
+
+#pacientesconsignacion-table tr.state-cuenta-cerrada {
+    background-color: #E2E8F0;
+}
+
+body.dark-mode #pacientesconsignacion-table tr.state-cuenta-cerrada {
+    background-color: #A0AEC0;
+}
+
+#pacientesconsignacion-table tr.state-actualizar-precio {
+    background-color: #F7FAFC;
+}
+
+body.dark-mode #pacientesconsignacion-table tr.state-actualizar-precio {
+    background-color: #3C4B64;
+}
+
+#pacientesconsignacion-table tr:hover {
+    background-color: #f7fafc;
+}
+
+body.dark-mode #pacientesconsignacion-table tr:hover {
+    background-color: #3c4b64;
+}
+
+#pacientesconsignacion-table .fas {
+    font-size: 12px;
+}
+
+#pacientesconsignacion-table .action-icon {
+    cursor: pointer;
+    margin: 0 3px;
+}
+
+#pacientesconsignacion-table .fa-edit {
+    color: #3182ce;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-edit {
+    color: #63b3ed;
+}
+
+#pacientesconsignacion-table .fa-trash {
+    color: #f56565;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-trash {
+    color: #f56565;
+}
+
+#pacientesconsignacion-table .fa-eye {
+    color: #17a2b8;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-eye {
+    color: #4dd0e1;
+}
+
+#pacientesconsignacion-table .fa-history {
+    color: #6c757d;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-history {
+    color: #a0aec0;
+}
+
+#pacientesconsignacion-table .fa-edit:hover {
+    color: #2b6cb0;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-edit:hover {
+    color: #4299e1;
+}
+
+#pacientesconsignacion-table .fa-trash:hover {
+    color: #e53e3e;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-trash:hover {
+    color: #e53e3e;
+}
+
+#pacientesconsignacion-table .fa-eye:hover {
+    color: #117a8b;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-eye:hover {
+    color: #26c6da;
+}
+
+#pacientesconsignacion-table .fa-history:hover {
+    color: #5a6268;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-history:hover {
+    color: #718096;
+}
+
+#pacientesconsignacion-table .fa-filter,
+#pacientesconsignacion-table .fa-filter-circle-xmark {
+    color: #6c757d;
+    cursor: pointer;
+    margin-left: 3px;
+    font-size: 10px;
+    transition: color 0.2s ease;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-filter,
+body.dark-mode #pacientesconsignacion-table .fa-filter-circle-xmark {
+    color: #a0aec0;
+}
+
+#pacientesconsignacion-table .fa-filter:hover,
+#pacientesconsignacion-table .fa-filter-circle-xmark:hover,
+#pacientesconsignacion-table .fa-filter.active,
+#pacientesconsignacion-table .fa-filter-circle-xmark.active {
+    color: #3182ce;
+}
+
+body.dark-mode #pacientesconsignacion-table .fa-filter:hover,
+body.dark-mode #pacientesconsignacion-table .fa-filter-circle-xmark:hover,
+body.dark-mode #pacientesconsignacion-table .fa-filter.active,
+body.dark-mode #pacientesconsignacion-table .fa-filter-circle-xmark.active {
+    color: #63b3ed;
+}
+
+.filter-input-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 4px;
+    margin-top: 2px;
+}
+
+body.dark-mode .filter-input-container {
+    background-color: #3c4b64;
+    border: 1px solid #4a5568;
+}
+
+.filter-input-container input {
+    width: 100%;
+    padding: 2px;
+    border: none;
+    font-size: 11px;
+    background-color: transparent;
+    color: #2d3748;
+    box-sizing: border-box;
+}
+
+body.dark-mode .filter-input-container input {
+    color: #e2e8f0;
+}
+
+.filter-input-container input:focus {
+    outline: none;
+    border-bottom: 1px solid #3182ce;
+}
+
+body.dark-mode .filter-input-container input:focus {
+    border-bottom: 1px solid #63b3ed;
+}
+
+.pagination-container {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#prev-btn,
+#next-btn,
+#export-excel-btn {
+    padding: 4px 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#prev-btn,
+#next-btn {
+    background-color: #3182ce;
+    color: #fff;
+}
+
+#export-excel-btn {
+    background-color: #38a169;
+    color: #fff;
+}
+
+body.dark-mode #prev-btn,
+body.dark-mode #next-btn {
+    background-color: #63b3ed;
+}
+
+body.dark-mode #export-excel-btn {
+    background-color: #38a169;
+}
+
+#prev-btn:disabled,
+#next-btn:disabled {
+    background-color: #e2e8f0;
+    cursor: not-allowed;
+}
+
+body.dark-mode #prev-btn:disabled,
+body.dark-mode #next-btn:disabled {
+    background-color: #4a5568;
+}
+
+#prev-btn:hover:not(:disabled),
+#next-btn:hover:not(:disabled) {
+    background-color: #2b6cb0;
+}
+
+#export-excel-btn:hover {
+    background-color: #2f855a;
+}
+
+body.dark-mode #prev-btn:hover:not(:disabled),
+body.dark-mode #next-btn:hover:not(:disabled) {
+    background-color: #4299e1;
+}
+
+body.dark-mode #export-excel-btn:hover {
+    background-color: #2f855a;
+}
+
+#page-info,
+#total-records {
+    font-size: 12px;
+    color: #2d3748;
+}
+
+body.dark-mode #page-info,
+body.dark-mode #total-records {
+    color: #e2e8f0;
+}
+
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal:not([hidden]) {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 15px;
+    width: 350px;
+    max-width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .modal-content {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.modal-content.small-modal {
+    width: 250px;
+    padding: 10px;
+}
+
+body.dark-mode .modal-content.small-modal {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #2d3748;
+    font-size: 14px;
+}
+
+body.dark-mode .modal-content h3 {
+    color: #e2e8f0;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 8px;
+    color: #2d3748;
+    font-size: 12px;
+}
+
+body.dark-mode .modal-content label {
+    color: #e2e8f0;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    border: 1px solid #e2e8f0;
+    font-size: 12px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #2d3748;
+}
+
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content select {
+    border: 1px solid #4a5568;
+    background-color: #3c4b64;
+    color: #e2e8f0;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    outline: none;
+    border-color: #3182ce;
+}
+
+body.dark-mode .modal-content input:focus,
+body.dark-mode .modal-content select:focus {
+    border-color: #63b3ed;
+}
+
+.modal-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.modal-btn {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.confirm-btn {
+    background-color: #3182ce;
+    color: #fff;
+}
+
+.cancel-btn {
+    background-color: #e2e8f0;
+    color: #2d3748;
+}
+
+body.dark-mode .confirm-btn {
+    background-color: #63b3ed;
+}
+
+body.dark-mode .cancel-btn {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.confirm-btn:hover {
+    background-color: #2b6cb0;
+}
+
+.cancel-btn:hover {
+    background-color: #cbd5e0;
+}
+
+body.dark-mode .confirm-btn:hover {
+    background-color: #4299e1;
+}
+
+body.dark-mode .cancel-btn:hover {
+    background-color: #718096;
+}
+
+#success-modal {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+#success-modal.success .modal-content {
+    background-color: #e6fffa;
+    border: 2px solid #38a169;
+    width: 250px;
+    padding: 8px;
+}
+
+body.dark-mode #success-modal.success .modal-content {
+    background-color: #2f855a;
+    border: 2px solid #38a169;
+}
+
+#success-modal.error .modal-content {
+    background-color: #fefcbf;
+    border: 2px solid #f56565;
+    width: 250px;
+    padding: 8px;
+}
+
+body.dark-mode #success-modal.error .modal-content {
+    background-color: #742a2a;
+    border: 2px solid #f56565;
+}
+
+#success-icon.fa-check-circle {
+    color: #38a169;
+}
+
+#success-icon.fa-exclamation-circle {
+    color: #f56565;
+}
+
+body.dark-mode #success-icon.fa-check-circle {
+    color: #38a169;
+}
+
+body.dark-mode #success-icon.fa-exclamation-circle {
+    color: #f56565;
+}
+
+#success-message {
+    margin-left: 8px;
+    color: #2d3748;
+    font-size: 12px;
+}
+
+body.dark-mode #success-message {
+    color: #e2e8f0;
+}
+
+#log-content {
+    max-height: 250px;
+    overflow-y: auto;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #f7fafc;
+}
+
+body.dark-mode #log-content {
+    background-color: #3c4b64;
+}
+
+.log-entry {
+    margin-bottom: 8px;
+    padding: 6px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+body.dark-mode .log-entry {
+    border-bottom: 1px solid #4a5568;
+}
+
+.log-entry strong {
+    color: #2d3748;
+    font-size: 12px;
+}
+
+body.dark-mode .log-entry strong {
+    color: #e2e8f0;
+}
+
+.log-entry small {
+    color: #718096;
+    font-size: 11px;
+}
+
+body.dark-mode .log-entry small {
+    color: #a0aec0;
+}

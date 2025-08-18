@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Referencias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="referencias-container">
+        <h2>Base de Referencias</h2>
+        <hr class="divider">
+
+        <!-- Reemplazamos el formulario con los botones de importación -->
+        <div class="import-container">
+            <div class="import-buttons">
+                <button id="download-template-btn" class="import-btn download-btn">
+                    <i class="fas fa-download"></i>
+                    Descargar Formato
+                </button>
+                <button id="import-file-btn" class="import-btn upload-btn">
+                    <i class="fas fa-upload"></i>
+                    Importar Archivo
+                </button>
+                <input type="file" id="file-input" accept=".xlsx,.xls,.csv" style="display: none;">
+            </div>
+            <div class="import-info">
+                <p><i class="fas fa-info-circle"></i> Descarga el formato Excel para importar referencias masivamente</p>
+            </div>
+        </div>
+
+        <!-- Modales existentes -->
+        <div id="register-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="spinner-container">
+                    <span class="loader"></span>
+                    <span class="spinner-text">Procesando... <span id="register-progress">0%</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="success-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="success-message-container">
+                    <i id="success-icon" class="fas"></i>
+                    <div id="success-message" class="success-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="edit-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Editar Referencia</h2>
+                <div class="edit-form-container">
+                    <div class="form-row form-row-4">
+                        <div class="form-group">
+                            <label for="edit-referencia">Referencia</label>
+                            <input type="text" id="edit-referencia" class="wide-input" placeholder="Ingrese la referencia"
+                                autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-descripcion">Descripción</label>
+                            <input type="text" id="edit-descripcion" class="wide-input" placeholder="Ingrese la descripción"
+                                autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-precio">Precio</label>
+                            <input type="text" id="edit-precio" class="wide-input" placeholder="0" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-codigo">Código</label>
+                            <input type="text" id="edit-codigo" class="wide-input" placeholder="Código" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-row form-row-4">
+                        <div class="form-group">
+                            <label for="edit-proveedor">Proveedor</label>
+                            <div class="input-with-icon">
+                                <input type="text" id="edit-proveedor" class="wide-input" placeholder="Ingrese el proveedor"
+                                    autocomplete="off">
+                                <i class="fas fa-list icon-list" id="edit-proveedor-search"></i>
+                                <ul class="suggestions-list" id="edit-proveedor-list"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-modalidad">Modalidad</label>
+                            <select id="edit-modalidad" class="wide-input">
+                                <option value="Cotización">Cotización</option>
+                                <option value="Consignación">Consignación</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-categoria">Categoría</label>
+                            <select id="edit-categoria" class="wide-input">
+                                <option value="Implantes">Implantes</option>
+                                <option value="Insumos">Insumos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-estado">Estado</label>
+                            <select id="edit-estado" class="wide-input">
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row form-row-4">
+                        <div class="form-group form-group-empty"></div>
+                        <div class="form-group form-group-empty"></div>
+                        <div class="form-group form-group-empty"></div>
+                        <div class="form-group form-group-button">
+                            <button id="save-edit-btn">Guardar</button>
+                            <button id="cancel-edit-btn">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="spinner-container">
+                    <span class="loader"></span>
+                    <span class="spinner-text">Cargando referencias... <span id="loading-progress">0%</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="delete-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <p id="delete-message"></p>
+                <div class="modal-buttons">
+                    <button id="confirm-delete-btn">Sí</button>
+                    <button id="cancel-delete-btn">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="log-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Historial</h2>
+                <div class="log-content" id="log-content"></div>
+                <div class="modal-buttons">
+                    <button id="close-log-btn">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para mostrar resultados de importación -->
+        <div id="import-results-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Resultados de Importación</h2>
+                <div class="import-results-content" id="import-results-content"></div>
+                <div class="modal-buttons">
+                    <button id="close-import-results-btn">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="referencias-table">
+                <thead>
+                    <tr>
+                        <th>ID <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="referenciaId"></i></th>
+                        <th>Acciones</th>
+                        <th>Referencia <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="referencia"></i></th>
+                        <th>Descripción <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="descripcion"></i></th>
+                        <th>Precio <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="precio"></i></th>
+                        <th>Código <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="codigo"></i></th>
+                        <th>Proveedor <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="proveedor"></i></th>
+                        <th>Modalidad <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="modalidad"></i></th>
+                        <th>Categoría <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="categoria"></i></th>
+                        <th>Estado <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="estado"></i></th>
+                        <th>Fecha Creación <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="fechaCreacion"></i></th>
+                        <th>Usuario <div class="resize-handle"></div><i class="fas fa-bars filter-icon" data-column="usuario"></i></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="pagination-container">
+            <button id="prev-btn" disabled>Anterior</button>
+            <button id="next-btn">Siguiente</button>
+            <button id="export-excel-btn">Descargar Excel</button>
+            <button id="clear-filters-btn">Limpiar Filtros</button>
+            <span id="page-info">Página 1 de 1</span>
+            <span id="total-records">Total de registros: 0</span>
+        </div>
+    </div>
+    <script type="module" src="base.js"></script>
+</body>
+</html>

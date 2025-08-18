@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pacientes Implantes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="referencias-container">
+        <h2>Gestión de Pacientes Implantes</h2>
+        <hr class="divider">
+        <div class="form-container">
+            <div class="filter-container-main">
+                <div class="form-group">
+                    <label for="filter-year">Año</label>
+                    <select id="filter-year" autocomplete="off">
+                        <option value="all">Todos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="filter-month">Mes</label>
+                    <select id="filter-month" autocomplete="off">
+                        <option value="" disabled selected>Seleccione un mes</option>
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                </div>
+                <div class="estado-buttons" id="estado-buttons"></div>
+                <div class="form-group">
+                    <button id="download-template-btn">Descargar Plantilla</button>
+                </div>
+                <div class="form-group">
+                    <label for="import-file">Importar CSV</label>
+                    <input type="file" id="import-file" accept=".csv" style="display: none;">
+                    <button id="import-btn">Importar</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="implantes-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select-all-checkbox"></th>
+                        <th>Fecha Ingreso<div class="resize-handle"></div><svg class="filter-icon" data-column="1" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Atributo<div class="resize-handle"></div><svg class="filter-icon" data-column="2" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Previsión<div class="resize-handle"></div><svg class="filter-icon" data-column="3" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Convenio<div class="resize-handle"></div><svg class="filter-icon" data-column="4" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Admisión<div class="resize-handle"></div><svg class="filter-icon" data-column="5" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Nombre Paciente<div class="resize-handle"></div><svg class="filter-icon" data-column="6" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Médico<div class="resize-handle"></div><svg class="filter-icon" data-column="7" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Fecha CX<div class="resize-handle"></div><svg class="filter-icon" data-column="8" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Proveedor<div class="resize-handle"></div><svg class="filter-icon" data-column="9" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Estado<div class="resize-handle"></div><svg class="filter-icon" data-column="10" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Fecha Cargo<div class="resize-handle"></div><svg class="filter-icon" data-column="11" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Informe<div class="resize-handle"></div><svg class="filter-icon" data-column="12" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Total Cotización<div class="resize-handle"></div><svg class="filter-icon" data-column="13" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                        <th>Acciones<div class="resize-handle"></div><svg class="filter-icon" data-column="14" viewBox="0 0 24 24">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+                            </svg></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <button id="prev-page-btn" disabled>Anterior</button>
+            <span id="page-info">Página 1 de 1</span>
+            <button id="next-page-btn" disabled>Siguiente</button>
+        </div>
+        <div id="message-container"></div>
+        <div id="loading-modal" class="modal">
+            <div class="modal-content">
+                <div class="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        </div>
+        <div id="edit-modal" class="modal">
+            <div class="modal-content">
+                <h2>Editar Implante</h2>
+                <div class="form-container">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-fecha-ingreso">Fecha de Ingreso</label>
+                            <input type="date" id="edit-fecha-ingreso" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-atributo">Atributo</label>
+                            <input type="text" id="edit-atributo" value="Implantes" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-prevision">Previsión</label>
+                            <input type="text" id="edit-prevision" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-convenio">Convenio</label>
+                            <input type="text" id="edit-convenio" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-admisión">Admisión</label>
+                            <input type="text" id="edit-admisión" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-nombrePaciente">Nombre Paciente</label>
+                            <input type="text" id="edit-nombrePaciente" autocomplete="off">
+                        </div>
+                        <div class="form-group input-with-icon">
+                            <label for="edit-medico">Médico</label>
+                            <input type="text" id="edit-medico" autocomplete="off">
+                            <i class="fas fa-list" id="edit-medico-search"></i>
+                            <ul class="suggestions-list" id="edit-medico-list"></ul>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-fechaCX">Fecha CX</label>
+                            <input type="date" id="edit-fechaCX" autocomplete="off">
+                        </div>
+                        <div class="form-group input-with-icon">
+                            <label for="edit-proveedor">Proveedor</label>
+                            <input type="text" id="edit-proveedor" autocomplete="off">
+                            <i class="fas fa-list" id="edit-proveedor-search"></i>
+                            <ul class="suggestions-list" id="edit-proveedor-list"></ul>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-estado">Estado</label>
+                            <select id="edit-estado" autocomplete="off">
+                                <option value="Agendando">Agendando</option>
+                                <option value="Cargado">Cargado</option>
+                                <option value="Esperando Cotización">Esperando Cotización</option>
+                                <option value="Pendiente el Código">Pendiente el Código</option>
+                                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                                <option value="Pendiente Cargo">Pendiente Cargo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-fecha-cargo">Fecha Cargo</label>
+                            <input type="date" id="edit-fecha-cargo" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-informe">Informe</label>
+                            <select id="edit-informe" autocomplete="off">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="Sí">Sí</option>
+                                <option value="No">No</option>
+                                <option value="Consignado">Consignado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-total-cotizacion">Total Cotización</label>
+                            <input type="text" id="edit-total-cotizacion" value="0" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button id="save-edit-btn">Guardar</button>
+                        <button id="cancel-edit-btn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <h2>Eliminar Implante</h2>
+                <p id="delete-message"></p>
+                <div class="modal-buttons">
+                    <button id="confirm-delete-btn">Confirmar</button>
+                    <button id="cancel-delete-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="log-modal" class="modal">
+            <div class="modal-content">
+                <h2>Historial de Cambios</h2>
+                <div id="log-content"></div>
+                <div class="modal-buttons">
+                    <button id="close-log-btn">Cerrar</button>
+                </div>
+            </div>
+        </div>
+        <div id="mass-status-modal" class="modal">
+            <div class="modal-content">
+                <h3>Cambiar Estado Masivo</h3>
+                <select id="mass-status-select" autocomplete="off">
+                    <option value="Agendando">Agendando</option>
+                    <option value="Cargado">Cargado</option>
+                    <option value="Esperando Cotización">Esperando Cotización</option>
+                    <option value="Pendiente el Código">Pendiente el Código</option>
+                    <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                    <option value="Pendiente Cargo">Pendiente Cargo</option>
+                </select>
+                <div class="modal-buttons">
+                    <button id="confirm-mass-status-btn">Confirmar</button>
+                    <button id="cancel-mass-status-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="single-status-modal" class="modal">
+            <div class="modal-content">
+                <h3>Cambiar Estado</h3>
+                <select id="single-status-select" autocomplete="off">
+                    <option value="Agendando">Agendando</option>
+                    <option value="Cargado">Cargado</option>
+                    <option value="Esperando Cotización">Esperando Cotización</option>
+                    <option value="Pendiente el Código">Pendiente el Código</option>
+                    <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                    <option value="Pendiente Cargo">Pendiente Cargo</option>
+                </select>
+                <div class="modal-buttons">
+                    <button id="confirm-single-status-btn">Confirmar</button>
+                    <button id="cancel-single-status-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div id="single-informe-modal" class="modal">
+            <div class="modal-content">
+                <h3>Cambiar Informe</h3>
+                <select id="single-informe-select" autocomplete="off">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                    <option value="Consignado">Consignado</option>
+                </select>
+                <div class="modal-buttons">
+                    <button id="confirm-single-informe-btn">Confirmar</button>
+                    <button id="cancel-single-informe-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

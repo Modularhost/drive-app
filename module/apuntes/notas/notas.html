@@ -1,0 +1,59 @@
+<div class="notas-container">
+    <h2>Notas</h2>
+    <div class="tabs-container">
+        <button id="crear-nota-btn" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Crear Nota
+        </button>
+    </div>
+    <div class="divider"></div>
+    <div class="notas-list-container">
+        <ul id="notas-list" class="notas-list"></ul>
+    </div>
+</div>
+
+<div id="nota-modal" class="modal" style="display: none;">
+    <div class="edit-modal-content">
+        <h2 id="nota-modal-title">Crear Nueva Nota</h2>
+        <div class="edit-form-container">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nota-titulo">Título</label>
+                    <input type="text" id="nota-titulo" class="wide-input" placeholder="Ingrese el título de la nota"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nota-contenido">Contenido</label>
+                    <textarea id="nota-contenido" class="wide-input" rows="10" placeholder="Escriba su nota aquí"
+                        required></textarea>
+                </div>
+            </div>
+            <div class="form-row form-group-button">
+                <button id="save-nota-btn" class="btn btn-primary">Guardar</button>
+                <button id="cancel-nota-btn" class="btn btn-secondary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="delete-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <p id="delete-message">¿Estás seguro de que deseas eliminar esta nota?</p>
+        <div class="modal-buttons">
+            <button id="confirm-delete-btn" class="btn btn-danger">Eliminar</button>
+            <button id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="success-modal" class="success-modal">
+    <div class="modal-content">
+        <div class="success-message-container">
+            <i id="success-icon" class="fas"></i>
+            <span class="success-message"></span>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="notas.js"></script>

@@ -1,0 +1,45 @@
+<div class="guias-container">
+    <h2>Guías</h2>
+    <div class="form-container">
+        <form id="guia-form">
+            <div class="form-group">
+                <label for="folio">Folio</label>
+                <input type="text" id="folio" name="folio" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha-guia">Fecha de Guía</label>
+                <input type="date" id="fecha-guia" name="fechaGuia" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="guia-despacho">Guía Despacho</label>
+                <input type="text" id="guia-despacho" name="guiaDespacho" class="form-input" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="form-btn save">Guardar</button>
+                <button type="button" class="form-btn cancel">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <hr class="divider">
+    <div class="table-container">
+        <table id="guias-table">
+            <thead>
+                <tr>
+                    <th>Folio</th>
+                    <th>Fecha de Guía</th>
+                    <th>Guía Despacho</th>
+                    <th>Estado</th>
+                    <th class="admin-only">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="guia-list"></tbody>
+        </table>
+    </div>
+</div>
+<div id="success-modal" hidden>
+    <div class="modal-content small-modal">
+        <i id="success-icon" class="fas fa-check-circle"></i>
+        <span id="success-message"></span>
+    </div>
+</div>
+<script type="module" src="guias.js"></script>
