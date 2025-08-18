@@ -1634,3 +1634,4 @@ try {
     showMessage(`Error en la inicialización: ${error.message}`, 'error');
 
 }
+
