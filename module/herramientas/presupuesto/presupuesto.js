@@ -21,8 +21,10 @@ const firebaseConfig = {
 let app;
 if (!getApps().length) {
     app = initializeApp(firebaseConfig);
+    console.log('Firebase inicializado correctamente');
 } else {
     app = getApp();
+    console.log('Firebase ya estaba inicializado');
 }
 
 const storage = getStorage(app);
