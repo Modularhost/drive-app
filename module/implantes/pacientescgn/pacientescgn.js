@@ -98,7 +98,7 @@ try {
     let currentStateChangeId = null;
     let pacientes = [];
     let currentPage = 1;
-    const recordsPerPage = 50;
+    const recordsPerPage = 100;
     let filters = {};
     let quickFilters = { year: new Date().getFullYear().toString(), month: (new Date().getMonth() + 1).toString().padStart(2, '0'), state: null };
     let selectedPacientes = new Set();
@@ -118,7 +118,7 @@ try {
             hour: '2-digit',
             minute: '2-digit',
             hour12: false,
-            timeZone: 'UTC' // Forzar UTC
+            timeZone: 'UTC'
         });
     }
 
@@ -170,7 +170,6 @@ try {
             console.error('Modal no encontrado en el DOM');
             return;
         }
-        console.log(`Mostrando modal: ${modal.id}`);
         modal.style.display = 'flex';
         modal.removeAttribute('hidden');
         modal.style.visibility = 'visible';
@@ -182,7 +181,6 @@ try {
             console.error('Modal no encontrado en el DOM');
             return;
         }
-        console.log(`Ocultando modal: ${modal.id}`);
         modal.style.display = 'none';
         modal.setAttribute('hidden', true);
         modal.style.visibility = 'hidden';
@@ -291,10 +289,9 @@ try {
     }
 
     function applyQuickFilters(data) {
-    console.log('Aplicando filtros rápidos:', quickFilters); // Agrega esto
     return data.filter(item => {
         if (!item.fechaCX) {
-            console.warn('Registro sin fechaCX:', item); // Agrega esto
+            console.warn('Registro sin fechaCX:', item); 
             return false;
         }
         let fechaCX;
@@ -306,7 +303,7 @@ try {
             fechaCX = item.fechaCX;
         }
         if (!fechaCX || isNaN(fechaCX)) {
-            console.warn('FechaCX inválida:', item.fechaCX); // Agrega esto
+            console.warn('FechaCX inválida:', item.fechaCX); 
             return false;
         }
 
@@ -439,7 +436,6 @@ try {
 
         showSpinner();
 
-        console.log('Cargando documentos de pacientesconsignacion');
         const pacientesCollection = collection(db, 'pacientesconsignacion');
         const q = query(
             pacientesCollection,
@@ -448,7 +444,6 @@ try {
             orderBy('proveedor', 'asc')
         );
         const querySnapshot = await getDocs(q);
-        console.log('Documentos recuperados:', querySnapshot.size);
         pacientesTableBody.innerHTML = '';
         pacientes = [];
         selectedPacientes.clear();
@@ -487,14 +482,11 @@ try {
         let filteredPacientes = applyQuickFilters(pacientes);
         filteredPacientes = applyFilters(filteredPacientes);
 
-        console.log('Registros después de filtrar:', filteredPacientes.length);
         const startIndex = (currentPage - 1) * recordsPerPage;
         const endIndex = startIndex + recordsPerPage;
         const paginatedPacientes = filteredPacientes.slice(startIndex, endIndex);
-        console.log('Registros paginados:', paginatedPacientes.length);
 
         paginatedPacientes.forEach(paciente => {
-            console.log('Renderizando paciente:', paciente);
             const tr = document.createElement('tr');
             const estado = paciente.estado || '';
             const estadoClass = estado ? `state-${estado.toLowerCase().replace(/\s+/g, '-')}` : '';
@@ -632,12 +624,11 @@ try {
             showSuccessMessage('Error: No se pudo abrir el modal de estado masivo', false);
             return;
         }
-        console.log('Abriendo modal de estado masivo');
         massiveStateSelect.value = 'Actualizar Precio';
         const today = new Date().toISOString().split('T')[0];
         massiveFechaCargoInput.value = today;
         showModal(massiveStateModal);
-        if (e) e.stopPropagation(); // Detener propagación para evitar cierre inmediato
+        if (e) e.stopPropagation(); 
     }
 
     function openDeleteModal(paciente) {
@@ -806,17 +797,14 @@ try {
             return;
         }
 
-        console.log('Inicializando módulo pacientesconsignacion');
 
         try {
             setupFilters();
             setupQuickFilters();
 
             if (massiveStateBtn) {
-                console.log('Configurando evento click para massive-state-btn');
                 massiveStateBtn.addEventListener('click', (e) => {
-                    console.log('Clic detectado en botón Estado Masivo');
-                    openMassiveStateModal(e); // Pasar el evento para detener propagación
+                    openMassiveStateModal(e); 
                 });
             } else {
                 console.error('Botón massive-state-btn no encontrado en el DOM');
@@ -845,7 +833,6 @@ try {
 
             if (saveMassiveStateBtn) {
                 saveMassiveStateBtn.addEventListener('click', async () => {
-                    console.log('Clic en Guardar estado masivo');
                     const estado = massiveStateSelect?.value || 'Actualizar Precio';
                     const fechaCargo = massiveFechaCargoInput?.value || '';
                     if (selectedPacientes.size === 0) {
@@ -910,7 +897,6 @@ try {
 
             if (cancelMassiveStateBtn) {
                 cancelMassiveStateBtn.addEventListener('click', () => {
-                    console.log('Clic en Cancelar modal de estado masivo');
                     hideModal(massiveStateModal);
                 });
             } else {
@@ -919,7 +905,6 @@ try {
 
             if (saveStateBtn) {
                 saveStateBtn.addEventListener('click', async () => {
-                    console.log('Clic en Guardar estado individual');
                     const estado = changeStateSelect?.value || 'Actualizar Precio';
                     if (!currentStateChangeId) {
                         showSuccessMessage('Error: No se seleccionó un paciente', false);
@@ -958,7 +943,6 @@ try {
 
             if (cancelStateBtn) {
                 cancelStateBtn.addEventListener('click', () => {
-                    console.log('Clic en Cancelar modal de cambio de estado');
                     hideModal(changeStateModal);
                     currentStateChangeId = null;
                 });
@@ -975,7 +959,6 @@ try {
                 }
 
                 currentUser = user;
-                console.log('Usuario autenticado:', user.uid); // Agrega esto
                 try {
                     const userDoc = await getDoc(doc(db, 'users', user.uid));
                     if (!userDoc.exists()) {
@@ -985,10 +968,8 @@ try {
                     }
 
                     const userData = userDoc.data();
-                    console.log('Datos del usuario:', userData); // Agrega esto
                     const hasAccess = userData.role === 'Administrador' ||
                         (userData.permissions && userData.permissions.includes('Consignacion:PacientesConsignacion'));
-                    console.log('Permisos:', { role: userData.role, permissions: userData.permissions, hasAccess }); // Agrega esto
                     if (!hasAccess) {
                         console.error('Acceso denegado');
                         container.innerHTML = '<p>Acceso denegado. No tienes permisos para este módulo.</p>';
@@ -999,7 +980,6 @@ try {
 
                     if (saveEditBtn) {
                         saveEditBtn.addEventListener('click', async () => {
-                            console.log('Clic en Guardar edición de paciente');
                             const fechaIngreso = editFechaIngresoInput?.value || '';
                             const admision = editAdmisionInput?.value.trim() || '';
                             const nombrePaciente = editNombrePacienteInput?.value.trim() || '';
@@ -1100,14 +1080,12 @@ try {
 
                     if (cancelEditBtn) {
                         cancelEditBtn.addEventListener('click', () => {
-                            console.log('Clic en Cancelar modal de edición');
                             hideModal(editModal);
                         });
                     }
 
                     if (confirmDeleteBtn) {
                         confirmDeleteBtn.addEventListener('click', async () => {
-                            console.log('Clic en Confirmar eliminación');
                             const id = confirmDeleteBtn.dataset.id;
                             try {
                                 const fullName = await getUserFullName();
@@ -1135,14 +1113,12 @@ try {
 
                     if (cancelDeleteBtn) {
                         cancelDeleteBtn.addEventListener('click', () => {
-                            console.log('Clic en Cancelar modal de eliminación');
                             hideModal(deleteModal);
                         });
                     }
 
                     if (closeLogBtn) {
                         closeLogBtn.addEventListener('click', () => {
-                            console.log('Clic en Cerrar modal de logs');
                             hideModal(logModal);
                         });
                     }
@@ -1172,7 +1148,6 @@ try {
                     });
 
                     document.addEventListener('click', (e) => {
-                        // Evitar cerrar modales si el clic es en botones que los abren
                         if (
                             e.target.closest('.modal-content') ||
                             e.target.classList.contains('action-icon') ||
@@ -1208,13 +1183,10 @@ try {
         }
     }
 
-    // Ejecutar init después de que el DOM esté completamente cargado
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        console.log('DOM cargado, ejecutando init');
         init();
     } else {
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOMContentLoaded, ejecutando init');
             init();
         });
     }
