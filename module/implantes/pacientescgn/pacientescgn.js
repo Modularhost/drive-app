@@ -285,28 +285,35 @@ try {
     }
 
     function applyQuickFilters(data) {
-        return data.filter(item => {
-            if (!item.fechaCX) return false;
-            let fechaCX;
-            if (typeof item.fechaCX === 'string') {
-                fechaCX = new Date(item.fechaCX);
-            } else if (item.fechaCX instanceof Timestamp) {
-                fechaCX = item.fechaCX.toDate();
-            } else if (item.fechaCX instanceof Date) {
-                fechaCX = item.fechaCX;
-            }
-            if (!fechaCX || isNaN(fechaCX)) return false;
+    console.log('Aplicando filtros rápidos:', quickFilters); // Agrega esto
+    return data.filter(item => {
+        if (!item.fechaCX) {
+            console.warn('Registro sin fechaCX:', item); // Agrega esto
+            return false;
+        }
+        let fechaCX;
+        if (typeof item.fechaCX === 'string') {
+            fechaCX = new Date(item.fechaCX);
+        } else if (item.fechaCX instanceof Timestamp) {
+            fechaCX = item.fechaCX.toDate();
+        } else if (item.fechaCX instanceof Date) {
+            fechaCX = item.fechaCX;
+        }
+        if (!fechaCX || isNaN(fechaCX)) {
+            console.warn('FechaCX inválida:', item.fechaCX); // Agrega esto
+            return false;
+        }
 
-            const year = fechaCX.getFullYear().toString();
-            const month = (fechaCX.getMonth() + 1).toString().padStart(2, '0');
+        const year = fechaCX.getFullYear().toString();
+        const month = (fechaCX.getMonth() + 1).toString().padStart(2, '0');
 
-            const yearMatch = !quickFilters.year || year === quickFilters.year;
-            const monthMatch = !quickFilters.month || month === quickFilters.month;
-            const stateMatch = !quickFilters.state || item.estado === quickFilters.state;
+        const yearMatch = !quickFilters.year || year === quickFilters.year;
+        const monthMatch = !quickFilters.month || quickFilters.month === 'all' || month === quickFilters.month;
+        const stateMatch = !quickFilters.state || item.estado === quickFilters.state;
 
-            return yearMatch && monthMatch && stateMatch;
-        });
-    }
+        return yearMatch && monthMatch && stateMatch;
+    });
+}
 
     function updateYearFilter(data) {
         if (!filterYearSelect) return;
@@ -326,43 +333,43 @@ try {
         filterYearSelect.value = quickFilters.year || new Date().getFullYear().toString();
     }
 
-   function updateMonthFilter(data) {
-    if (!filterMonthSelect) return;
-    
-    let months = [];
-    if (quickFilters.year) {
-        months = [...new Set(data
-            .filter(p => {
-                if (!p.fechaCX) return false;
-                let fechaCX;
-                if (typeof p.fechaCX === 'string') fechaCX = new Date(p.fechaCX);
-                else if (p.fechaCX instanceof Timestamp) fechaCX = p.fechaCX.toDate();
-                else if (p.fechaCX instanceof Date) fechaCX = p.fechaCX;
-                if (!fechaCX || isNaN(fechaCX)) return false;
-                return fechaCX.getFullYear().toString() === quickFilters.year;
-            })
-            .map(p => {
-                let fechaCX;
-                if (typeof p.fechaCX === 'string') fechaCX = new Date(p.fechaCX);
-                else if (p.fechaCX instanceof Timestamp) fechaCX = p.fechaCX.toDate();
-                else if (p.fechaCX instanceof Date) fechaCX = p.fechaCX;
-                return (fechaCX.getMonth() + 1).toString().padStart(2, '0');
-            })
-        )].sort();
-    }
+    function updateMonthFilter(data) {
+        if (!filterMonthSelect) return;
+        
+        let months = [];
+        if (quickFilters.year) {
+            months = [...new Set(data
+                .filter(p => {
+                    if (!p.fechaCX) return false;
+                    let fechaCX;
+                    if (typeof p.fechaCX === 'string') fechaCX = new Date(p.fechaCX);
+                    else if (p.fechaCX instanceof Timestamp) fechaCX = p.fechaCX.toDate();
+                    else if (p.fechaCX instanceof Date) fechaCX = p.fechaCX;
+                    if (!fechaCX || isNaN(fechaCX)) return false;
+                    return fechaCX.getFullYear().toString() === quickFilters.year;
+                })
+                .map(p => {
+                    let fechaCX;
+                    if (typeof p.fechaCX === 'string') fechaCX = new Date(p.fechaCX);
+                    else if (p.fechaCX instanceof Timestamp) fechaCX = p.fechaCX.toDate();
+                    else if (p.fechaCX instanceof Date) fechaCX = p.fechaCX;
+                    return (fechaCX.getMonth() + 1).toString().padStart(2, '0');
+                })
+            )].sort();
+        }
 
-    filterMonthSelect.innerHTML = months.map(month => `<option value="${month}">${monthNames[month]}</option>`).join('');
-    
-    const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
-    
-    // Preservar el mes seleccionado si es válido; sino, usar default
-    if (quickFilters.month && months.includes(quickFilters.month)) {
-        filterMonthSelect.value = quickFilters.month;
-    } else {
-        filterMonthSelect.value = months.includes(currentMonth) && quickFilters.year === new Date().getFullYear().toString() ? currentMonth : months[0] || '';
-        quickFilters.month = filterMonthSelect.value;
+        filterMonthSelect.innerHTML = `<option value="all">Todos</option>` + 
+            months.map(month => `<option value="${month}">${monthNames[month]}</option>`).join('');
+        
+        const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
+        
+        if (quickFilters.month && months.includes(quickFilters.month)) {
+            filterMonthSelect.value = quickFilters.month;
+        } else {
+            filterMonthSelect.value = months.includes(currentMonth) && quickFilters.year === new Date().getFullYear().toString() ? currentMonth : 'all';
+            quickFilters.month = filterMonthSelect.value;
+        }
     }
-}
 
     function updateStateButtons(data) {
         if (!stateButtonsContainer) return;
@@ -415,67 +422,78 @@ try {
         }
     }
 
-    async function loadPacientes() {
-        try {
-            if (!pacientesTableBody) {
-                console.error('Tabla de pacientes no encontrada');
-                showSuccessMessage('Error: No se encontró la tabla de pacientes', false);
-                hideSpinner();
-                return;
-            }
+   async function loadPacientes() {
+    try {
+        if (!pacientesTableBody) {
+            console.error('Tabla de pacientes no encontrada');
+            showSuccessMessage('Error: No se encontró la tabla de pacientes', false);
+            hideSpinner();
+            return;
+        }
 
-            showSpinner();
+        showSpinner();
 
-            const pacientesCollection = collection(db, 'pacientesconsignacion');
-            const q = query(
-                pacientesCollection,
-                orderBy('fechaCX', 'desc'),
-                orderBy('nombrePaciente', 'asc'),
-                orderBy('proveedor', 'asc')
-            );
-            const querySnapshot = await getDocs(q);
-            pacientesTableBody.innerHTML = '';
-            pacientes = [];
-            selectedPacientes.clear();
-            querySnapshot.forEach(doc => {
-                const data = doc.data();
-                console.debug('Documento cargado:', {
-                    docId: doc.id,
-                    fechaIngreso: data.fechaIngreso,
-                    fechaCX: data.fechaCX,
-                    fechaCargo: data.fechaCargo,
-                    data: data
-                });
-                pacientes.push({ docId: doc.id, ...data });
+        console.log('Cargando documentos de pacientesconsignacion');
+        const pacientesCollection = collection(db, 'pacientesconsignacion');
+        const q = query(
+            pacientesCollection,
+            orderBy('fechaCX', 'desc'),
+            orderBy('nombrePaciente', 'asc'),
+            orderBy('proveedor', 'asc')
+        );
+        const querySnapshot = await getDocs(q);
+        console.log('Documentos recuperados:', querySnapshot.size);
+        pacientesTableBody.innerHTML = '';
+        pacientes = [];
+        selectedPacientes.clear();
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+            console.debug('Documento cargado:', {
+                docId: doc.id,
+                fechaIngreso: data.fechaIngreso,
+                fechaCX: data.fechaCX,
+                fechaCargo: data.fechaCargo,
+                data: data
             });
+            pacientes.push({
+                docId: doc.id,
+                fechaCX: data.fechaCX instanceof Timestamp ? data.fechaCX : null,
+                fechaIngreso: data.fechaIngreso instanceof Timestamp ? data.fechaIngreso : null,
+                fechaCargo: data.fechaCargo instanceof Timestamp ? data.fechaCargo : null,
+                ...data
+            });
+        });
 
-            if (pacientes.length === 0) {
-                console.warn('No se encontraron documentos en pacientesconsignacion');
-                pacientesTableBody.innerHTML = '<tr><td colspan="14">No hay pacientes disponibles</td></tr>';
-                hideSpinner();
-                updateMassiveStateButton();
-                return;
-            }
+        if (pacientes.length === 0) {
+            console.warn('No se encontraron documentos en pacientesconsignacion');
+            pacientesTableBody.innerHTML = '<tr><td colspan="14">No hay pacientes disponibles</td></tr>';
+            hideSpinner();
+            updateMassiveStateButton();
+            return;
+        }
 
-            await updatePrevisionFromReportesPabellon();
+        await updatePrevisionFromReportesPabellon();
 
-            updateYearFilter(pacientes);
-            updateMonthFilter(pacientes);
-            updateStateButtons(pacientes);
+        updateYearFilter(pacientes);
+        updateMonthFilter(pacientes);
+        updateStateButtons(pacientes);
 
-            let filteredPacientes = applyQuickFilters(pacientes);
-            filteredPacientes = applyFilters(filteredPacientes);
+        let filteredPacientes = applyQuickFilters(pacientes);
+        filteredPacientes = applyFilters(filteredPacientes);
 
-            const startIndex = (currentPage - 1) * recordsPerPage;
-            const endIndex = startIndex + recordsPerPage;
-            const paginatedPacientes = filteredPacientes.slice(startIndex, endIndex);
+        console.log('Registros después de filtrar:', filteredPacientes.length);
+        const startIndex = (currentPage - 1) * recordsPerPage;
+        const endIndex = startIndex + recordsPerPage;
+        const paginatedPacientes = filteredPacientes.slice(startIndex, endIndex);
+        console.log('Registros paginados:', paginatedPacientes.length);
 
-            paginatedPacientes.forEach(paciente => {
-                const tr = document.createElement('tr');
-                const estado = paciente.estado || '';
-                const estadoClass = estado ? `state-${estado.toLowerCase().replace(/\s+/g, '-')}` : '';
-                tr.className = estadoClass;
-                tr.innerHTML = `
+        paginatedPacientes.forEach(paciente => {
+            console.log('Renderizando paciente:', paciente);
+            const tr = document.createElement('tr');
+            const estado = paciente.estado || '';
+            const estadoClass = estado ? `state-${estado.toLowerCase().replace(/\s+/g, '-')}` : '';
+            tr.className = estadoClass;
+            tr.innerHTML = `
                 <td><input type="checkbox" class="select-paciente" data-id="${paciente.docId}"></td>
                 <td>
                     <i class="fas fa-edit action-icon" data-id="${paciente.docId}" title="Editar"></i>
@@ -495,19 +513,19 @@ try {
                 <td>${formatPrice(paciente.totalPaciente)}</td>
                 <td>${paciente.usuario || '-'}</td>
             `;
-                pacientesTableBody.appendChild(tr);
-            });
+            pacientesTableBody.appendChild(tr);
+        });
 
-            updatePagination(filteredPacientes.length);
-            updateMassiveStateButton();
-            setupCheckboxListeners();
-            hideSpinner();
-        } catch (error) {
-            console.error('Error al cargar pacientes:', error.code, error.message);
-            showSuccessMessage('Error al cargar pacientes: ' + error.message, false);
-            hideSpinner();
-        }
+        updatePagination(filteredPacientes.length);
+        updateMassiveStateButton();
+        setupCheckboxListeners();
+        hideSpinner();
+    } catch (error) {
+        console.error('Error al cargar pacientes:', error.code, error.message);
+        showSuccessMessage('Error al cargar pacientes: ' + error.message, false);
+        hideSpinner();
     }
+}
 
     function setupCheckboxListeners() {
         const checkboxes = document.querySelectorAll('.select-paciente');
@@ -951,17 +969,20 @@ try {
                 }
 
                 currentUser = user;
+                console.log('Usuario autenticado:', user.uid); // Agrega esto
                 try {
                     const userDoc = await getDoc(doc(db, 'users', user.uid));
                     if (!userDoc.exists()) {
-                        console.error('Documento de usuario no encontrado');
+                        console.error('Documento de usuario no encontrado para UID:', user.uid);
                         container.innerHTML = '<p>Error: Tu cuenta no está registrada. Contacta al administrador.</p>';
                         return;
                     }
 
                     const userData = userDoc.data();
+                    console.log('Datos del usuario:', userData); // Agrega esto
                     const hasAccess = userData.role === 'Administrador' ||
                         (userData.permissions && userData.permissions.includes('Consignacion:PacientesConsignacion'));
+                    console.log('Permisos:', { role: userData.role, permissions: userData.permissions, hasAccess }); // Agrega esto
                     if (!hasAccess) {
                         console.error('Acceso denegado');
                         container.innerHTML = '<p>Acceso denegado. No tienes permisos para este módulo.</p>';
