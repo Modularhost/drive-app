@@ -883,6 +883,7 @@ async function init() {
             currentUser = user;
 
             try {
+                // En iniciar.js, dentro de onAuthStateChanged
                 const userDoc = await getDoc(doc(db, 'users', user.uid));
                 if (!userDoc.exists()) {
                     console.error('Documento de usuario no encontrado');
@@ -892,8 +893,11 @@ async function init() {
 
                 const userData = userDoc.data();
                 const hasAccess = userData.role === 'Administrador' ||
-                    (userData.permissions && userData.permissions.includes('Consignacion:PacientesConsignacion'));
-                
+                    (userData.permissions && (
+                        userData.permissions.includes('Consignacion:PacientesConsignacion') ||
+                        userData.permissions.includes('Migración:Pacientes de Consignación') // Añade esto
+                    ));
+
                 if (!hasAccess) {
                     console.error('Acceso denegado');
                     elements.container.innerHTML = '<p>Acceso denegado. No tienes permisos para este módulo.</p>';

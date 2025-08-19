@@ -1009,6 +1009,7 @@ async function init() {
             currentUser = user;
 
             try {
+                // En integrar.js, dentro de onAuthStateChanged
                 const userDoc = await getDoc(doc(db, 'users', user.uid));
                 if (!userDoc.exists()) {
                     console.error('Documento de usuario no encontrado');
@@ -1018,7 +1019,10 @@ async function init() {
 
                 const userData = userDoc.data();
                 const hasAccess = userData.role === 'Administrador' ||
-                    (userData.permissions && userData.permissions.includes('Consignacion:IntegrarConsignacion'));
+                    (userData.permissions && (
+                        userData.permissions.includes('Consignacion:IntegrarConsignacion') ||
+                        userData.permissions.includes('Migración:Base de Consignación') // Añade esto
+                    ));
 
                 if (!hasAccess) {
                     console.error('Acceso denegado');
