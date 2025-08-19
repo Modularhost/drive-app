@@ -114,10 +114,11 @@ try {
             return 'Sin fecha';
         }
         if (isNaN(d.getTime())) return 'Sin fecha';
-        d.setHours(0, 0, 0, 0);
-        const day = String(d.getDate()).padStart(2, '0');
-        const month = String(d.getMonth() + 1).padStart(2, '0');
-        const year = d.getFullYear();
+
+        // Usar métodos de UTC para evitar el desplazamiento de zona horaria
+        const day = String(d.getUTCDate()).padStart(2, '0');
+        const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+        const year = d.getUTCFullYear();
         return `${day}/${month}/${year}`;
     }
 
