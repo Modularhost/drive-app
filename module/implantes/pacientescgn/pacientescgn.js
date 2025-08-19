@@ -110,7 +110,16 @@ try {
 
     function formatDate(date) {
         if (!date || isNaN(new Date(date))) return '-';
-        return new Date(date).toLocaleString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+        const parsedDate = date instanceof Timestamp ? date.toDate() : new Date(date);
+        return parsedDate.toLocaleString('es-CL', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+            timeZone: 'UTC' // Forzar UTC
+        });
     }
 
     function formatDateOnly(date) {
@@ -127,18 +136,15 @@ try {
         if (typeof date === 'string') {
             const [year, month, day] = date.split('-');
             if (year && month && day && year.length === 4 && month.length === 2 && day.length === 2) {
-                parsedDate = new Date(year, month - 1, day);
-                parsedDate.setHours(0, 0, 0, 0);
+                parsedDate = new Date(Date.UTC(year, month - 1, day));
             } else {
                 console.warn('Fecha en formato de cadena inválida:', date);
                 return '';
             }
         } else if (date instanceof Timestamp) {
             parsedDate = date.toDate();
-            parsedDate.setHours(0, 0, 0, 0);
         } else if (date instanceof Date) {
-            parsedDate = new Date(date);
-            parsedDate.setHours(0, 0, 0, 0);
+            parsedDate = date;
         } else {
             console.warn('Formato de fecha no reconocido:', date, 'Tipo:', typeof date);
             return '';
@@ -147,9 +153,9 @@ try {
             console.warn('Fecha parseada inválida:', date, 'Parsed:', parsedDate);
             return '';
         }
-        const day = parsedDate.getDate().toString().padStart(2, '0');
-        const month = (parsedDate.getMonth() + 1).toString().padStart(2, '0');
-        const year = parsedDate.getFullYear();
+        const day = parsedDate.getUTCDate().toString().padStart(2, '0');
+        const month = (parsedDate.getUTCMonth() + 1).toString().padStart(2, '0');
+        const year = parsedDate.getUTCFullYear();
         const formattedDate = `${day}-${month}-${year}`;
         console.debug('Fecha formateada:', formattedDate);
         return formattedDate;
