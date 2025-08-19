@@ -778,7 +778,11 @@ async function init() {
                 createdAt: serverTimestamp(),
                 updatedAt: serverTimestamp()
               });
-              await setDoc(doc(db, 'usernames', data.username), { uid: user.uid });
+              // Corregido: incluir email en la colección usernames
+              await setDoc(doc(db, 'usernames', data.username), {
+                uid: user.uid,
+                email: data.email
+              });
               await logAction(user.uid, 'Usuario creado', { email: data.email, role: data.role, createdBy: auth.currentUser.uid });
               showModal('success', 'Usuario registrado con éxito.');
               clearForm();
@@ -810,7 +814,11 @@ async function init() {
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
           });
-          await setDoc(doc(db, 'usernames', data.username), { uid: user.uid });
+          // Corregido: incluir email en la colección usernames
+          await setDoc(doc(db, 'usernames', data.username), {
+            uid: user.uid,
+            email: data.email
+          });
           await logAction(user.uid, 'Usuario creado', { email: data.email, role: data.role, createdBy: auth.currentUser.uid });
           showModal('success', 'Usuario registrado con éxito.');
           clearForm();
@@ -907,7 +915,11 @@ async function init() {
           await updateDoc(userRef, updateData);
           if (oldData.username !== data.username) {
             await deleteDoc(usernameRef);
-            await setDoc(newUsernameRef, { uid });
+            // Corregido: incluir email en la colección usernames
+            await setDoc(newUsernameRef, {
+              uid,
+              email: data.email
+            });
           }
           await logAction(uid, 'Usuario actualizado', { email: data.email, role: data.role, updatedBy: auth.currentUser.uid });
           showModal('success', 'Usuario actualizado con éxito.');
