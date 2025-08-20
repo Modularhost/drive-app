@@ -32,13 +32,7 @@ setPersistence(auth, browserLocalPersistence).catch(error => {
 });
 
 const submenuData = {
-  Migración: [
-    { name: 'Base de implantes' },
-    { name: 'Historial de pacientes' },
-    { name: 'Base de Consignación' },
-    { name: 'Pacientes de Consignación' },
-    { name: 'Traspasar Consignación' }
-  ],
+
   Implantes: [
     { name: 'Cargos Imp' },
     { name: 'Pacientes Imp' },
@@ -48,9 +42,9 @@ const submenuData = {
     { name: 'Paquetización' },
     { name: 'Mantenedor' },
     { name: 'Tránsito' },
+    { name: 'Consumidos' },
     { name: 'Contenedores' },
-    { name: 'Catálogo' },
-    { name: 'Exportar' }
+    { name: 'Catálogo' }
   ],
   Consignacion: [
     { name: 'Asignación' },
@@ -68,6 +62,10 @@ const submenuData = {
     { name: 'Facturación' },
     { name: 'Detalles' }
   ],
+  Visualización: [
+    { name: 'Pacientes' },
+    { name: 'Generales' }
+  ],
   Prestaciones: [
     { name: 'Empresas' },
     { name: 'Médicos' },
@@ -75,6 +73,18 @@ const submenuData = {
     { name: 'Áreas Clínicas' },
     { name: 'CTS Proveedores' },
     { name: 'CTS Clínico' }
+  ],
+  Herramientas: [
+    { name: 'Presupuesto' },
+    { name: 'Lector' },
+    { name: 'DTE' }
+  ],
+    Migración: [
+    { name: 'Base de implantes' },
+    { name: 'Historial de pacientes' },
+    { name: 'Base de Consignación' },
+    { name: 'Pacientes de Consignación' },
+    { name: 'Traspasar Consignación' }
   ],
   Importacion: [
     { name: 'Reporte Pabellón' },
@@ -94,10 +104,13 @@ const submenuData = {
   Usuarios: [
     { name: 'Registros' }
   ],
-  Herramientas: [
-    { name: 'Presupuesto' },
-    { name: 'Lector' },
-    { name: 'DTE' }
+  Prestaciones: [
+    { name: 'Empresas' },
+    { name: 'Médicos' },
+    { name: 'Previsiones' },
+    { name: 'Áreas Clínicas' },
+    { name: 'CTS Proveedores' },
+    { name: 'CTS Clínico' }
   ]
 };
 
